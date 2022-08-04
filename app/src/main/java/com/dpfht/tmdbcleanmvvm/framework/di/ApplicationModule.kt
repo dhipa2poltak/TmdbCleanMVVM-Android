@@ -2,7 +2,7 @@ package com.dpfht.tmdbcleanmvvm.framework.di
 
 import com.dpfht.tmdbcleanmvvm.core.data.repository.AppDataSource
 import com.dpfht.tmdbcleanmvvm.core.data.repository.AppRepository
-import com.dpfht.tmdbcleanmvvm.core.data.repository.AppRepositoryImpl
+import com.dpfht.tmdbcleanmvvm.framework.rest.api.AppRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

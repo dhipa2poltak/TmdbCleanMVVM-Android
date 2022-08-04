@@ -1,9 +1,11 @@
 package com.dpfht.tmdbcleanmvvm.core.data.model.remote
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.util.Date
 
+@Keep
 @Suppress("unused")
 data class Review(
     val author: String? = null,

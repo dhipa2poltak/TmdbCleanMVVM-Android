@@ -1,10 +1,12 @@
 package com.dpfht.tmdbcleanmvvm.core.data.model.remote.response
 
+import androidx.annotation.Keep
 import com.dpfht.tmdbcleanmvvm.core.data.model.remote.Review
 import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieReviewResult
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
+@Keep
 @Suppress("unused")
 data class ReviewResponse(
     val id: Int = 0,

@@ -1,9 +1,9 @@
 package com.dpfht.tmdbcleanmvvm.viewmodel
 
+import com.dpfht.tmdbcleanmvvm.BuildConfig
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.dpfht.tmdbcleanmvvm.MainCoroutineRule
-import com.dpfht.tmdbcleanmvvm.Config
 import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieDetailsResult
 import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieDetailsUseCase
 import com.dpfht.tmdbcleanmvvm.core.usecase.UseCaseResultWrapper
@@ -82,7 +82,7 @@ class MovieDetailsViewModelUnitTest {
     verify(titleObserver).onChanged(eq(title))
     verify(overviewObserver).onChanged(eq(overview))
 
-    val imageUrl = Config.IMAGE_URL_BASE_PATH + posterPath
+    val imageUrl = BuildConfig.IMAGE_URL_BASE_PATH + posterPath
     verify(imageUrlObserver).onChanged(eq(imageUrl))
 
     verify(showLoadingObserver).onChanged(eq(false))

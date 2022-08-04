@@ -1,7 +1,6 @@
 package com.dpfht.tmdbcleanmvvm.framework.di
 
 import com.dpfht.tmdbcleanmvvm.BuildConfig
-import com.dpfht.tmdbcleanmvvm.Config
 import com.dpfht.tmdbcleanmvvm.core.data.repository.AppDataSource
 import com.dpfht.tmdbcleanmvvm.framework.rest.api.AuthInterceptor
 import com.dpfht.tmdbcleanmvvm.framework.rest.api.RemoteDataSourceImpl
@@ -24,7 +23,7 @@ class NetworkModule {
 
   @Provides
   fun provideBaseUrl(): String {
-    return Config.API_BASE_URL
+    return BuildConfig.BASE_URL
   }
 
   @Provides

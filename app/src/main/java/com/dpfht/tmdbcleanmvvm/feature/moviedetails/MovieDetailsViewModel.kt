@@ -1,10 +1,10 @@
 package com.dpfht.tmdbcleanmvvm.feature.moviedetails
 
+import com.dpfht.tmdbcleanmvvm.BuildConfig
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavDirections
-import com.dpfht.tmdbcleanmvvm.Config
 import com.dpfht.tmdbcleanmvvm.feature.base.BaseViewModel
 import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieDetailsResult
 import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieDetailsUseCase
@@ -76,7 +76,7 @@ class MovieDetailsViewModel @Inject constructor(
   private fun onSuccess(result: GetMovieDetailsResult) {
     imageUrl = ""
     if (result.posterPath.isNotEmpty()) {
-      imageUrl = Config.IMAGE_URL_BASE_PATH + result.posterPath
+      imageUrl = BuildConfig.IMAGE_URL_BASE_PATH + result.posterPath
     }
 
     _movieId = result.movieId

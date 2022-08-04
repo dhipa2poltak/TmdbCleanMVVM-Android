@@ -7,6 +7,15 @@ plugins {
 }
 
 android {
+  signingConfigs {
+    release {
+      storeFile file('/Users/user/Documents/mykeystores/tmdb.keystore')
+      storePassword 'tmdb1234'
+      keyAlias 'tmdb'
+      keyPassword 'tmdb1234'
+    }
+  }
+
   compileSdk 31
 
   defaultConfig {
@@ -23,8 +32,18 @@ android {
 
   buildTypes {
     release {
-      minifyEnabled false
+      minifyEnabled true
+      shrinkResources true
       proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+      signingConfig signingConfigs.release
+
+      manifestPlaceholders.appNameSuffix = ""
+    }
+    debug {
+      applicationIdSuffix ".debug"
+      versionNameSuffix "-debug"
+      manifestPlaceholders.appNameSuffix = " (debug)"
     }
   }
   buildFeatures {
@@ -36,6 +55,32 @@ android {
   }
   kotlinOptions {
     jvmTarget = '1.8'
+  }
+
+  flavorDimensions "default"
+
+  productFlavors {
+    staging {
+      applicationId "com.dpfht.tmdbcleanmvvm.staging"
+
+      manifestPlaceholders.appName = "TMDB Clean MVVM-Staging"
+      buildConfigField 'String', 'BASE_URL', STAGING_BASE_URL
+      buildConfigField 'String', 'IMAGE_URL_BASE_PATH', STAGING_IMAGE_URL_BASE_PATH
+    }
+    verify {
+      applicationId "com.dpfht.tmdbcleanmvvm.verify"
+
+      manifestPlaceholders.appName = "TMDB Clean MVVM-Verify"
+      buildConfigField 'String', 'BASE_URL', VERIFY_BASE_URL
+      buildConfigField 'String', 'IMAGE_URL_BASE_PATH', VERIFY_IMAGE_URL_BASE_PATH
+    }
+    prod {
+      applicationId "com.dpfht.tmdbcleanmvvm"
+
+      manifestPlaceholders.appName = "TMDB Clean MVVM"
+      buildConfigField 'String', 'BASE_URL', PROD_BASE_URL
+      buildConfigField 'String', 'IMAGE_URL_BASE_PATH', PROD_IMAGE_URL_BASE_PATH
+    }
   }
 }
 
