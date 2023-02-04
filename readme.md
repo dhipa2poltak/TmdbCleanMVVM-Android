@@ -18,4 +18,4 @@
 - Embedded Youtube Android Player
 
 **Caution:**
-**All the api calls are switching to IO thread in DataSource class**
+**All the api calls are switching to IO dispatchers in DataSource class**
