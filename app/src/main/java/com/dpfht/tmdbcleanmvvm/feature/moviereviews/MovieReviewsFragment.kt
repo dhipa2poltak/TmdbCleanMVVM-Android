@@ -63,7 +63,7 @@ class MovieReviewsFragment: Fragment() {
 
     //--
 
-    viewModel.isShowDialogLoading.observe(requireActivity()) { value ->
+    viewModel.isShowDialogLoading.observe(viewLifecycleOwner) { value ->
       if (value) {
         loadingDialog.show()
       } else {
@@ -71,19 +71,19 @@ class MovieReviewsFragment: Fragment() {
       }
     }
 
-    viewModel.notifyItemInserted.observe(requireActivity()) { position ->
+    viewModel.notifyItemInserted.observe(viewLifecycleOwner) { position ->
       if (position > 0) {
         adapter.notifyItemInserted(position)
       }
     }
 
-    viewModel.errorMessage.observe(requireActivity()) { message ->
+    viewModel.errorMessage.observe(viewLifecycleOwner) { message ->
       if (message.isNotEmpty()) {
         showErrorMessage(message)
       }
     }
 
-    viewModel.showCanceledMessage.observe(requireActivity()) { isShow ->
+    viewModel.showCanceledMessage.observe(viewLifecycleOwner) { isShow ->
       if (isShow) {
         showCanceledMessage()
       }

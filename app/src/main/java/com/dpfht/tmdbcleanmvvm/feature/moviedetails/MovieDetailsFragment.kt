@@ -47,7 +47,7 @@ class MovieDetailsFragment: Fragment() {
 
     //--
 
-    viewModel.isShowDialogLoading.observe(requireActivity()) { value ->
+    viewModel.isShowDialogLoading.observe(viewLifecycleOwner) { value ->
       if (value) {
         loadingDialog.show()
       } else {
@@ -55,27 +55,27 @@ class MovieDetailsFragment: Fragment() {
       }
     }
 
-    viewModel.errorMessage.observe(requireActivity()) { message ->
+    viewModel.errorMessage.observe(viewLifecycleOwner) { message ->
       if (message.isNotEmpty()) {
         showErrorMessage(message)
       }
     }
 
-    viewModel.showCanceledMessage.observe(requireActivity()) { isShow ->
+    viewModel.showCanceledMessage.observe(viewLifecycleOwner) { isShow ->
       if (isShow) {
         showCanceledMessage()
       }
     }
 
-    viewModel.titleData.observe(requireActivity()) { title ->
+    viewModel.titleData.observe(viewLifecycleOwner) { title ->
       binding.tvTitleMovie.text = title
     }
 
-    viewModel.overviewData.observe(requireActivity()) { overview ->
+    viewModel.overviewData.observe(viewLifecycleOwner) { overview ->
       binding.tvDescMovie.text = overview
     }
 
-    viewModel.imageUrlData.observe(requireActivity()) { imageUrl ->
+    viewModel.imageUrlData.observe(viewLifecycleOwner) { imageUrl ->
       Picasso.get().load(imageUrl)
         .error(android.R.drawable.ic_menu_close_clear_cancel)
         .placeholder(R.drawable.loading)
