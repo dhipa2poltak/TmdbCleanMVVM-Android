@@ -9,16 +9,13 @@ abstract class BaseViewModel: ViewModel() {
   protected var mIsLoadingData = false
 
   protected val mIsShowDialogLoading = MutableLiveData<Boolean>()
-  val isShowDialogLoading: LiveData<Boolean>
-    get() = mIsShowDialogLoading
+  val isShowDialogLoading: LiveData<Boolean> = mIsShowDialogLoading
 
   protected val mErrorMessage = MutableLiveData<String>()
-  val errorMessage: LiveData<String>
-    get() = mErrorMessage
+  val errorMessage: LiveData<String> = mErrorMessage
 
   private val mShowCanceledMessage = MutableLiveData<Boolean>()
-  val showCanceledMessage: LiveData<Boolean>
-    get() = mShowCanceledMessage
+  val showCanceledMessage: LiveData<Boolean> = mShowCanceledMessage
 
   fun isLoadingData() = mIsLoadingData
 

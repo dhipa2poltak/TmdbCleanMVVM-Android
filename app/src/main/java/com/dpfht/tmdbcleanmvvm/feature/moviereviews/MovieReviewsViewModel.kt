@@ -24,8 +24,7 @@ class MovieReviewsViewModel @Inject constructor(
   private var isEmptyNextResponse = false
 
   private val _notifyItemInserted = MutableLiveData<Int>()
-  val notifyItemInserted: LiveData<Int>
-    get() = _notifyItemInserted
+  val notifyItemInserted: LiveData<Int> = _notifyItemInserted
 
   override fun start() {
     if (_movieId != -1 && reviews.isEmpty()) {
@@ -76,12 +75,4 @@ class MovieReviewsViewModel @Inject constructor(
     mIsLoadingData = false
     mErrorMessage.postValue(message)
   }
-
-  /*
-  private fun onCancel() {
-    mIsShowDialogLoading.postValue(false)
-    mIsLoadingData = false
-    mShowCanceledMessage.postValue(true)
-  }
-  */
 }

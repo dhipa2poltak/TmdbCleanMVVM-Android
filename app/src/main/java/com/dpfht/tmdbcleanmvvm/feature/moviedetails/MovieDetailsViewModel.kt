@@ -28,16 +28,13 @@ class MovieDetailsViewModel @Inject constructor(
   //--
 
   private val _titleData = MutableLiveData<String>()
-  val titleData: LiveData<String>
-    get() = _titleData
+  val titleData: LiveData<String> = _titleData
 
   private val _overviewData = MutableLiveData<String>()
-  val overviewData: LiveData<String>
-    get() = _overviewData
+  val overviewData: LiveData<String> = _overviewData
 
   private val _imageUrlData = MutableLiveData<String>()
-  val imageUrlData: LiveData<String>
-    get() = _imageUrlData
+  val imageUrlData: LiveData<String> = _imageUrlData
 
   //--
 
@@ -94,13 +91,6 @@ class MovieDetailsViewModel @Inject constructor(
     mIsShowDialogLoading.postValue(false)
     mErrorMessage.postValue(message)
   }
-
-  /*
-  private fun onCancel() {
-    mIsShowDialogLoading.postValue(false)
-    mShowCanceledMessage.postValue(true)
-  }
-  */
 
   fun getNavDirectionsToMovieReviews(): NavDirections {
     return MovieDetailsFragmentDirections.actionMovieDetailsToMovieReviews(_movieId, title)

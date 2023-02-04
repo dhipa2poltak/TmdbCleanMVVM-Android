@@ -21,16 +21,13 @@ class MovieTrailerViewModel(
   private var _movieId = -1
 
   private val _keyVideo = MutableLiveData<String>()
-  val keyVideo: LiveData<String>
-    get() = _keyVideo
+  val keyVideo: LiveData<String> = _keyVideo
 
   private val mErrorMessage = MutableLiveData<String>()
-  val errorMessage: LiveData<String>
-    get() = mErrorMessage
+  val errorMessage: LiveData<String> = mErrorMessage
 
   private val mShowCanceledMessage = MutableLiveData<Boolean>()
-  val showCanceledMessage: LiveData<Boolean>
-    get() = mShowCanceledMessage
+  val showCanceledMessage: LiveData<Boolean> = mShowCanceledMessage
 
   fun setMovieId(movieId: Int) {
     this._movieId = movieId
@@ -74,12 +71,6 @@ class MovieTrailerViewModel(
   private fun onError(message: String) {
     mErrorMessage.postValue(message)
   }
-
-  /*
-  fun onCancel() {
-    mShowCanceledMessage.postValue(true)
-  }
-  */
 
   fun onDestroy() {
     if (scope.isActive) {

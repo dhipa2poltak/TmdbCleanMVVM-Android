@@ -21,8 +21,7 @@ class GenreViewModel @Inject constructor(
 ) : BaseViewModel() {
 
   private val _notifyItemInserted = MutableLiveData<Int>()
-  val notifyItemInserted: LiveData<Int>
-    get() = _notifyItemInserted
+  val notifyItemInserted: LiveData<Int> = _notifyItemInserted
 
   override fun start() {
     if (genres.isEmpty()) {
@@ -56,13 +55,6 @@ class GenreViewModel @Inject constructor(
     mIsShowDialogLoading.postValue(false)
     mErrorMessage.postValue(message)
   }
-
-  /*
-  private fun onCancel() {
-    mIsShowDialogLoading.postValue(false)
-    mShowCanceledMessage.postValue(true)
-  }
-  */
 
   fun getNavDirectionsOnClickGenreAt(position: Int): NavDirections {
     val genre = genres[position]
