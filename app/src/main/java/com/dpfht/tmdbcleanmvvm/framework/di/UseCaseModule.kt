@@ -1,6 +1,6 @@
 package com.dpfht.tmdbcleanmvvm.framework.di
 
-import com.dpfht.tmdbcleanmvvm.core.domain.repository.AppRepository
+import com.dpfht.tmdbcleanmvvm.core.data.repository.AppRepository
 import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieByGenreUseCase
 import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieByGenreUseCaseImpl
 import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieDetailsUseCase

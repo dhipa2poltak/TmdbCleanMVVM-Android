@@ -5,7 +5,6 @@ import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieDetailsResult
 import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieGenreResult
 import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieReviewResult
 import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieTrailerResult
-import com.dpfht.tmdbcleanmvvm.core.domain.repository.AppRepository
 import com.dpfht.tmdbcleanmvvm.core.usecase.UseCaseResultWrapper
 
 class AppRepositoryImpl(private val remoteDataSource: AppDataSource): AppRepository {
