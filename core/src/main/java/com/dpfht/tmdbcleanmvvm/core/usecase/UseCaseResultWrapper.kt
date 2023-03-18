@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvvm.core.domain.usecase
+package com.dpfht.tmdbcleanmvvm.core.usecase
 
 sealed class UseCaseResultWrapper<out T> {
   data class Success<out T>(val value: T): UseCaseResultWrapper<T>()

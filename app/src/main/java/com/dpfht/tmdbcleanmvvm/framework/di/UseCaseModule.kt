@@ -1,14 +1,14 @@
 package com.dpfht.tmdbcleanmvvm.framework.di
 
 import com.dpfht.tmdbcleanmvvm.core.domain.repository.AppRepository
-import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieByGenreUseCase
-import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieByGenreUseCaseImpl
-import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieDetailsUseCase
-import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieDetailsUseCaseImpl
-import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieGenreUseCase
-import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieGenreUseCaseImpl
-import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieReviewUseCase
-import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieReviewUseCaseImpl
+import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieByGenreUseCase
+import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieByGenreUseCaseImpl
+import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieDetailsUseCase
+import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieDetailsUseCaseImpl
+import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieGenreUseCase
+import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieGenreUseCaseImpl
+import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieReviewUseCase
+import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieReviewUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

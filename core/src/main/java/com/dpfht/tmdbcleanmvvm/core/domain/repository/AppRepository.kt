@@ -5,7 +5,7 @@ import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieDetailsResult
 import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieGenreResult
 import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieReviewResult
 import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieTrailerResult
-import com.dpfht.tmdbcleanmvvm.core.domain.usecase.UseCaseResultWrapper
+import com.dpfht.tmdbcleanmvvm.core.usecase.UseCaseResultWrapper
 
 interface AppRepository {
 

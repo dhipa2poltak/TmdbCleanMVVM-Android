@@ -5,8 +5,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.dpfht.tmdbcleanmvvm.MainCoroutineRule
 import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieDetailsResult
-import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieDetailsUseCase
-import com.dpfht.tmdbcleanmvvm.core.domain.usecase.UseCaseResultWrapper
+import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieDetailsUseCase
+import com.dpfht.tmdbcleanmvvm.core.usecase.UseCaseResultWrapper
 import com.dpfht.tmdbcleanmvvm.feature.moviedetails.MovieDetailsViewModel
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
