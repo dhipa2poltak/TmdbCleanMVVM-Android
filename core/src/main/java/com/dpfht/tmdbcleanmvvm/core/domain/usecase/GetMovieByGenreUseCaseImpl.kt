@@ -1,6 +1,6 @@
-package com.dpfht.tmdbcleanmvvm.core.usecase
+package com.dpfht.tmdbcleanmvvm.core.domain.usecase
 
-import com.dpfht.tmdbcleanmvvm.core.data.repository.AppRepository
+import com.dpfht.tmdbcleanmvvm.core.domain.repository.AppRepository
 import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieByGenreResult
 
 class GetMovieByGenreUseCaseImpl(

@@ -7,9 +7,9 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavDirections
 import com.dpfht.tmdbcleanmvvm.feature.base.BaseViewModel
 import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieDetailsResult
-import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieDetailsUseCase
-import com.dpfht.tmdbcleanmvvm.core.usecase.UseCaseResultWrapper.ErrorResult
-import com.dpfht.tmdbcleanmvvm.core.usecase.UseCaseResultWrapper.Success
+import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieDetailsUseCase
+import com.dpfht.tmdbcleanmvvm.core.domain.usecase.UseCaseResultWrapper.ErrorResult
+import com.dpfht.tmdbcleanmvvm.core.domain.usecase.UseCaseResultWrapper.Success
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

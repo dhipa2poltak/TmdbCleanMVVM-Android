@@ -5,8 +5,8 @@ import androidx.lifecycle.Observer
 import com.dpfht.tmdbcleanmvvm.MainCoroutineRule
 import com.dpfht.tmdbcleanmvvm.core.data.model.remote.Review
 import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieReviewResult
-import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieReviewUseCase
-import com.dpfht.tmdbcleanmvvm.core.usecase.UseCaseResultWrapper
+import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieReviewUseCase
+import com.dpfht.tmdbcleanmvvm.core.domain.usecase.UseCaseResultWrapper
 import com.dpfht.tmdbcleanmvvm.feature.moviereviews.MovieReviewsViewModel
 import kotlinx.coroutines.runBlocking
 import org.junit.Before

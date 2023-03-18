@@ -5,8 +5,8 @@ import androidx.lifecycle.Observer
 import com.dpfht.tmdbcleanmvvm.MainCoroutineRule
 import com.dpfht.tmdbcleanmvvm.core.data.model.remote.Trailer
 import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieTrailerResult
-import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieTrailerUseCase
-import com.dpfht.tmdbcleanmvvm.core.usecase.UseCaseResultWrapper
+import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieTrailerUseCase
+import com.dpfht.tmdbcleanmvvm.core.domain.usecase.UseCaseResultWrapper
 import com.dpfht.tmdbcleanmvvm.feature.movietrailer.MovieTrailerViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job

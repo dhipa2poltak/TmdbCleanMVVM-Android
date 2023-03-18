@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvvm.framework.rest.api
+package com.dpfht.tmdbcleanmvvm.framework
 
 import com.dpfht.tmdbcleanmvvm.core.data.model.remote.response.toDomain
 import com.dpfht.tmdbcleanmvvm.core.data.repository.AppDataSource
@@ -7,11 +7,13 @@ import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieDetailsResult
 import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieGenreResult
 import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieReviewResult
 import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieTrailerResult
-import com.dpfht.tmdbcleanmvvm.core.usecase.UseCaseResultWrapper
-import com.dpfht.tmdbcleanmvvm.core.usecase.UseCaseResultWrapper.ErrorResult
-import com.dpfht.tmdbcleanmvvm.framework.rest.api.ResultWrapper.GenericError
-import com.dpfht.tmdbcleanmvvm.framework.rest.api.ResultWrapper.NetworkError
-import com.dpfht.tmdbcleanmvvm.framework.rest.api.ResultWrapper.Success
+import com.dpfht.tmdbcleanmvvm.core.domain.usecase.UseCaseResultWrapper
+import com.dpfht.tmdbcleanmvvm.core.domain.usecase.UseCaseResultWrapper.ErrorResult
+import com.dpfht.tmdbcleanmvvm.framework.rest.RestService
+import com.dpfht.tmdbcleanmvvm.framework.rest.ResultWrapper.GenericError
+import com.dpfht.tmdbcleanmvvm.framework.rest.ResultWrapper.NetworkError
+import com.dpfht.tmdbcleanmvvm.framework.rest.ResultWrapper.Success
+import com.dpfht.tmdbcleanmvvm.framework.rest.api.safeApiCall
 import kotlinx.coroutines.Dispatchers
 
 class RemoteDataSourceImpl(private val restService: RestService):

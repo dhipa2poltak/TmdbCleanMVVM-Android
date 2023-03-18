@@ -3,9 +3,9 @@ package com.dpfht.tmdbcleanmvvm.feature.movietrailer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dpfht.tmdbcleanmvvm.core.data.model.remote.Trailer
-import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieTrailerUseCase
-import com.dpfht.tmdbcleanmvvm.core.usecase.UseCaseResultWrapper.ErrorResult
-import com.dpfht.tmdbcleanmvvm.core.usecase.UseCaseResultWrapper.Success
+import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieTrailerUseCase
+import com.dpfht.tmdbcleanmvvm.core.domain.usecase.UseCaseResultWrapper.ErrorResult
+import com.dpfht.tmdbcleanmvvm.core.domain.usecase.UseCaseResultWrapper.Success
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel

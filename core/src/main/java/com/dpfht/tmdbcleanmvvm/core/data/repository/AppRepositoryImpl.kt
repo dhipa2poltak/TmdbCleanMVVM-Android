@@ -1,17 +1,16 @@
-package com.dpfht.tmdbcleanmvvm.framework.rest.api
+package com.dpfht.tmdbcleanmvvm.core.data.repository
 
-import com.dpfht.tmdbcleanmvvm.core.data.repository.AppDataSource
-import com.dpfht.tmdbcleanmvvm.core.data.repository.AppRepository
 import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieByGenreResult
 import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieDetailsResult
 import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieGenreResult
 import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieReviewResult
 import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieTrailerResult
-import com.dpfht.tmdbcleanmvvm.core.usecase.UseCaseResultWrapper
+import com.dpfht.tmdbcleanmvvm.core.domain.repository.AppRepository
+import com.dpfht.tmdbcleanmvvm.core.domain.usecase.UseCaseResultWrapper
 
 class AppRepositoryImpl(private val remoteDataSource: AppDataSource): AppRepository {
 
-  override suspend fun getMovieGenre():  UseCaseResultWrapper<GetMovieGenreResult> {
+  override suspend fun getMovieGenre(): UseCaseResultWrapper<GetMovieGenreResult> {
     return remoteDataSource.getMovieGenre()
   }
 

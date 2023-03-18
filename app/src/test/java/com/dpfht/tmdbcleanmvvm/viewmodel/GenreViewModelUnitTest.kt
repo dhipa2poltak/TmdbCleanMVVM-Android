@@ -5,8 +5,8 @@ import androidx.lifecycle.Observer
 import com.dpfht.tmdbcleanmvvm.MainCoroutineRule
 import com.dpfht.tmdbcleanmvvm.core.data.model.remote.Genre
 import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieGenreResult
-import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieGenreUseCase
-import com.dpfht.tmdbcleanmvvm.core.usecase.UseCaseResultWrapper
+import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieGenreUseCase
+import com.dpfht.tmdbcleanmvvm.core.domain.usecase.UseCaseResultWrapper
 import com.dpfht.tmdbcleanmvvm.feature.genre.GenreViewModel
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
