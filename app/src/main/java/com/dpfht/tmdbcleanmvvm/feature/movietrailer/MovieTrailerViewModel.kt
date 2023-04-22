@@ -2,10 +2,10 @@ package com.dpfht.tmdbcleanmvvm.feature.movietrailer
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.dpfht.tmdbcleanmvvm.core.data.model.remote.Trailer
-import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieTrailerUseCase
-import com.dpfht.tmdbcleanmvvm.core.usecase.UseCaseResultWrapper.ErrorResult
-import com.dpfht.tmdbcleanmvvm.core.usecase.UseCaseResultWrapper.Success
+import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieTrailerUseCase
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.Result.ErrorResult
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.Result.Success
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.TrailerEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -43,7 +43,7 @@ class MovieTrailerViewModel(
     scope.launch(Dispatchers.Main) {
       when (val result = getMovieTrailerUseCase(_movieId)) {
         is Success -> {
-          onSuccess(result.value.trailers)
+          onSuccess(result.value.results)
         }
         is ErrorResult -> {
           onError(result.message)
@@ -52,13 +52,12 @@ class MovieTrailerViewModel(
     }
   }
 
-  private fun onSuccess(trailers: List<Trailer>) {
+  private fun onSuccess(trailers: List<TrailerEntity>) {
     var keyVideo = ""
     for (trailer in trailers) {
-      if (trailer.site?.lowercase(Locale.ROOT)
-          ?.trim() == "youtube"
+      if (trailer.site.lowercase(Locale.ROOT).trim() == "youtube"
       ) {
-        keyVideo = trailer.key ?: ""
+        keyVideo = trailer.key
         break
       }
     }

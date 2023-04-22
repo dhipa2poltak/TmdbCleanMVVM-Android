@@ -3,10 +3,10 @@ package com.dpfht.tmdbcleanmvvm.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.dpfht.tmdbcleanmvvm.MainCoroutineRule
-import com.dpfht.tmdbcleanmvvm.core.data.model.remote.Genre
-import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieGenreResult
-import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieGenreUseCase
-import com.dpfht.tmdbcleanmvvm.core.usecase.UseCaseResultWrapper
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.GenreDomain
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.GenreEntity
+import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieGenreUseCase
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.Result
 import com.dpfht.tmdbcleanmvvm.feature.genre.GenreViewModel
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -42,7 +42,7 @@ class GenreViewModelUnitTest {
   @Mock
   private lateinit var errorMessageObserver: Observer<String>
 
-  private val listOfGenres = arrayListOf<Genre>()
+  private val listOfGenres = arrayListOf<GenreEntity>()
 
   @Before
   fun setup() {
@@ -51,13 +51,13 @@ class GenreViewModelUnitTest {
 
   @Test
   fun `fetch movie genre successfully`() = runBlocking {
-    val genre1 = Genre(1, "Cartoon")
-    val genre2 = Genre(2, "Drama")
-    val genre3 = Genre(3, "Horror")
+    val genre1 = GenreEntity(1, "Cartoon")
+    val genre2 = GenreEntity(2, "Drama")
+    val genre3 = GenreEntity(3, "Horror")
 
     val genres = listOf(genre1, genre2, genre3)
-    val getMovieGenreResult = GetMovieGenreResult(genres)
-    val result = UseCaseResultWrapper.Success(getMovieGenreResult)
+    val getMovieGenreResult = GenreDomain(genres)
+    val result = Result.Success(getMovieGenreResult)
 
     whenever(getMovieGenreUseCase.invoke()).thenReturn(result)
 
@@ -73,7 +73,7 @@ class GenreViewModelUnitTest {
   @Test
   fun `failed fetch movie genre`() = runBlocking {
     val msg = "error fetch genre"
-    val result = UseCaseResultWrapper.ErrorResult(msg)
+    val result = Result.ErrorResult(msg)
 
     whenever(getMovieGenreUseCase.invoke()).thenReturn(result)
 

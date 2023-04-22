@@ -5,10 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavDirections
 import com.dpfht.tmdbcleanmvvm.feature.base.BaseViewModel
-import com.dpfht.tmdbcleanmvvm.core.data.model.remote.Genre
-import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieGenreUseCase
-import com.dpfht.tmdbcleanmvvm.core.usecase.UseCaseResultWrapper.ErrorResult
-import com.dpfht.tmdbcleanmvvm.core.usecase.UseCaseResultWrapper.Success
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.GenreEntity
+import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieGenreUseCase
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.Result.ErrorResult
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.Result.Success
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class GenreViewModel @Inject constructor(
   val getMovieGenreUseCase: GetMovieGenreUseCase,
-  val genres: ArrayList<Genre>
+  val genres: ArrayList<GenreEntity>
 ) : BaseViewModel() {
 
   private val _notifyItemInserted = MutableLiveData<Int>()
@@ -43,7 +43,7 @@ class GenreViewModel @Inject constructor(
     }
   }
 
-  private fun onSuccess(genres: List<Genre>) {
+  private fun onSuccess(genres: List<GenreEntity>) {
     for (genre in genres) {
       this.genres.add(genre)
       _notifyItemInserted.postValue(this.genres.size - 1)
@@ -60,7 +60,7 @@ class GenreViewModel @Inject constructor(
     val genre = genres[position]
 
     return GenreFragmentDirections.actionGenreFragmentToMoviesByGenreFragment(
-      genre.id, genre.name ?: ""
+      genre.id, genre.name
     )
   }
 }

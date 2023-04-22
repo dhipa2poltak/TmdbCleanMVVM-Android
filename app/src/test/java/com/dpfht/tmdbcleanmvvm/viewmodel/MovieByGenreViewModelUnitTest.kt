@@ -3,10 +3,10 @@ package com.dpfht.tmdbcleanmvvm.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.dpfht.tmdbcleanmvvm.MainCoroutineRule
-import com.dpfht.tmdbcleanmvvm.core.data.model.remote.Movie
-import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieByGenreResult
-import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieByGenreUseCase
-import com.dpfht.tmdbcleanmvvm.core.usecase.UseCaseResultWrapper
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.DiscoverMovieByGenreDomain
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.MovieEntity
+import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieByGenreUseCase
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.Result
 import com.dpfht.tmdbcleanmvvm.feature.moviesbygenre.MoviesByGenreViewModel
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -42,7 +42,7 @@ class MovieByGenreViewModelUnitTest {
   @Mock
   private lateinit var errorMessageObserver: Observer<String>
 
-  private val listOfMovie = arrayListOf<Movie>()
+  private val listOfMovie = arrayListOf<MovieEntity>()
 
   @Before
   fun setup() {
@@ -51,16 +51,16 @@ class MovieByGenreViewModelUnitTest {
 
   @Test
   fun `fetch movie successfully`() = runBlocking {
-    val movie1 = Movie(id = 1, originalTitle = "title1", overview = "overview1", title = "title1")
-    val movie2 = Movie(id = 2, originalTitle = "title2", overview = "overview2", title = "title2")
-    val movie3 = Movie(id = 3, originalTitle = "title3", overview = "overview3", title = "title3")
+    val movie1 = MovieEntity(id = 1, title = "title1", overview = "overview1")
+    val movie2 = MovieEntity(id = 2, title = "title2", overview = "overview2")
+    val movie3 = MovieEntity(id = 3, title = "title3", overview = "overview3")
 
     val genreId = 1
     val page = 1
 
     val movies = listOf(movie1, movie2, movie3)
-    val getMovieByGenreResult = GetMovieByGenreResult(movies, page)
-    val result = UseCaseResultWrapper.Success(getMovieByGenreResult)
+    val getMovieByGenreResult = DiscoverMovieByGenreDomain(page, movies)
+    val result = Result.Success(getMovieByGenreResult)
 
     whenever(getMovieByGenreUseCase.invoke(genreId, page)).thenReturn(result)
 
@@ -77,7 +77,7 @@ class MovieByGenreViewModelUnitTest {
   @Test
   fun `failed fetch movie`() = runBlocking {
     val msg = "error fetch movie"
-    val result = UseCaseResultWrapper.ErrorResult(msg)
+    val result = Result.ErrorResult(msg)
 
     val genreId = 1
     val page = 1

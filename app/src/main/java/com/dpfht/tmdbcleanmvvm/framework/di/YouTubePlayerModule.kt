@@ -1,8 +1,8 @@
 package com.dpfht.tmdbcleanmvvm.framework.di
 
-import com.dpfht.tmdbcleanmvvm.core.data.repository.AppRepository
-import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieTrailerUseCase
-import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieTrailerUseCaseImpl
+import com.dpfht.tmdbcleanmvvm.core.domain.repository.AppRepository
+import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieTrailerUseCase
+import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieTrailerUseCaseImpl
 import com.dpfht.tmdbcleanmvvm.feature.movietrailer.MovieTrailerViewModel
 import dagger.Module
 import dagger.Provides

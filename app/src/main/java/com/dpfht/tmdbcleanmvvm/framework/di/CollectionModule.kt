@@ -1,8 +1,8 @@
 package com.dpfht.tmdbcleanmvvm.framework.di
 
-import com.dpfht.tmdbcleanmvvm.core.data.model.remote.Genre
-import com.dpfht.tmdbcleanmvvm.core.data.model.remote.Movie
-import com.dpfht.tmdbcleanmvvm.core.data.model.remote.Review
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.GenreEntity
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.MovieEntity
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.ReviewEntity
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,17 +13,17 @@ import dagger.hilt.android.components.ViewModelComponent
 class CollectionModule {
 
   @Provides
-  fun provideGenres(): ArrayList<Genre> {
+  fun provideGenres(): ArrayList<GenreEntity> {
     return arrayListOf()
   }
 
   @Provides
-  fun provideMovies(): ArrayList<Movie> {
+  fun provideMovies(): ArrayList<MovieEntity> {
     return arrayListOf()
   }
 
   @Provides
-  fun provideReviews(): ArrayList<Review> {
+  fun provideReviews(): ArrayList<ReviewEntity> {
     return arrayListOf()
   }
 }

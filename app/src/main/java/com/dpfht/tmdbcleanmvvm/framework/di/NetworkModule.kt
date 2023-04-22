@@ -1,11 +1,11 @@
 package com.dpfht.tmdbcleanmvvm.framework.di
 
 import com.dpfht.tmdbcleanmvvm.BuildConfig
-import com.dpfht.tmdbcleanmvvm.core.data.repository.AppDataSource
-import com.dpfht.tmdbcleanmvvm.framework.rest.AuthInterceptor
-import com.dpfht.tmdbcleanmvvm.framework.RemoteDataSourceImpl
-import com.dpfht.tmdbcleanmvvm.framework.rest.RestService
-import com.dpfht.tmdbcleanmvvm.framework.rest.UnsafeOkHttpClient
+import com.dpfht.tmdbcleanmvvm.core.data.datasource.AppDataSource
+import com.dpfht.tmdbcleanmvvm.framework.data.core.api.rest.AuthInterceptor
+import com.dpfht.tmdbcleanmvvm.framework.data.datasource.RemoteDataSourceImpl
+import com.dpfht.tmdbcleanmvvm.framework.data.core.api.rest.RestService
+import com.dpfht.tmdbcleanmvvm.framework.data.core.api.rest.UnsafeOkHttpClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

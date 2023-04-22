@@ -3,10 +3,10 @@ package com.dpfht.tmdbcleanmvvm.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.dpfht.tmdbcleanmvvm.MainCoroutineRule
-import com.dpfht.tmdbcleanmvvm.core.data.model.remote.Trailer
-import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieTrailerResult
-import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieTrailerUseCase
-import com.dpfht.tmdbcleanmvvm.core.usecase.UseCaseResultWrapper
+import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieTrailerUseCase
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.Result
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.TrailerDomain
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.TrailerEntity
 import com.dpfht.tmdbcleanmvvm.feature.movietrailer.MovieTrailerViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -51,13 +51,13 @@ class MovieTrailerViewModelUnitTest {
   @Test
   fun `fetch movie trailer successfully`() = runBlocking {
     val keyVideo1 = "11111"
-    val trailer1 = Trailer(id = "1", key = keyVideo1, name = "name1", site = "youtube")
-    val trailer2 = Trailer(id = "2", key = "22222", name = "name2", site = "youtube")
-    val trailer3 = Trailer(id = "3", key = "33333", name = "name3", site = "youtube")
+    val trailer1 = TrailerEntity(id = "1", key = keyVideo1, name = "name1", site = "youtube")
+    val trailer2 = TrailerEntity(id = "2", key = "22222", name = "name2", site = "youtube")
+    val trailer3 = TrailerEntity(id = "3", key = "33333", name = "name3", site = "youtube")
 
     val trailers = listOf(trailer1, trailer2, trailer3)
-    val getMovieTrailerResult = GetMovieTrailerResult(trailers)
-    val result = UseCaseResultWrapper.Success(getMovieTrailerResult)
+    val getMovieTrailerResult = TrailerDomain(results = trailers)
+    val result = Result.Success(getMovieTrailerResult)
 
     val movieId = 1
 
@@ -74,7 +74,7 @@ class MovieTrailerViewModelUnitTest {
   @Test
   fun `failed fetch movie trailer`() = runBlocking {
     val msg = "error fetch movie trailer"
-    val result = UseCaseResultWrapper.ErrorResult(msg)
+    val result = Result.ErrorResult(msg)
 
     val movieId = 1
 

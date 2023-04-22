@@ -4,9 +4,9 @@ import com.dpfht.tmdbcleanmvvm.BuildConfig
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.dpfht.tmdbcleanmvvm.MainCoroutineRule
-import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieDetailsResult
-import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieDetailsUseCase
-import com.dpfht.tmdbcleanmvvm.core.usecase.UseCaseResultWrapper
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.MovieDetailsDomain
+import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieDetailsUseCase
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.Result
 import com.dpfht.tmdbcleanmvvm.feature.moviedetails.MovieDetailsViewModel
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -60,14 +60,14 @@ class MovieDetailsViewModelUnitTest {
     val overview = "overview1"
     val posterPath = "poster_path1"
 
-    val getMovieDetailsResult = GetMovieDetailsResult(
-      movieId = movieId,
+    val getMovieDetailsResult = MovieDetailsDomain(
+      id = movieId,
       title = title,
       overview = overview,
-      posterPath = posterPath
+      imageUrl = posterPath
     )
 
-    val result = UseCaseResultWrapper.Success(getMovieDetailsResult)
+    val result = Result.Success(getMovieDetailsResult)
 
     whenever(getMovieDetailsUseCase.invoke(movieId)).thenReturn(result)
 
@@ -91,7 +91,7 @@ class MovieDetailsViewModelUnitTest {
   @Test
   fun `failed fetch movie details`() = runBlocking {
     val msg = "error fetch movie details"
-    val result = UseCaseResultWrapper.ErrorResult(msg)
+    val result = Result.ErrorResult(msg)
 
     val movieId = 1
 

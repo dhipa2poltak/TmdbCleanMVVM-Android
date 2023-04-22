@@ -3,10 +3,10 @@ package com.dpfht.tmdbcleanmvvm.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.dpfht.tmdbcleanmvvm.MainCoroutineRule
-import com.dpfht.tmdbcleanmvvm.core.data.model.remote.Review
-import com.dpfht.tmdbcleanmvvm.core.domain.model.GetMovieReviewResult
-import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieReviewUseCase
-import com.dpfht.tmdbcleanmvvm.core.usecase.UseCaseResultWrapper
+import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieReviewUseCase
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.Result
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.ReviewDomain
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.ReviewEntity
 import com.dpfht.tmdbcleanmvvm.feature.moviereviews.MovieReviewsViewModel
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -42,7 +42,7 @@ class MovieReviewViewModelUnitTest {
   @Mock
   private lateinit var errorMessageObserver: Observer<String>
 
-  private val listOfReview = arrayListOf<Review>()
+  private val listOfReview = arrayListOf<ReviewEntity>()
 
   @Before
   fun setup() {
@@ -51,15 +51,15 @@ class MovieReviewViewModelUnitTest {
 
   @Test
   fun `fetch movie review successfully`() = runBlocking {
-    val review1 = Review(author = "author1", content = "content1", id = "1", url = "url1")
-    val review2 = Review(author = "author2", content = "content2", id = "2", url = "url2")
+    val review1 = ReviewEntity(author = "author1", content = "content1")
+    val review2 = ReviewEntity(author = "author2", content = "content2")
     val reviews = listOf(review1, review2)
 
     val movieId = 1
     val page = 1
 
-    val getMovieReviewResult = GetMovieReviewResult(reviews, 1)
-    val result = UseCaseResultWrapper.Success(getMovieReviewResult)
+    val getMovieReviewResult = ReviewDomain(reviews)
+    val result = Result.Success(getMovieReviewResult)
 
     whenever(getMovieReviewUseCase.invoke(movieId, page)).thenReturn(result)
 
@@ -79,7 +79,7 @@ class MovieReviewViewModelUnitTest {
     val page = 1
 
     val msg = "error fetch movie review"
-    val result = UseCaseResultWrapper.ErrorResult(msg)
+    val result = Result.ErrorResult(msg)
 
     whenever(getMovieReviewUseCase.invoke(movieId, page)).thenReturn(result)
 

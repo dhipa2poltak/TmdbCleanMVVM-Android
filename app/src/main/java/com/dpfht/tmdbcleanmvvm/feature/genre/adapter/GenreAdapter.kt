@@ -3,7 +3,7 @@ package com.dpfht.tmdbcleanmvvm.feature.genre.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.dpfht.tmdbcleanmvvm.core.data.model.remote.Genre
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.GenreEntity
 import com.dpfht.tmdbcleanmvvm.databinding.RowGenreBinding
 import javax.inject.Inject
 
@@ -11,7 +11,7 @@ class GenreAdapter @Inject constructor(
   //val genres: ArrayList<Genre>
 ): RecyclerView.Adapter<GenreAdapter.GenreHolder>() {
 
-  lateinit var genres: ArrayList<Genre>
+  lateinit var genres: ArrayList<GenreEntity>
   var onClickGenreListener: OnClickGenreListener? = null
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenreHolder {
@@ -33,7 +33,7 @@ class GenreAdapter @Inject constructor(
 
   class GenreHolder(private val binding: RowGenreBinding): RecyclerView.ViewHolder(binding.root) {
 
-    fun bindData(genre: Genre) {
+    fun bindData(genre: GenreEntity) {
       binding.tvGenre.text = genre.name
     }
   }

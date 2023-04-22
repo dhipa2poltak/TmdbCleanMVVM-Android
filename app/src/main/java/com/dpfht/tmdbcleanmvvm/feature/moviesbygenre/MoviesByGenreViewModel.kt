@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavDirections
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.MovieEntity
 import com.dpfht.tmdbcleanmvvm.feature.base.BaseViewModel
-import com.dpfht.tmdbcleanmvvm.core.data.model.remote.Movie
-import com.dpfht.tmdbcleanmvvm.core.usecase.GetMovieByGenreUseCase
-import com.dpfht.tmdbcleanmvvm.core.usecase.UseCaseResultWrapper.ErrorResult
-import com.dpfht.tmdbcleanmvvm.core.usecase.UseCaseResultWrapper.Success
+import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieByGenreUseCase
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.Result.ErrorResult
+import com.dpfht.tmdbcleanmvvm.core.domain.entity.Result.Success
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MoviesByGenreViewModel @Inject constructor(
   val getMovieByGenreUseCase: GetMovieByGenreUseCase,
-  val movies: ArrayList<Movie>
+  val movies: ArrayList<MovieEntity>
 ): BaseViewModel() {
 
   private var _genreId = -1
@@ -46,7 +46,7 @@ class MoviesByGenreViewModel @Inject constructor(
     viewModelScope.launch(Dispatchers.Main) {
       when (val result = getMovieByGenreUseCase(_genreId, page + 1)) {
         is Success -> {
-          onSuccess(result.value.movies, result.value.page)
+          onSuccess(result.value.results, result.value.page)
         }
         is ErrorResult -> {
           onError(result.message)
@@ -55,7 +55,7 @@ class MoviesByGenreViewModel @Inject constructor(
     }
   }
 
-  private fun onSuccess(movies: List<Movie>, page: Int) {
+  private fun onSuccess(movies: List<MovieEntity>, page: Int) {
     if (movies.isNotEmpty()) {
       this.page = page
 
