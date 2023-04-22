@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
@@ -25,9 +24,6 @@ class MoviesByGenreFragment: Fragment() {
 
   @Inject
   lateinit var adapter: MoviesByGenreAdapter
-
-  @Inject
-  lateinit var loadingDialog: AlertDialog
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -73,9 +69,9 @@ class MoviesByGenreFragment: Fragment() {
 
     viewModel.isShowDialogLoading.observe(viewLifecycleOwner) { value ->
       if (value) {
-        loadingDialog.show()
+        binding.pbLoading.visibility = View.VISIBLE
       } else {
-        loadingDialog.dismiss()
+        binding.pbLoading.visibility = View.GONE
       }
     }
 
