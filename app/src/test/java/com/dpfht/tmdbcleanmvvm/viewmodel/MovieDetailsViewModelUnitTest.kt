@@ -5,7 +5,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.dpfht.tmdbcleanmvvm.MainCoroutineRule
 import com.dpfht.tmdbcleanmvvm.core.domain.entity.MovieDetailsDomain
-import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieDetailsUseCase
+import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieDetailsUseCase
 import com.dpfht.tmdbcleanmvvm.core.domain.entity.Result
 import com.dpfht.tmdbcleanmvvm.feature.moviedetails.MovieDetailsViewModel
 import kotlinx.coroutines.runBlocking
@@ -31,7 +31,7 @@ class MovieDetailsViewModelUnitTest {
   private lateinit var viewModel: MovieDetailsViewModel
 
   @Mock
-  private lateinit var getMovieDetailsUseCase: GetMovieDetailsUseCase
+  private lateinit var getMovieDetailsUseCase: com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieDetailsUseCase
 
   @Mock
   private lateinit var titleObserver: Observer<String>

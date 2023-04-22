@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavDirections
-import com.dpfht.tmdbcleanmvvm.core.domain.entity.MovieEntity
+import com.dpfht.tmdbcleanmvvm.domain.entity.MovieEntity
 import com.dpfht.tmdbcleanmvvm.feature.base.BaseViewModel
-import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieByGenreUseCase
-import com.dpfht.tmdbcleanmvvm.core.domain.entity.Result.ErrorResult
-import com.dpfht.tmdbcleanmvvm.core.domain.entity.Result.Success
+import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieByGenreUseCase
+import com.dpfht.tmdbcleanmvvm.domain.entity.Result.ErrorResult
+import com.dpfht.tmdbcleanmvvm.domain.entity.Result.Success
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -2,10 +2,10 @@ package com.dpfht.tmdbcleanmvvm.feature.movietrailer
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieTrailerUseCase
-import com.dpfht.tmdbcleanmvvm.core.domain.entity.Result.ErrorResult
-import com.dpfht.tmdbcleanmvvm.core.domain.entity.Result.Success
-import com.dpfht.tmdbcleanmvvm.core.domain.entity.TrailerEntity
+import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieTrailerUseCase
+import com.dpfht.tmdbcleanmvvm.domain.entity.Result.ErrorResult
+import com.dpfht.tmdbcleanmvvm.domain.entity.Result.Success
+import com.dpfht.tmdbcleanmvvm.domain.entity.TrailerEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel

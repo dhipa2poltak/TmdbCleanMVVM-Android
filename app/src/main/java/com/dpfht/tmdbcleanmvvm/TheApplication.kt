@@ -6,6 +6,7 @@ import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy.Builder
 import android.os.StrictMode.VmPolicy
 import androidx.multidex.MultiDex
+import com.dpfht.tmdbcleanmvvm.framework.BuildConfig
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp

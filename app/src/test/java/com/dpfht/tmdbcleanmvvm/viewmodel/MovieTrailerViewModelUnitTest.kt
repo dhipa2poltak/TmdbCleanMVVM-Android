@@ -3,7 +3,7 @@ package com.dpfht.tmdbcleanmvvm.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.dpfht.tmdbcleanmvvm.MainCoroutineRule
-import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieTrailerUseCase
+import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieTrailerUseCase
 import com.dpfht.tmdbcleanmvvm.core.domain.entity.Result
 import com.dpfht.tmdbcleanmvvm.core.domain.entity.TrailerDomain
 import com.dpfht.tmdbcleanmvvm.core.domain.entity.TrailerEntity
@@ -33,7 +33,7 @@ class MovieTrailerViewModelUnitTest {
   private lateinit var viewModel: MovieTrailerViewModel
 
   @Mock
-  private lateinit var getMovieTrailerUseCase: GetMovieTrailerUseCase
+  private lateinit var getMovieTrailerUseCase: com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieTrailerUseCase
 
   @Mock
   private lateinit var keyVideoObserver: Observer<String>

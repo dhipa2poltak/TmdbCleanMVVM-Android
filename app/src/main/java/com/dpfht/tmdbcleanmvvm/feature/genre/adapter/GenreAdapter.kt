@@ -3,7 +3,7 @@ package com.dpfht.tmdbcleanmvvm.feature.genre.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.dpfht.tmdbcleanmvvm.core.domain.entity.GenreEntity
+import com.dpfht.tmdbcleanmvvm.domain.entity.GenreEntity
 import com.dpfht.tmdbcleanmvvm.databinding.RowGenreBinding
 import javax.inject.Inject
 

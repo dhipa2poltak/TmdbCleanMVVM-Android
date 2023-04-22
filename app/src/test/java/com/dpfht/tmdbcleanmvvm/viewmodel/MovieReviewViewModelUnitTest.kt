@@ -3,7 +3,7 @@ package com.dpfht.tmdbcleanmvvm.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.dpfht.tmdbcleanmvvm.MainCoroutineRule
-import com.dpfht.tmdbcleanmvvm.core.domain.usecase.GetMovieReviewUseCase
+import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieReviewUseCase
 import com.dpfht.tmdbcleanmvvm.core.domain.entity.Result
 import com.dpfht.tmdbcleanmvvm.core.domain.entity.ReviewDomain
 import com.dpfht.tmdbcleanmvvm.core.domain.entity.ReviewEntity
@@ -31,7 +31,7 @@ class MovieReviewViewModelUnitTest {
   private lateinit var viewModel: MovieReviewsViewModel
 
   @Mock
-  private lateinit var getMovieReviewUseCase: GetMovieReviewUseCase
+  private lateinit var getMovieReviewUseCase: com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieReviewUseCase
 
   @Mock
   private lateinit var notifyItemInsertedObserver: Observer<Int>
