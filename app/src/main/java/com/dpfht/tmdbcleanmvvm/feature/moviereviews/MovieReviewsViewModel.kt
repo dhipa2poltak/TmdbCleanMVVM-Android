@@ -3,7 +3,7 @@ package com.dpfht.tmdbcleanmvvm.feature.moviereviews
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.dpfht.tmdbcleanmvvm.feature.base.BaseViewModel
+import com.dpfht.tmdbcleanmvvm.framework.base.BaseViewModel
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieReviewUseCase
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result.ErrorResult
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result.Success

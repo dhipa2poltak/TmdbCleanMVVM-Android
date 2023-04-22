@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvvm.feature.base
+package com.dpfht.tmdbcleanmvvm.framework.base
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

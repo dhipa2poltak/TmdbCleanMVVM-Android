@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvvm.framework.di
+package com.dpfht.tmdbcleanmvvm.framework.di.module
 
 import com.dpfht.tmdbcleanmvvm.domain.entity.GenreEntity
 import com.dpfht.tmdbcleanmvvm.domain.entity.MovieEntity

@@ -12,7 +12,7 @@ data class TrailerResponse(
 )
 
 fun TrailerResponse.toDomain(): TrailerDomain {
-    val trailerEntities = results.map { TrailerEntity(it.id, it.name, it.key, it.site) }
+    val trailerEntities = results.map { TrailerEntity(it.id, it.key, it.name, it.site) }
 
     return TrailerDomain(this.id, trailerEntities.toList())
 }

@@ -5,7 +5,6 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.dpfht.tmdbcleanmvvm.PlayerConfig
 import com.dpfht.tmdbcleanmvvm.R
-import com.dpfht.tmdbcleanmvvm.TheApplication
 import com.dpfht.tmdbcleanmvvm.databinding.ActivityMovieTrailerBinding
 import com.google.android.youtube.player.YouTubeBaseActivity
 import com.google.android.youtube.player.YouTubeInitializationResult
@@ -18,7 +17,7 @@ import dagger.hilt.components.SingletonComponent
 class MovieTrailerActivity : YouTubeBaseActivity() {
 
   private lateinit var binding: ActivityMovieTrailerBinding
-  val viewModel: MovieTrailerViewModel
+  lateinit var viewModel: MovieTrailerViewModel
 
   @EntryPoint
   @InstallIn(SingletonComponent::class)
@@ -26,13 +25,12 @@ class MovieTrailerActivity : YouTubeBaseActivity() {
     fun getMovieTrailerViewModel(): MovieTrailerViewModel
   }
 
-  init {
-    val entryPoint = EntryPointAccessors.fromApplication(TheApplication.instance, MovieTrailerEntryPoint::class.java)
-    viewModel = entryPoint.getMovieTrailerViewModel()
-  }
-
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+
+    val entryPoint = EntryPointAccessors.fromApplication(applicationContext, MovieTrailerEntryPoint::class.java)
+    viewModel = entryPoint.getMovieTrailerViewModel()
+
     binding = ActivityMovieTrailerBinding.inflate(layoutInflater)
     setContentView(binding.root)
 

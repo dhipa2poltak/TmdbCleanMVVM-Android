@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvvm.framework.di
+package com.dpfht.tmdbcleanmvvm.framework.di.module
 
 import com.dpfht.tmdbcleanmvvm.framework.BuildConfig
 import com.dpfht.tmdbcleanmvvm.data.datasource.AppDataSource
