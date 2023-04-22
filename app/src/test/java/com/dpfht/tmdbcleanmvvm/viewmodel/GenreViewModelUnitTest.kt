@@ -3,10 +3,10 @@ package com.dpfht.tmdbcleanmvvm.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.dpfht.tmdbcleanmvvm.MainCoroutineRule
-import com.dpfht.tmdbcleanmvvm.core.domain.entity.GenreDomain
-import com.dpfht.tmdbcleanmvvm.core.domain.entity.GenreEntity
+import com.dpfht.tmdbcleanmvvm.domain.entity.GenreDomain
+import com.dpfht.tmdbcleanmvvm.domain.entity.GenreEntity
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieGenreUseCase
-import com.dpfht.tmdbcleanmvvm.core.domain.entity.Result
+import com.dpfht.tmdbcleanmvvm.domain.entity.Result
 import com.dpfht.tmdbcleanmvvm.feature.genre.GenreViewModel
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -31,7 +31,7 @@ class GenreViewModelUnitTest {
   private lateinit var viewModel: GenreViewModel
 
   @Mock
-  private lateinit var getMovieGenreUseCase: com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieGenreUseCase
+  private lateinit var getMovieGenreUseCase: GetMovieGenreUseCase
 
   @Mock
   private lateinit var notifyItemInsertedObserver: Observer<Int>

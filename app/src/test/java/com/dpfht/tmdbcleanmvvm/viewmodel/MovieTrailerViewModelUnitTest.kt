@@ -4,9 +4,9 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.dpfht.tmdbcleanmvvm.MainCoroutineRule
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieTrailerUseCase
-import com.dpfht.tmdbcleanmvvm.core.domain.entity.Result
-import com.dpfht.tmdbcleanmvvm.core.domain.entity.TrailerDomain
-import com.dpfht.tmdbcleanmvvm.core.domain.entity.TrailerEntity
+import com.dpfht.tmdbcleanmvvm.domain.entity.Result
+import com.dpfht.tmdbcleanmvvm.domain.entity.TrailerDomain
+import com.dpfht.tmdbcleanmvvm.domain.entity.TrailerEntity
 import com.dpfht.tmdbcleanmvvm.feature.movietrailer.MovieTrailerViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -33,7 +33,7 @@ class MovieTrailerViewModelUnitTest {
   private lateinit var viewModel: MovieTrailerViewModel
 
   @Mock
-  private lateinit var getMovieTrailerUseCase: com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieTrailerUseCase
+  private lateinit var getMovieTrailerUseCase: GetMovieTrailerUseCase
 
   @Mock
   private lateinit var keyVideoObserver: Observer<String>

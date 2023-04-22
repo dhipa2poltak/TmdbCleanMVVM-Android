@@ -4,9 +4,9 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.dpfht.tmdbcleanmvvm.MainCoroutineRule
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieReviewUseCase
-import com.dpfht.tmdbcleanmvvm.core.domain.entity.Result
-import com.dpfht.tmdbcleanmvvm.core.domain.entity.ReviewDomain
-import com.dpfht.tmdbcleanmvvm.core.domain.entity.ReviewEntity
+import com.dpfht.tmdbcleanmvvm.domain.entity.Result
+import com.dpfht.tmdbcleanmvvm.domain.entity.ReviewDomain
+import com.dpfht.tmdbcleanmvvm.domain.entity.ReviewEntity
 import com.dpfht.tmdbcleanmvvm.feature.moviereviews.MovieReviewsViewModel
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -31,7 +31,7 @@ class MovieReviewViewModelUnitTest {
   private lateinit var viewModel: MovieReviewsViewModel
 
   @Mock
-  private lateinit var getMovieReviewUseCase: com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieReviewUseCase
+  private lateinit var getMovieReviewUseCase: GetMovieReviewUseCase
 
   @Mock
   private lateinit var notifyItemInsertedObserver: Observer<Int>

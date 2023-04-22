@@ -1,12 +1,11 @@
 package com.dpfht.tmdbcleanmvvm.viewmodel
 
-import com.dpfht.tmdbcleanmvvm.BuildConfig
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.dpfht.tmdbcleanmvvm.MainCoroutineRule
-import com.dpfht.tmdbcleanmvvm.core.domain.entity.MovieDetailsDomain
+import com.dpfht.tmdbcleanmvvm.domain.entity.MovieDetailsDomain
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieDetailsUseCase
-import com.dpfht.tmdbcleanmvvm.core.domain.entity.Result
+import com.dpfht.tmdbcleanmvvm.domain.entity.Result
 import com.dpfht.tmdbcleanmvvm.feature.moviedetails.MovieDetailsViewModel
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -31,7 +30,7 @@ class MovieDetailsViewModelUnitTest {
   private lateinit var viewModel: MovieDetailsViewModel
 
   @Mock
-  private lateinit var getMovieDetailsUseCase: com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieDetailsUseCase
+  private lateinit var getMovieDetailsUseCase: GetMovieDetailsUseCase
 
   @Mock
   private lateinit var titleObserver: Observer<String>
@@ -82,7 +81,7 @@ class MovieDetailsViewModelUnitTest {
     verify(titleObserver).onChanged(eq(title))
     verify(overviewObserver).onChanged(eq(overview))
 
-    val imageUrl = BuildConfig.IMAGE_URL_BASE_PATH + posterPath
+    val imageUrl = posterPath
     verify(imageUrlObserver).onChanged(eq(imageUrl))
 
     verify(showLoadingObserver).onChanged(eq(false))
