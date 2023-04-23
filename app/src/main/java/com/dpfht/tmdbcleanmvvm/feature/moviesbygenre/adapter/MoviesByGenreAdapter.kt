@@ -3,8 +3,10 @@ package com.dpfht.tmdbcleanmvvm.feature.moviesbygenre.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.dpfht.tmdbcleanmvvm.R
 import com.dpfht.tmdbcleanmvvm.databinding.RowMovieBinding
 import com.dpfht.tmdbcleanmvvm.domain.entity.MovieEntity
+import com.squareup.picasso.Picasso
 import javax.inject.Inject
 
 class MoviesByGenreAdapter @Inject constructor(
@@ -35,6 +37,12 @@ class MoviesByGenreAdapter @Inject constructor(
 
     fun bindData(movie: MovieEntity) {
       binding.tvTitleMovie.text = movie.title
+      binding.tvOverviewMovie.text = movie.overview
+
+      Picasso.get().load(movie.imageUrl)
+        .error(android.R.drawable.ic_menu_close_clear_cancel)
+        .placeholder(R.drawable.loading)
+        .into(binding.ivMovie)
     }
   }
 
