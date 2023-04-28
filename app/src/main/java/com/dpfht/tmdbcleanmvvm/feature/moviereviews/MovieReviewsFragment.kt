@@ -1,12 +1,14 @@
 package com.dpfht.tmdbcleanmvvm.feature.moviereviews
 
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -112,8 +114,17 @@ class MovieReviewsFragment: Fragment() {
   }
 
   private fun showErrorMessage(message: String) {
-    val navDirections = MovieReviewsFragmentDirections.actionMovieReviewsToErrorDialog(message)
-    Navigation.findNavController(requireView()).navigate(navDirections)
+    val builder = Uri.Builder()
+    builder.scheme("android-app")
+      .authority("tmdbcleanmvvm.dpfht.com")
+      .appendPath("error_message_dialog_fragment")
+      .appendQueryParameter("message", message)
+
+    val navRequest = NavDeepLinkRequest.Builder
+      .fromUri(builder.build())
+      .build()
+
+    Navigation.findNavController(requireView()).navigate(navRequest)
   }
 
   private fun showCanceledMessage() {

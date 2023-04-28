@@ -2,12 +2,14 @@ package com.dpfht.tmdbcleanmvvm.feature.moviedetails
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.Navigation
 import com.dpfht.tmdbcleanmvvm.R
 import com.dpfht.tmdbcleanmvvm.databinding.FragmentMovieDetailsBinding
@@ -101,8 +103,8 @@ class MovieDetailsFragment: Fragment() {
   }
 
   private fun onClickShowReview() {
-    val navDirections = viewModel.getNavDirectionsToMovieReviews()
-    Navigation.findNavController(requireView()).navigate(navDirections)
+    val navRequest = viewModel.getNavDeeplinkRequestToMovieReviews()
+    Navigation.findNavController(requireView()).navigate(navRequest)
   }
 
   private fun onClickShowTrailer() {
@@ -112,8 +114,17 @@ class MovieDetailsFragment: Fragment() {
   }
 
   private fun showErrorMessage(message: String) {
-    val navDirections = MovieDetailsFragmentDirections.actionMovieDetailsToErrorDialog(message)
-    Navigation.findNavController(requireView()).navigate(navDirections)
+    val builder = Uri.Builder()
+    builder.scheme("android-app")
+      .authority("tmdbcleanmvvm.dpfht.com")
+      .appendPath("error_message_dialog_fragment")
+      .appendQueryParameter("message", message)
+
+    val navRequest = NavDeepLinkRequest.Builder
+      .fromUri(builder.build())
+      .build()
+
+    Navigation.findNavController(requireView()).navigate(navRequest)
   }
 
   private fun showCanceledMessage() {

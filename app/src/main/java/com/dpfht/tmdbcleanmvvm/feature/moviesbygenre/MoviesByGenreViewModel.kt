@@ -1,14 +1,15 @@
 package com.dpfht.tmdbcleanmvvm.feature.moviesbygenre
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavDirections
+import androidx.navigation.NavDeepLinkRequest
 import com.dpfht.tmdbcleanmvvm.domain.entity.MovieEntity
-import com.dpfht.tmdbcleanmvvm.framework.base.BaseViewModel
-import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieByGenreUseCase
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result.ErrorResult
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result.Success
+import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieByGenreUseCase
+import com.dpfht.tmdbcleanmvvm.framework.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -77,9 +78,17 @@ class MoviesByGenreViewModel @Inject constructor(
     mErrorMessage.postValue(message)
   }
 
-  fun getNavDirectionsOnClickMovieAt(position: Int): NavDirections {
+  fun getNavDeeplinkRequestOnClickMovieAt(position: Int): NavDeepLinkRequest {
     val movie = movies[position]
 
-    return MoviesByGenreFragmentDirections.actionMovieByGenreToMovieDetails(movie.id)
+    val builder = Uri.Builder()
+    builder.scheme("android-app")
+      .authority("tmdbcleanmvvm.dpfht.com")
+      .appendPath("movie_details_fragment")
+      .appendQueryParameter("movieId", "${movie.id}")
+
+    return NavDeepLinkRequest.Builder
+      .fromUri(builder.build())
+      .build()
   }
 }

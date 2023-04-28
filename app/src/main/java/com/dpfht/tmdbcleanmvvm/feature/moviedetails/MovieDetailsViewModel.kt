@@ -1,14 +1,15 @@
 package com.dpfht.tmdbcleanmvvm.feature.moviedetails
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavDirections
-import com.dpfht.tmdbcleanmvvm.framework.base.BaseViewModel
+import androidx.navigation.NavDeepLinkRequest
 import com.dpfht.tmdbcleanmvvm.domain.entity.MovieDetailsDomain
-import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieDetailsUseCase
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result.ErrorResult
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result.Success
+import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieDetailsUseCase
+import com.dpfht.tmdbcleanmvvm.framework.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -88,7 +89,16 @@ class MovieDetailsViewModel @Inject constructor(
     mErrorMessage.postValue(message)
   }
 
-  fun getNavDirectionsToMovieReviews(): NavDirections {
-    return MovieDetailsFragmentDirections.actionMovieDetailsToMovieReviews(_movieId, title)
+  fun getNavDeeplinkRequestToMovieReviews(): NavDeepLinkRequest {
+    val builder = Uri.Builder()
+    builder.scheme("android-app")
+      .authority("tmdbcleanmvvm.dpfht.com")
+      .appendPath("movie_reviews_fragment")
+      .appendQueryParameter("movieId", "$_movieId")
+      .appendQueryParameter("movieTitle", title)
+
+    return NavDeepLinkRequest.Builder
+      .fromUri(builder.build())
+      .build()
   }
 }

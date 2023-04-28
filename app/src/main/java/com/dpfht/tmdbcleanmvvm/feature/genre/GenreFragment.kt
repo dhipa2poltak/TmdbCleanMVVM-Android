@@ -1,12 +1,14 @@
 package com.dpfht.tmdbcleanmvvm.feature.genre
 
 import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dpfht.tmdbcleanmvvm.R
@@ -59,8 +61,8 @@ class GenreFragment: Fragment() {
 
     adapter.onClickGenreListener = object : GenreAdapter.OnClickGenreListener {
       override fun onClickGenre(position: Int) {
-        val navDirections = viewModel.getNavDirectionsOnClickGenreAt(position)
-        Navigation.findNavController(requireView()).navigate(navDirections)
+        val navRequest = viewModel.getNavDeepLinkRequestOnClickGenreAt(position)
+        Navigation.findNavController(requireView()).navigate(navRequest)
       }
     }
 
@@ -96,8 +98,17 @@ class GenreFragment: Fragment() {
   }
 
   private fun showErrorMessage(message: String) {
-    val navDirections = GenreFragmentDirections.actionGenreFragmentToErrorDialog(message)
-    Navigation.findNavController(requireView()).navigate(navDirections)
+    val builder = Uri.Builder()
+    builder.scheme("android-app")
+      .authority("tmdbcleanmvvm.dpfht.com")
+      .appendPath("error_message_dialog_fragment")
+      .appendQueryParameter("message", message)
+
+    val navRequest = NavDeepLinkRequest.Builder
+      .fromUri(builder.build())
+      .build()
+
+    Navigation.findNavController(requireView()).navigate(navRequest)
   }
 
   private fun showCanceledMessage() {
