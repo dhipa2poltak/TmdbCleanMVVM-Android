@@ -1,5 +1,6 @@
 package com.dpfht.tmdbcleanmvvm.feature.genre
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dpfht.tmdbcleanmvvm.R
 import com.dpfht.tmdbcleanmvvm.databinding.FragmentGenreBinding
 import com.dpfht.tmdbcleanmvvm.feature.genre.adapter.GenreAdapter
+import com.dpfht.tmdbcleanmvvm.feature.genre.di.DaggerGenreComponent
+import com.dpfht.tmdbcleanmvvm.framework.di.dependency.GenreDependency
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -22,6 +26,16 @@ class GenreFragment: Fragment() {
 
   @Inject
   lateinit var adapter: GenreAdapter
+
+  override fun onAttach(context: Context) {
+    super.onAttach(context)
+
+    DaggerGenreComponent.builder()
+      .context(requireContext())
+      .dependency(EntryPointAccessors.fromApplication(requireContext().applicationContext, GenreDependency::class.java))
+      .build()
+      .inject(this)
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,

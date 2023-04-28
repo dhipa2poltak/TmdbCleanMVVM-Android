@@ -1,5 +1,6 @@
 package com.dpfht.tmdbcleanmvvm.feature.moviereviews
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dpfht.tmdbcleanmvvm.R
 import com.dpfht.tmdbcleanmvvm.databinding.FragmentMovieReviewsBinding
 import com.dpfht.tmdbcleanmvvm.feature.moviereviews.adapter.MovieReviewsAdapter
+import com.dpfht.tmdbcleanmvvm.feature.moviereviews.di.DaggerMovieReviewsComponent
+import com.dpfht.tmdbcleanmvvm.framework.di.dependency.MovieReviewsDependency
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -23,6 +27,16 @@ class MovieReviewsFragment: Fragment() {
 
   @Inject
   lateinit var adapter: MovieReviewsAdapter
+
+  override fun onAttach(context: Context) {
+    super.onAttach(context)
+
+    DaggerMovieReviewsComponent.builder()
+      .context(requireContext())
+      .dependency(EntryPointAccessors.fromApplication(requireContext().applicationContext, MovieReviewsDependency::class.java))
+      .build()
+      .inject(this)
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,

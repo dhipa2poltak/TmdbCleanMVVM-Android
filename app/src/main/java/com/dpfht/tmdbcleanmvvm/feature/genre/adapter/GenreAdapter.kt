@@ -7,9 +7,7 @@ import com.dpfht.tmdbcleanmvvm.domain.entity.GenreEntity
 import com.dpfht.tmdbcleanmvvm.databinding.RowGenreBinding
 import javax.inject.Inject
 
-class GenreAdapter @Inject constructor(
-  //val genres: ArrayList<Genre>
-): RecyclerView.Adapter<GenreAdapter.GenreHolder>() {
+class GenreAdapter @Inject constructor(): RecyclerView.Adapter<GenreAdapter.GenreHolder>() {
 
   lateinit var genres: ArrayList<GenreEntity>
   var onClickGenreListener: OnClickGenreListener? = null

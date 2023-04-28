@@ -1,5 +1,6 @@
 package com.dpfht.tmdbcleanmvvm.feature.moviesbygenre
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +14,10 @@ import com.dpfht.tmdbcleanmvvm.R
 import com.dpfht.tmdbcleanmvvm.databinding.FragmentMoviesByGenreBinding
 import com.dpfht.tmdbcleanmvvm.feature.moviesbygenre.adapter.MoviesByGenreAdapter
 import com.dpfht.tmdbcleanmvvm.feature.moviesbygenre.adapter.MoviesByGenreAdapter.OnClickMovieListener
+import com.dpfht.tmdbcleanmvvm.feature.moviesbygenre.di.DaggerMoviesByGenreComponent
+import com.dpfht.tmdbcleanmvvm.framework.di.dependency.MoviesByGenreDependency
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -24,6 +28,16 @@ class MoviesByGenreFragment: Fragment() {
 
   @Inject
   lateinit var adapter: MoviesByGenreAdapter
+
+  override fun onAttach(context: Context) {
+    super.onAttach(context)
+
+    DaggerMoviesByGenreComponent.builder()
+      .context(requireContext())
+      .dependency(EntryPointAccessors.fromApplication(requireContext().applicationContext, MoviesByGenreDependency::class.java))
+      .build()
+      .inject(this)
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,

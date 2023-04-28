@@ -1,5 +1,6 @@
 package com.dpfht.tmdbcleanmvvm.feature.moviedetails
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,15 +11,28 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.dpfht.tmdbcleanmvvm.R
 import com.dpfht.tmdbcleanmvvm.databinding.FragmentMovieDetailsBinding
+import com.dpfht.tmdbcleanmvvm.feature.moviedetails.di.DaggerMovieDetailsComponent
 import com.dpfht.tmdbcleanmvvm.feature.movietrailer.MovieTrailerActivity
+import com.dpfht.tmdbcleanmvvm.framework.di.dependency.MovieDetailsDependency
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.EntryPointAccessors
 
 @AndroidEntryPoint
 class MovieDetailsFragment: Fragment() {
 
   private lateinit var binding: FragmentMovieDetailsBinding
   private val viewModel by viewModels<MovieDetailsViewModel>()
+
+  override fun onAttach(context: Context) {
+    super.onAttach(context)
+
+    DaggerMovieDetailsComponent.builder()
+      .context(requireContext())
+      .dependency(EntryPointAccessors.fromApplication(requireContext().applicationContext, MovieDetailsDependency::class.java))
+      .build()
+      .inject(this)
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
