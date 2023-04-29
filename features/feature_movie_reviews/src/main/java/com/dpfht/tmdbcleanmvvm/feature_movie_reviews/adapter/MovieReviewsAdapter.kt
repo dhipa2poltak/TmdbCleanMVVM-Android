@@ -1,16 +1,17 @@
-package com.dpfht.tmdbcleanmvvm.feature.moviereviews.adapter
+package com.dpfht.tmdbcleanmvvm.feature_movie_reviews.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dpfht.tmdbcleanmvvm.domain.entity.ReviewEntity
-import com.dpfht.tmdbcleanmvvm.databinding.RowReviewBinding
+import com.dpfht.tmdbcleanmvvm.feature_movie_reviews.databinding.RowReviewBinding
+import com.dpfht.tmdbcleanmvvm.feature_movie_reviews.adapter.MovieReviewsAdapter.ReviewHolder
 import com.squareup.picasso.Picasso
 import javax.inject.Inject
 
 class MovieReviewsAdapter @Inject constructor(
 
-): RecyclerView.Adapter<MovieReviewsAdapter.ReviewHolder>() {
+): RecyclerView.Adapter<ReviewHolder>() {
 
   lateinit var reviews: ArrayList<ReviewEntity>
 

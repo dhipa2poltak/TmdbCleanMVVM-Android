@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvvm.feature.moviereviews.di
+package com.dpfht.tmdbcleanmvvm.feature_movie_reviews.di
 
 import com.dpfht.tmdbcleanmvvm.domain.entity.ReviewEntity
 import com.dpfht.tmdbcleanmvvm.domain.repository.AppRepository

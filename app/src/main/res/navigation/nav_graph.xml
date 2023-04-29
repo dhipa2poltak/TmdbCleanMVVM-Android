@@ -55,7 +55,7 @@
 
   <fragment
       android:id="@+id/movieReviewsFragment"
-      android:name="com.dpfht.tmdbcleanmvvm.feature.moviereviews.MovieReviewsFragment"
+      android:name="com.dpfht.tmdbcleanmvvm.feature_movie_reviews.MovieReviewsFragment"
       tools:layout="@layout/fragment_movie_reviews">
 
     <deepLink

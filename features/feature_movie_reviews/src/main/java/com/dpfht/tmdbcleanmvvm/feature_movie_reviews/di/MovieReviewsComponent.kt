@@ -1,7 +1,7 @@
-package com.dpfht.tmdbcleanmvvm.feature.moviereviews.di
+package com.dpfht.tmdbcleanmvvm.feature_movie_reviews.di
 
 import android.content.Context
-import com.dpfht.tmdbcleanmvvm.feature.moviereviews.MovieReviewsFragment
+import com.dpfht.tmdbcleanmvvm.feature_movie_reviews.MovieReviewsFragment
 import com.dpfht.tmdbcleanmvvm.framework.di.dependency.MovieReviewsDependency
 import dagger.BindsInstance
 import dagger.Component

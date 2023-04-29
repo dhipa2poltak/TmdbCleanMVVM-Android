@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvvm.feature.moviereviews
+package com.dpfht.tmdbcleanmvvm.feature_movie_reviews
 
 import android.content.Context
 import android.net.Uri
@@ -13,9 +13,9 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dpfht.tmdbcleanmvvm.framework.R
-import com.dpfht.tmdbcleanmvvm.databinding.FragmentMovieReviewsBinding
-import com.dpfht.tmdbcleanmvvm.feature.moviereviews.adapter.MovieReviewsAdapter
-import com.dpfht.tmdbcleanmvvm.feature.moviereviews.di.DaggerMovieReviewsComponent
+import com.dpfht.tmdbcleanmvvm.feature_movie_reviews.databinding.FragmentMovieReviewsBinding
+import com.dpfht.tmdbcleanmvvm.feature_movie_reviews.adapter.MovieReviewsAdapter
+import com.dpfht.tmdbcleanmvvm.feature_movie_reviews.di.DaggerMovieReviewsComponent
 import com.dpfht.tmdbcleanmvvm.framework.di.dependency.MovieReviewsDependency
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.EntryPointAccessors
@@ -103,14 +103,15 @@ class MovieReviewsFragment: Fragment() {
 
     //--
 
-    val args = MovieReviewsFragmentArgs.fromBundle(requireArguments())
-    val movieId = args.movieId
-    val movieTitle = args.movieTitle
+    arguments?.let {
+      val movieId = it.getInt("movieId")
+      val movieTitle = it.getString("movieTitle")
 
-    binding.tvMovieName.text = movieTitle
+      binding.tvMovieName.text = movieTitle
 
-    viewModel.setMovieId(movieId)
-    viewModel.start()
+      viewModel.setMovieId(movieId)
+      viewModel.start()
+    }
   }
 
   private fun showErrorMessage(message: String) {

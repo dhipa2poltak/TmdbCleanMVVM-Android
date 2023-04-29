@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvvm.feature.moviereviews
+package com.dpfht.tmdbcleanmvvm.feature_movie_reviews
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

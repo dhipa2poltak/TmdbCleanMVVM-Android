@@ -7,7 +7,7 @@ import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieReviewUseCase
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result
 import com.dpfht.tmdbcleanmvvm.domain.entity.ReviewDomain
 import com.dpfht.tmdbcleanmvvm.domain.entity.ReviewEntity
-import com.dpfht.tmdbcleanmvvm.feature.moviereviews.MovieReviewsViewModel
+import com.dpfht.tmdbcleanmvvm.feature_movie_reviews.MovieReviewsViewModel
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
