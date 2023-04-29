@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvvm.feature.moviesbygenre
+package com.dpfht.tmdbcleanmvvm.feature_movies_by_genre
 
 import android.content.Context
 import android.net.Uri
@@ -13,10 +13,10 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dpfht.tmdbcleanmvvm.framework.R
-import com.dpfht.tmdbcleanmvvm.databinding.FragmentMoviesByGenreBinding
-import com.dpfht.tmdbcleanmvvm.feature.moviesbygenre.adapter.MoviesByGenreAdapter
-import com.dpfht.tmdbcleanmvvm.feature.moviesbygenre.adapter.MoviesByGenreAdapter.OnClickMovieListener
-import com.dpfht.tmdbcleanmvvm.feature.moviesbygenre.di.DaggerMoviesByGenreComponent
+import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.databinding.FragmentMoviesByGenreBinding
+import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.adapter.MoviesByGenreAdapter
+import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.adapter.MoviesByGenreAdapter.OnClickMovieListener
+import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.di.DaggerMoviesByGenreComponent
 import com.dpfht.tmdbcleanmvvm.framework.di.dependency.MoviesByGenreDependency
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.EntryPointAccessors
@@ -109,15 +109,16 @@ class MoviesByGenreFragment: Fragment() {
       }
     }
 
-    val args = MoviesByGenreFragmentArgs.fromBundle(requireArguments())
-    val genreId = args.genreId
-    val genreName = args.genreName
+    arguments?.let {
+      val genreId = it.getInt("genreId")
+      val genreName = it.getString("genreName")
 
-    val title = "$genreName movies"
-    binding.tvTitle.text = title
+      val title = "$genreName movies"
+      binding.tvTitle.text = title
 
-    viewModel.setGenreId(genreId)
-    viewModel.start()
+      viewModel.setGenreId(genreId)
+      viewModel.start()
+    }
   }
 
   private fun showErrorMessage(message: String) {

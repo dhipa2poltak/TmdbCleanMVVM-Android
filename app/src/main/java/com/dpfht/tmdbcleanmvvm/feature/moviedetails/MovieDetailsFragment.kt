@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.Navigation
-import com.dpfht.tmdbcleanmvvm.R
+import com.dpfht.tmdbcleanmvvm.framework.R
 import com.dpfht.tmdbcleanmvvm.databinding.FragmentMovieDetailsBinding
 import com.dpfht.tmdbcleanmvvm.feature.moviedetails.di.DaggerMovieDetailsComponent
 import com.dpfht.tmdbcleanmvvm.feature.movietrailer.MovieTrailerActivity
@@ -128,6 +128,6 @@ class MovieDetailsFragment: Fragment() {
   }
 
   private fun showCanceledMessage() {
-    showErrorMessage(getString(com.dpfht.tmdbcleanmvvm.framework.R.string.canceled_message))
+    showErrorMessage(getString(R.string.canceled_message))
   }
 }

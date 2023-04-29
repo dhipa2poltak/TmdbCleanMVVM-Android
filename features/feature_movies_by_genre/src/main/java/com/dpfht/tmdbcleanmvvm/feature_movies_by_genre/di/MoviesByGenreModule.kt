@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvvm.feature.moviesbygenre.di
+package com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.di
 
 import com.dpfht.tmdbcleanmvvm.domain.entity.MovieEntity
 import com.dpfht.tmdbcleanmvvm.domain.repository.AppRepository

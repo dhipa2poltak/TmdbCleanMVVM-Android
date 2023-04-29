@@ -1,17 +1,18 @@
-package com.dpfht.tmdbcleanmvvm.feature.moviesbygenre.adapter
+package com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.dpfht.tmdbcleanmvvm.R
-import com.dpfht.tmdbcleanmvvm.databinding.RowMovieBinding
+import com.dpfht.tmdbcleanmvvm.framework.R
+import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.databinding.RowMovieBinding
 import com.dpfht.tmdbcleanmvvm.domain.entity.MovieEntity
+import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.adapter.MoviesByGenreAdapter.MovieByGenreHolder
 import com.squareup.picasso.Picasso
 import javax.inject.Inject
 
 class MoviesByGenreAdapter @Inject constructor(
 
-): RecyclerView.Adapter<MoviesByGenreAdapter.MovieByGenreHolder>() {
+): RecyclerView.Adapter<MovieByGenreHolder>() {
 
   lateinit var movies: ArrayList<MovieEntity>
   var onClickMovieListener: OnClickMovieListener? = null

@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvvm.feature.moviesbygenre
+package com.dpfht.tmdbcleanmvvm.feature_movies_by_genre
 
 import android.net.Uri
 import androidx.lifecycle.LiveData

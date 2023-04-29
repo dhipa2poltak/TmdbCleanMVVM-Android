@@ -21,7 +21,7 @@
 
   <fragment
       android:id="@+id/moviesByGenreFragment"
-      android:name="com.dpfht.tmdbcleanmvvm.feature.moviesbygenre.MoviesByGenreFragment"
+      android:name="com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.MoviesByGenreFragment"
       tools:layout="@layout/fragment_movies_by_genre">
 
     <deepLink
