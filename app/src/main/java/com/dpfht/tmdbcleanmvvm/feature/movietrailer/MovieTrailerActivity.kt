@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.dpfht.tmdbcleanmvvm.PlayerConfig
-import com.dpfht.tmdbcleanmvvm.R
+import com.dpfht.tmdbcleanmvvm.framework.R
 import com.dpfht.tmdbcleanmvvm.databinding.ActivityMovieTrailerBinding
 import com.google.android.youtube.player.YouTubeBaseActivity
 import com.google.android.youtube.player.YouTubeInitializationResult

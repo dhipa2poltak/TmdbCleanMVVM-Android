@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvvm.feature.genre
+package com.dpfht.tmdbcleanmvvm.feature_genre
 
 import android.content.Context
 import android.net.Uri
@@ -12,10 +12,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dpfht.tmdbcleanmvvm.R
-import com.dpfht.tmdbcleanmvvm.databinding.FragmentGenreBinding
-import com.dpfht.tmdbcleanmvvm.feature.genre.adapter.GenreAdapter
-import com.dpfht.tmdbcleanmvvm.feature.genre.di.DaggerGenreComponent
+import com.dpfht.tmdbcleanmvvm.feature_genre.R
+import com.dpfht.tmdbcleanmvvm.feature_genre.databinding.FragmentGenreBinding
+import com.dpfht.tmdbcleanmvvm.feature_genre.adapter.GenreAdapter
+import com.dpfht.tmdbcleanmvvm.feature_genre.di.DaggerGenreComponent
 import com.dpfht.tmdbcleanmvvm.framework.di.dependency.GenreDependency
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.EntryPointAccessors
@@ -118,6 +118,6 @@ class GenreFragment: Fragment() {
   }
 
   private fun showCanceledMessage() {
-    showErrorMessage(getString(R.string.canceled_message))
+    showErrorMessage(getString(com.dpfht.tmdbcleanmvvm.framework.R.string.canceled_message))
   }
 }

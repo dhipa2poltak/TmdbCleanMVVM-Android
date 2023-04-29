@@ -12,7 +12,7 @@ import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.dpfht.tmdbcleanmvvm.R
+import com.dpfht.tmdbcleanmvvm.framework.R
 import com.dpfht.tmdbcleanmvvm.databinding.FragmentMoviesByGenreBinding
 import com.dpfht.tmdbcleanmvvm.feature.moviesbygenre.adapter.MoviesByGenreAdapter
 import com.dpfht.tmdbcleanmvvm.feature.moviesbygenre.adapter.MoviesByGenreAdapter.OnClickMovieListener

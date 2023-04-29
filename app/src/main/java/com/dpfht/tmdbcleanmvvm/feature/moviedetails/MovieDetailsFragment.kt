@@ -128,6 +128,6 @@ class MovieDetailsFragment: Fragment() {
   }
 
   private fun showCanceledMessage() {
-    showErrorMessage(getString(R.string.canceled_message))
+    showErrorMessage(getString(com.dpfht.tmdbcleanmvvm.framework.R.string.canceled_message))
   }
 }

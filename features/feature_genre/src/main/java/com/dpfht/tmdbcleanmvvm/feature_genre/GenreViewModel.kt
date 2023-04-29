@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvvm.feature.genre
+package com.dpfht.tmdbcleanmvvm.feature_genre
 
 import android.net.Uri
 import androidx.lifecycle.LiveData

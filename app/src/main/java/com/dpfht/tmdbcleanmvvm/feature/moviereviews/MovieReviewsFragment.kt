@@ -12,7 +12,7 @@ import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.dpfht.tmdbcleanmvvm.R
+import com.dpfht.tmdbcleanmvvm.framework.R
 import com.dpfht.tmdbcleanmvvm.databinding.FragmentMovieReviewsBinding
 import com.dpfht.tmdbcleanmvvm.feature.moviereviews.adapter.MovieReviewsAdapter
 import com.dpfht.tmdbcleanmvvm.feature.moviereviews.di.DaggerMovieReviewsComponent

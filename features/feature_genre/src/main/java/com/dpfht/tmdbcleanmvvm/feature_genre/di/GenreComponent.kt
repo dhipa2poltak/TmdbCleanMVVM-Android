@@ -1,7 +1,7 @@
-package com.dpfht.tmdbcleanmvvm.feature.genre.di
+package com.dpfht.tmdbcleanmvvm.feature_genre.di
 
 import android.content.Context
-import com.dpfht.tmdbcleanmvvm.feature.genre.GenreFragment
+import com.dpfht.tmdbcleanmvvm.feature_genre.GenreFragment
 import com.dpfht.tmdbcleanmvvm.framework.di.dependency.GenreDependency
 import dagger.BindsInstance
 import dagger.Component
