@@ -1,5 +1,9 @@
 package com.dpfht.tmdbcleanmvvm
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
@@ -27,5 +31,26 @@ class MainActivity : AppCompatActivity() {
 
   override fun onSupportNavigateUp(): Boolean {
     return navController.navigateUp() || super.onSupportNavigateUp()
+  }
+
+  override fun onResume() {
+    super.onResume()
+
+    registerReceiver(receiverToGenre, IntentFilter("enter_genre"))
+  }
+
+  override fun onPause() {
+    super.onPause()
+
+    unregisterReceiver(receiverToGenre)
+  }
+
+  private val receiverToGenre = object : BroadcastReceiver() {
+    override fun onReceive(context: Context?, intent: Intent?) {
+      val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
+      navGraph.setStartDestination(R.id.genreFragment)
+
+      navController.graph = navGraph
+    }
   }
 }

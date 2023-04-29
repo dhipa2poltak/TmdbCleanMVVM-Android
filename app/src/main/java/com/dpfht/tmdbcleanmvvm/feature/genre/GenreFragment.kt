@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDeepLinkRequest
@@ -50,6 +51,7 @@ class GenreFragment: Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    setToolbar()
 
     adapter.genres = viewModel.genres
 
@@ -95,6 +97,10 @@ class GenreFragment: Fragment() {
     }
 
     viewModel.start()
+  }
+
+  private fun setToolbar() {
+    (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
   }
 
   private fun showErrorMessage(message: String) {

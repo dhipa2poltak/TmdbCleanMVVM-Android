@@ -12,4 +12,5 @@
   <string name="text_ok">OK</string>
   <string name="canceled_message">api request is canceled</string>
   <string name="title_message">Message</string>
+  <string name="text_loading">loading…</string>
 </resources>
