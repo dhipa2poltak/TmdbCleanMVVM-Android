@@ -6,7 +6,7 @@ import com.dpfht.tmdbcleanmvvm.MainCoroutineRule
 import com.dpfht.tmdbcleanmvvm.domain.entity.MovieDetailsDomain
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieDetailsUseCase
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result
-import com.dpfht.tmdbcleanmvvm.feature.moviedetails.MovieDetailsViewModel
+import com.dpfht.tmdbcleanmvvm.feature_movie_details.MovieDetailsViewModel
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule

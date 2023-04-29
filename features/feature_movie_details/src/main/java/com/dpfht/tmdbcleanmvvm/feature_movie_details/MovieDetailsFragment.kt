@@ -1,7 +1,6 @@
-package com.dpfht.tmdbcleanmvvm.feature.moviedetails
+package com.dpfht.tmdbcleanmvvm.feature_movie_details
 
 import android.content.Context
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,10 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.Navigation
+import com.dpfht.tmdbcleanmvvm.feature_movie_details.databinding.FragmentMovieDetailsBinding
+import com.dpfht.tmdbcleanmvvm.feature_movie_details.di.DaggerMovieDetailsComponent
 import com.dpfht.tmdbcleanmvvm.framework.R
-import com.dpfht.tmdbcleanmvvm.databinding.FragmentMovieDetailsBinding
-import com.dpfht.tmdbcleanmvvm.feature.moviedetails.di.DaggerMovieDetailsComponent
-import com.dpfht.tmdbcleanmvvm.feature.movietrailer.MovieTrailerActivity
 import com.dpfht.tmdbcleanmvvm.framework.di.dependency.MovieDetailsDependency
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,7 +51,7 @@ class MovieDetailsFragment: Fragment() {
     }
 
     binding.tvShowTrailer.setOnClickListener {
-      onClickShowTrailer()
+      //onClickShowTrailer()
     }
 
     //--
@@ -95,11 +93,12 @@ class MovieDetailsFragment: Fragment() {
 
     //--
 
-    val args = MovieDetailsFragmentArgs.fromBundle(requireArguments())
-    val movieId = args.movieId
+    arguments?.let {
+      val movieId = it.getInt("movieId")
 
-    viewModel.setMovieId(movieId)
-    viewModel.start()
+      viewModel.setMovieId(movieId)
+      viewModel.start()
+    }
   }
 
   private fun onClickShowReview() {
@@ -107,11 +106,13 @@ class MovieDetailsFragment: Fragment() {
     Navigation.findNavController(requireView()).navigate(navRequest)
   }
 
+  /*
   private fun onClickShowTrailer() {
     val itn = Intent(requireContext(), MovieTrailerActivity::class.java)
     itn.putExtra("movie_id", viewModel.getMovieId())
     requireActivity().startActivity(itn)
   }
+  */
 
   private fun showErrorMessage(message: String) {
     val builder = Uri.Builder()

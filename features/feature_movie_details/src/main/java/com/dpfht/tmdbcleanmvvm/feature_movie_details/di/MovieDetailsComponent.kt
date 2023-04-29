@@ -1,7 +1,7 @@
-package com.dpfht.tmdbcleanmvvm.feature.moviedetails.di
+package com.dpfht.tmdbcleanmvvm.feature_movie_details.di
 
 import android.content.Context
-import com.dpfht.tmdbcleanmvvm.feature.moviedetails.MovieDetailsFragment
+import com.dpfht.tmdbcleanmvvm.feature_movie_details.MovieDetailsFragment
 import com.dpfht.tmdbcleanmvvm.framework.di.dependency.MovieDetailsDependency
 import dagger.BindsInstance
 import dagger.Component

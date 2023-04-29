@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvvm.feature.moviedetails
+package com.dpfht.tmdbcleanmvvm.feature_movie_details
 
 import android.net.Uri
 import androidx.lifecycle.LiveData

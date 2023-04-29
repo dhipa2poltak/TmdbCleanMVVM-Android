@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvvm.feature.moviedetails.di
+package com.dpfht.tmdbcleanmvvm.feature_movie_details.di
 
 import com.dpfht.tmdbcleanmvvm.domain.repository.AppRepository
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieDetailsUseCase
