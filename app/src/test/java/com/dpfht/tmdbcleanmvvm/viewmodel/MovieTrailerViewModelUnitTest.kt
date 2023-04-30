@@ -7,7 +7,7 @@ import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieTrailerUseCase
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result
 import com.dpfht.tmdbcleanmvvm.domain.entity.TrailerDomain
 import com.dpfht.tmdbcleanmvvm.domain.entity.TrailerEntity
-import com.dpfht.tmdbcleanmvvm.feature.movietrailer.MovieTrailerViewModel
+import com.dpfht.tmdbcleanmvvm.feature_movie_trailer.MovieTrailerViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.runBlocking

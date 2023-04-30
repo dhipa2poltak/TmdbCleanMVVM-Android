@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvvm.feature.movietrailer
+package com.dpfht.tmdbcleanmvvm.feature_movie_trailer
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

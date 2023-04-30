@@ -78,6 +78,7 @@ android {
 dependencies {
 
   implementation fileTree(dir: "libs", include: ["*.jar"])
+  implementation files("../libjars/YouTubeAndroidPlayerApi.jar")
   implementation project(":framework")
   implementation project(":domain")
   implementation project(":data")
@@ -86,6 +87,7 @@ dependencies {
   implementation project(":features:feature_movies_by_genre")
   implementation project(":features:feature_movie_details")
   implementation project(":features:feature_movie_reviews")
+  implementation project(":features:feature_movie_trailer")
 
   implementation 'androidx.core:core-ktx:1.9.0'
   implementation 'androidx.appcompat:appcompat:1.6.1'

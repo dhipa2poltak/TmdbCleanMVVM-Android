@@ -1,11 +1,10 @@
-package com.dpfht.tmdbcleanmvvm.feature.movietrailer
+package com.dpfht.tmdbcleanmvvm.feature_movie_trailer
 
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import com.dpfht.tmdbcleanmvvm.PlayerConfig
+import com.dpfht.tmdbcleanmvvm.feature_movie_trailer.databinding.ActivityMovieTrailerBinding
 import com.dpfht.tmdbcleanmvvm.framework.R
-import com.dpfht.tmdbcleanmvvm.databinding.ActivityMovieTrailerBinding
 import com.google.android.youtube.player.YouTubeBaseActivity
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
@@ -17,7 +16,7 @@ import dagger.hilt.components.SingletonComponent
 class MovieTrailerActivity : YouTubeBaseActivity() {
 
   private lateinit var binding: ActivityMovieTrailerBinding
-  lateinit var viewModel: MovieTrailerViewModel
+  private lateinit var viewModel: MovieTrailerViewModel
 
   @EntryPoint
   @InstallIn(SingletonComponent::class)

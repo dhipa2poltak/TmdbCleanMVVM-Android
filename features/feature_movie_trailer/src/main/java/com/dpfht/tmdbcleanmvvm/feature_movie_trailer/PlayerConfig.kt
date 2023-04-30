@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvvm
+package com.dpfht.tmdbcleanmvvm.feature_movie_trailer
 
 object PlayerConfig {
 

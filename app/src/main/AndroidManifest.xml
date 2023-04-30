@@ -17,7 +17,7 @@
       android:theme="@style/Theme.TmdbMVVM"
       tools:targetApi="31">
     <activity
-        android:name="com.dpfht.tmdbcleanmvvm.feature.movietrailer.MovieTrailerActivity"
+        android:name="com.dpfht.tmdbcleanmvvm.feature_movie_trailer.MovieTrailerActivity"
         android:exported="false" />
     <activity
         android:name="com.dpfht.tmdbcleanmvvm.MainActivity"

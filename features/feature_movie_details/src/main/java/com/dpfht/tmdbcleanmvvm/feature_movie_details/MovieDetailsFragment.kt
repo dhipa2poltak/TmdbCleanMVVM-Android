@@ -1,6 +1,7 @@
 package com.dpfht.tmdbcleanmvvm.feature_movie_details
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.Navigation
 import com.dpfht.tmdbcleanmvvm.feature_movie_details.databinding.FragmentMovieDetailsBinding
 import com.dpfht.tmdbcleanmvvm.feature_movie_details.di.DaggerMovieDetailsComponent
+import com.dpfht.tmdbcleanmvvm.feature_movie_trailer.MovieTrailerActivity
 import com.dpfht.tmdbcleanmvvm.framework.R
 import com.dpfht.tmdbcleanmvvm.framework.di.dependency.MovieDetailsDependency
 import com.squareup.picasso.Picasso
@@ -51,7 +53,7 @@ class MovieDetailsFragment: Fragment() {
     }
 
     binding.tvShowTrailer.setOnClickListener {
-      //onClickShowTrailer()
+      onClickShowTrailer()
     }
 
     //--
@@ -106,13 +108,11 @@ class MovieDetailsFragment: Fragment() {
     Navigation.findNavController(requireView()).navigate(navRequest)
   }
 
-  /*
   private fun onClickShowTrailer() {
     val itn = Intent(requireContext(), MovieTrailerActivity::class.java)
     itn.putExtra("movie_id", viewModel.getMovieId())
     requireActivity().startActivity(itn)
   }
-  */
 
   private fun showErrorMessage(message: String) {
     val builder = Uri.Builder()
