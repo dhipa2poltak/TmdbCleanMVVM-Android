@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.dpfht.tmdbcleanmvvm.feature_movie_details.databinding.FragmentMovieDetailsBinding
 import com.dpfht.tmdbcleanmvvm.feature_movie_details.di.DaggerMovieDetailsComponent
 import com.dpfht.tmdbcleanmvvm.framework.R
+import com.dpfht.tmdbcleanmvvm.framework.base.BaseFragment
 import com.dpfht.tmdbcleanmvvm.framework.di.dependency.MovieDetailsDependency
 import com.dpfht.tmdbcleanmvvm.framework.di.dependency.NavigationDependency
 import com.dpfht.tmdbcleanmvvm.framework.navigation.NavigationInterface
@@ -19,13 +19,13 @@ import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MovieDetailsFragment: Fragment() {
+class MovieDetailsFragment: BaseFragment<MovieDetailsViewModel>() {
 
   private lateinit var binding: FragmentMovieDetailsBinding
-  private val viewModel by viewModels<MovieDetailsViewModel>()
+  override val viewModel by viewModels<MovieDetailsViewModel>()
 
   @Inject
-  lateinit var navigationService: NavigationInterface
+  override lateinit var navigationService: NavigationInterface
 
   override fun onAttach(context: Context) {
     super.onAttach(context)
@@ -58,25 +58,24 @@ class MovieDetailsFragment: Fragment() {
       onClickShowTrailer()
     }
 
-    //--
+    observeViewModel()
+
+    arguments?.let {
+      val movieId = it.getInt("movieId")
+
+      viewModel.setMovieId(movieId)
+      viewModel.start()
+    }
+  }
+
+  override fun observeViewModel() {
+    super.observeViewModel()
 
     viewModel.isShowDialogLoading.observe(viewLifecycleOwner) { value ->
-      if (value) {
-        binding.pbLoading.visibility = View.VISIBLE
+      binding.pbLoading.visibility = if (value) {
+        View.VISIBLE
       } else {
-        binding.pbLoading.visibility = View.GONE
-      }
-    }
-
-    viewModel.errorMessage.observe(viewLifecycleOwner) { message ->
-      if (message.isNotEmpty()) {
-        showErrorMessage(message)
-      }
-    }
-
-    viewModel.showCanceledMessage.observe(viewLifecycleOwner) { isShow ->
-      if (isShow) {
-        showCanceledMessage()
+        View.GONE
       }
     }
 
@@ -94,15 +93,6 @@ class MovieDetailsFragment: Fragment() {
         .placeholder(R.drawable.loading)
         .into(binding.ivImageMovie)
     }
-
-    //--
-
-    arguments?.let {
-      val movieId = it.getInt("movieId")
-
-      viewModel.setMovieId(movieId)
-      viewModel.start()
-    }
   }
 
   private fun onClickShowReview() {
@@ -111,13 +101,5 @@ class MovieDetailsFragment: Fragment() {
 
   private fun onClickShowTrailer() {
     navigationService.navigateToMovieTrailer(viewModel.getMovieId())
-  }
-
-  private fun showErrorMessage(message: String) {
-    navigationService.navigateToErrorMessage(message)
-  }
-
-  private fun showCanceledMessage() {
-    showErrorMessage(getString(R.string.canceled_message))
   }
 }

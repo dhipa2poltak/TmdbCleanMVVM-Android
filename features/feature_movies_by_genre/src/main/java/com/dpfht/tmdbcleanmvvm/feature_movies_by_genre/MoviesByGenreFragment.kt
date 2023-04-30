@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +12,7 @@ import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.adapter.MoviesByGenreAdap
 import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.adapter.MoviesByGenreAdapter.OnClickMovieListener
 import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.databinding.FragmentMoviesByGenreBinding
 import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.di.DaggerMoviesByGenreComponent
-import com.dpfht.tmdbcleanmvvm.framework.R
+import com.dpfht.tmdbcleanmvvm.framework.base.BaseFragment
 import com.dpfht.tmdbcleanmvvm.framework.di.dependency.MoviesByGenreDependency
 import com.dpfht.tmdbcleanmvvm.framework.di.dependency.NavigationDependency
 import com.dpfht.tmdbcleanmvvm.framework.navigation.NavigationInterface
@@ -22,13 +21,13 @@ import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MoviesByGenreFragment: Fragment() {
+class MoviesByGenreFragment: BaseFragment<MoviesByGenreViewModel>() {
 
   private lateinit var binding: FragmentMoviesByGenreBinding
-  private val viewModel by viewModels<MoviesByGenreViewModel>()
+  override val viewModel by viewModels<MoviesByGenreViewModel>()
 
   @Inject
-  lateinit var navigationService: NavigationInterface
+  override lateinit var navigationService: NavigationInterface
 
   @Inject
   lateinit var adapter: MoviesByGenreAdapter
@@ -84,33 +83,7 @@ class MoviesByGenreFragment: Fragment() {
       }
     })
 
-    //--
-
-    viewModel.isShowDialogLoading.observe(viewLifecycleOwner) { value ->
-      if (value) {
-        binding.pbLoading.visibility = View.VISIBLE
-      } else {
-        binding.pbLoading.visibility = View.GONE
-      }
-    }
-
-    viewModel.notifyItemInserted.observe(viewLifecycleOwner) { position ->
-      if (position > 0) {
-        adapter.notifyItemInserted(position)
-      }
-    }
-
-    viewModel.errorMessage.observe(viewLifecycleOwner) { message ->
-      if (message.isNotEmpty()) {
-        showErrorMessage(message)
-      }
-    }
-
-    viewModel.showCanceledMessage.observe(viewLifecycleOwner) { isShow ->
-      if (isShow) {
-        showCanceledMessage()
-      }
-    }
+    observeViewModel()
 
     arguments?.let {
       val genreId = it.getInt("genreId")
@@ -124,11 +97,21 @@ class MoviesByGenreFragment: Fragment() {
     }
   }
 
-  private fun showErrorMessage(message: String) {
-    navigationService.navigateToErrorMessage(message)
-  }
+  override fun observeViewModel() {
+    super.observeViewModel()
 
-  private fun showCanceledMessage() {
-    showErrorMessage(getString(R.string.canceled_message))
+    viewModel.isShowDialogLoading.observe(viewLifecycleOwner) { value ->
+      binding.pbLoading.visibility = if (value) {
+        View.VISIBLE
+      } else {
+        View.GONE
+      }
+    }
+
+    viewModel.notifyItemInserted.observe(viewLifecycleOwner) { position ->
+      if (position > 0) {
+        adapter.notifyItemInserted(position)
+      }
+    }
   }
 }
