@@ -1,10 +1,8 @@
 package com.dpfht.tmdbcleanmvvm.feature_movies_by_genre
 
-import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavDeepLinkRequest
 import com.dpfht.tmdbcleanmvvm.domain.entity.MovieEntity
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result.ErrorResult
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result.Success
@@ -76,19 +74,5 @@ class MoviesByGenreViewModel @Inject constructor(
     mIsShowDialogLoading.postValue(false)
     mIsLoadingData = false
     mErrorMessage.postValue(message)
-  }
-
-  fun getNavDeeplinkRequestOnClickMovieAt(position: Int): NavDeepLinkRequest {
-    val movie = movies[position]
-
-    val builder = Uri.Builder()
-    builder.scheme("android-app")
-      .authority("tmdbcleanmvvm.dpfht.com")
-      .appendPath("movie_details_fragment")
-      .appendQueryParameter("movieId", "${movie.id}")
-
-    return NavDeepLinkRequest.Builder
-      .fromUri(builder.build())
-      .build()
   }
 }

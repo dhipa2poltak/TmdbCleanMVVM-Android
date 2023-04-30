@@ -1,7 +1,6 @@
 package com.dpfht.tmdbcleanmvvm.feature_genre
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,14 +8,13 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavDeepLinkRequest
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dpfht.tmdbcleanmvvm.feature_genre.R
-import com.dpfht.tmdbcleanmvvm.feature_genre.databinding.FragmentGenreBinding
 import com.dpfht.tmdbcleanmvvm.feature_genre.adapter.GenreAdapter
+import com.dpfht.tmdbcleanmvvm.feature_genre.databinding.FragmentGenreBinding
 import com.dpfht.tmdbcleanmvvm.feature_genre.di.DaggerGenreComponent
 import com.dpfht.tmdbcleanmvvm.framework.di.dependency.GenreDependency
+import com.dpfht.tmdbcleanmvvm.framework.di.dependency.NavigationDependency
+import com.dpfht.tmdbcleanmvvm.framework.navigation.NavigationInterface
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
@@ -28,6 +26,9 @@ class GenreFragment: Fragment() {
   private val viewModel by viewModels<GenreViewModel>()
 
   @Inject
+  lateinit var navigationService: NavigationInterface
+
+  @Inject
   lateinit var adapter: GenreAdapter
 
   override fun onAttach(context: Context) {
@@ -36,6 +37,7 @@ class GenreFragment: Fragment() {
     DaggerGenreComponent.builder()
       .context(requireContext())
       .dependency(EntryPointAccessors.fromApplication(requireContext().applicationContext, GenreDependency::class.java))
+      .navDependency(EntryPointAccessors.fromActivity(requireActivity(), NavigationDependency::class.java))
       .build()
       .inject(this)
   }
@@ -63,8 +65,8 @@ class GenreFragment: Fragment() {
 
     adapter.onClickGenreListener = object : GenreAdapter.OnClickGenreListener {
       override fun onClickGenre(position: Int) {
-        val navRequest = viewModel.getNavDeepLinkRequestOnClickGenreAt(position)
-        Navigation.findNavController(requireView()).navigate(navRequest)
+        val genre = viewModel.genres[position]
+        navigationService.navigateToMoviesByGender(genre.id, genre.name)
       }
     }
 
@@ -104,17 +106,7 @@ class GenreFragment: Fragment() {
   }
 
   private fun showErrorMessage(message: String) {
-    val builder = Uri.Builder()
-    builder.scheme("android-app")
-      .authority("tmdbcleanmvvm.dpfht.com")
-      .appendPath("error_message_dialog_fragment")
-      .appendQueryParameter("message", message)
-
-    val navRequest = NavDeepLinkRequest.Builder
-      .fromUri(builder.build())
-      .build()
-
-    Navigation.findNavController(requireView()).navigate(navRequest)
+    navigationService.navigateToErrorMessage(message)
   }
 
   private fun showCanceledMessage() {

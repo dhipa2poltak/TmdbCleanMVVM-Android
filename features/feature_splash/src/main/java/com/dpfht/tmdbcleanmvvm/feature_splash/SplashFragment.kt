@@ -1,6 +1,5 @@
 package com.dpfht.tmdbcleanmvvm.feature_splash
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -10,10 +9,17 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.dpfht.tmdbcleanmvvm.feature_splash.databinding.FragmentSplashBinding
+import com.dpfht.tmdbcleanmvvm.framework.navigation.NavigationInterface
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SplashFragment: Fragment() {
 
   private lateinit var binding: FragmentSplashBinding
+
+  @Inject
+  lateinit var navigationService: NavigationInterface
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +40,7 @@ class SplashFragment: Fragment() {
   }
 
   private fun navigateToNextScreen() {
-    requireContext().sendBroadcast(Intent("enter_genre"))
+    navigationService.navigateToGender()
   }
 
   override fun onStart() {

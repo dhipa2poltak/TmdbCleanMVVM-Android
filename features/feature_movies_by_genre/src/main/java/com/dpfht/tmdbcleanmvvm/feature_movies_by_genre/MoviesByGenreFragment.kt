@@ -1,23 +1,22 @@
 package com.dpfht.tmdbcleanmvvm.feature_movies_by_genre
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavDeepLinkRequest
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.dpfht.tmdbcleanmvvm.framework.R
-import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.databinding.FragmentMoviesByGenreBinding
 import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.adapter.MoviesByGenreAdapter
 import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.adapter.MoviesByGenreAdapter.OnClickMovieListener
+import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.databinding.FragmentMoviesByGenreBinding
 import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.di.DaggerMoviesByGenreComponent
+import com.dpfht.tmdbcleanmvvm.framework.R
 import com.dpfht.tmdbcleanmvvm.framework.di.dependency.MoviesByGenreDependency
+import com.dpfht.tmdbcleanmvvm.framework.di.dependency.NavigationDependency
+import com.dpfht.tmdbcleanmvvm.framework.navigation.NavigationInterface
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
@@ -29,6 +28,9 @@ class MoviesByGenreFragment: Fragment() {
   private val viewModel by viewModels<MoviesByGenreViewModel>()
 
   @Inject
+  lateinit var navigationService: NavigationInterface
+
+  @Inject
   lateinit var adapter: MoviesByGenreAdapter
 
   override fun onAttach(context: Context) {
@@ -37,6 +39,7 @@ class MoviesByGenreFragment: Fragment() {
     DaggerMoviesByGenreComponent.builder()
       .context(requireContext())
       .dependency(EntryPointAccessors.fromApplication(requireContext().applicationContext, MoviesByGenreDependency::class.java))
+      .navDependency(EntryPointAccessors.fromActivity(requireActivity(), NavigationDependency::class.java))
       .build()
       .inject(this)
   }
@@ -63,8 +66,8 @@ class MoviesByGenreFragment: Fragment() {
 
     adapter.onClickMovieListener = object : OnClickMovieListener {
       override fun onClickMovie(position: Int) {
-        val navRequest = viewModel.getNavDeeplinkRequestOnClickMovieAt(position)
-        Navigation.findNavController(requireView()).navigate(navRequest)
+        val movie = viewModel.movies[position]
+        navigationService.navigateToMovieDetails(movie.id)
       }
     }
 
@@ -122,17 +125,7 @@ class MoviesByGenreFragment: Fragment() {
   }
 
   private fun showErrorMessage(message: String) {
-    val builder = Uri.Builder()
-    builder.scheme("android-app")
-      .authority("tmdbcleanmvvm.dpfht.com")
-      .appendPath("error_message_dialog_fragment")
-      .appendQueryParameter("message", message)
-
-    val navRequest = NavDeepLinkRequest.Builder
-      .fromUri(builder.build())
-      .build()
-
-    Navigation.findNavController(requireView()).navigate(navRequest)
+    navigationService.navigateToErrorMessage(message)
   }
 
   private fun showCanceledMessage() {

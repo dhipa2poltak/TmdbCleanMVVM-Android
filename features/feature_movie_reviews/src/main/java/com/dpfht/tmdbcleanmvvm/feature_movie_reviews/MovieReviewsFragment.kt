@@ -1,22 +1,21 @@
 package com.dpfht.tmdbcleanmvvm.feature_movie_reviews
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavDeepLinkRequest
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.dpfht.tmdbcleanmvvm.framework.R
-import com.dpfht.tmdbcleanmvvm.feature_movie_reviews.databinding.FragmentMovieReviewsBinding
 import com.dpfht.tmdbcleanmvvm.feature_movie_reviews.adapter.MovieReviewsAdapter
+import com.dpfht.tmdbcleanmvvm.feature_movie_reviews.databinding.FragmentMovieReviewsBinding
 import com.dpfht.tmdbcleanmvvm.feature_movie_reviews.di.DaggerMovieReviewsComponent
+import com.dpfht.tmdbcleanmvvm.framework.R
 import com.dpfht.tmdbcleanmvvm.framework.di.dependency.MovieReviewsDependency
+import com.dpfht.tmdbcleanmvvm.framework.di.dependency.NavigationDependency
+import com.dpfht.tmdbcleanmvvm.framework.navigation.NavigationInterface
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
@@ -28,6 +27,9 @@ class MovieReviewsFragment: Fragment() {
   private val viewModel by viewModels<MovieReviewsViewModel>()
 
   @Inject
+  lateinit var navigationService: NavigationInterface
+
+  @Inject
   lateinit var adapter: MovieReviewsAdapter
 
   override fun onAttach(context: Context) {
@@ -36,6 +38,7 @@ class MovieReviewsFragment: Fragment() {
     DaggerMovieReviewsComponent.builder()
       .context(requireContext())
       .dependency(EntryPointAccessors.fromApplication(requireContext().applicationContext, MovieReviewsDependency::class.java))
+      .navDependency(EntryPointAccessors.fromActivity(requireActivity(), NavigationDependency::class.java))
       .build()
       .inject(this)
   }
@@ -115,17 +118,7 @@ class MovieReviewsFragment: Fragment() {
   }
 
   private fun showErrorMessage(message: String) {
-    val builder = Uri.Builder()
-    builder.scheme("android-app")
-      .authority("tmdbcleanmvvm.dpfht.com")
-      .appendPath("error_message_dialog_fragment")
-      .appendQueryParameter("message", message)
-
-    val navRequest = NavDeepLinkRequest.Builder
-      .fromUri(builder.build())
-      .build()
-
-    Navigation.findNavController(requireView()).navigate(navRequest)
+    navigationService.navigateToErrorMessage(message)
   }
 
   private fun showCanceledMessage() {

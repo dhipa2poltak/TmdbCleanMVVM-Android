@@ -1,10 +1,8 @@
 package com.dpfht.tmdbcleanmvvm.feature_movie_details
 
-import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavDeepLinkRequest
 import com.dpfht.tmdbcleanmvvm.domain.entity.MovieDetailsDomain
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result.ErrorResult
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result.Success
@@ -21,7 +19,7 @@ class MovieDetailsViewModel @Inject constructor(
 ): BaseViewModel() {
 
   private var _movieId = -1
-  private var title = ""
+  private var _title = ""
   private var overview = ""
   private var imageUrl = ""
 
@@ -46,11 +44,15 @@ class MovieDetailsViewModel @Inject constructor(
     return _movieId
   }
 
+  fun getMovieTitle(): String {
+    return _title
+  }
+
   override fun start() {
-    if (title.isEmpty()) {
+    if (_title.isEmpty()) {
       getMovieDetails()
     } else {
-      _titleData.postValue(title)
+      _titleData.postValue(_title)
       _overviewData.postValue(overview)
       _imageUrlData.postValue(imageUrl)
     }
@@ -74,10 +76,10 @@ class MovieDetailsViewModel @Inject constructor(
     imageUrl = result.imageUrl
 
     _movieId = result.id
-    title = result.title
+    _title = result.title
     overview = result.overview
 
-    _titleData.postValue(title)
+    _titleData.postValue(_title)
     _overviewData.postValue(overview)
     _imageUrlData.postValue(imageUrl)
 
@@ -87,18 +89,5 @@ class MovieDetailsViewModel @Inject constructor(
   private fun onError(message: String) {
     mIsShowDialogLoading.postValue(false)
     mErrorMessage.postValue(message)
-  }
-
-  fun getNavDeeplinkRequestToMovieReviews(): NavDeepLinkRequest {
-    val builder = Uri.Builder()
-    builder.scheme("android-app")
-      .authority("tmdbcleanmvvm.dpfht.com")
-      .appendPath("movie_reviews_fragment")
-      .appendQueryParameter("movieId", "$_movieId")
-      .appendQueryParameter("movieTitle", title)
-
-    return NavDeepLinkRequest.Builder
-      .fromUri(builder.build())
-      .build()
   }
 }
