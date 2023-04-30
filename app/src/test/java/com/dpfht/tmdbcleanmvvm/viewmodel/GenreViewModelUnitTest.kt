@@ -7,7 +7,7 @@ import com.dpfht.tmdbcleanmvvm.domain.entity.GenreDomain
 import com.dpfht.tmdbcleanmvvm.domain.entity.GenreEntity
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieGenreUseCase
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result
-import com.dpfht.tmdbcleanmvvm.feature.genre.GenreViewModel
+import com.dpfht.tmdbcleanmvvm.feature_genre.GenreViewModel
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule

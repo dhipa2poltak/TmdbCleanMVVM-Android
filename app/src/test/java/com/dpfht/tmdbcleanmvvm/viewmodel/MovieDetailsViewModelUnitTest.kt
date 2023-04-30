@@ -81,8 +81,7 @@ class MovieDetailsViewModelUnitTest {
     verify(titleObserver).onChanged(eq(title))
     verify(overviewObserver).onChanged(eq(overview))
 
-    val imageUrl = posterPath
-    verify(imageUrlObserver).onChanged(eq(imageUrl))
+    verify(imageUrlObserver).onChanged(eq(posterPath))
 
     verify(showLoadingObserver).onChanged(eq(false))
   }
