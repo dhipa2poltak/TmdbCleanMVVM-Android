@@ -7,11 +7,11 @@ import com.dpfht.tmdbcleanmvvm.domain.entity.GenreEntity
 
 @Keep
 data class GenreResponse(
-    val genres: List<Genre> = arrayListOf()
+    val genres: List<Genre>? = listOf()
 )
 
 fun GenreResponse.toDomain(): GenreDomain {
-    val genreEntities = genres.map { GenreEntity(it.id, it.name) }
+    val genreEntities = genres?.map { GenreEntity(it.id ?: -1, it.name ?: "") }
 
-    return GenreDomain(genreEntities.toList())
+    return GenreDomain(genreEntities?.toList() ?: listOf())
 }

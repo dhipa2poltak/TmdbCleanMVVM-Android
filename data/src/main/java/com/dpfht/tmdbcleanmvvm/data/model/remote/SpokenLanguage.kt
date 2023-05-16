@@ -9,13 +9,13 @@ import com.google.gson.annotations.SerializedName
 data class SpokenLanguage(
     @SerializedName("iso_639_1")
     @Expose
-    val iso6391: String = "",
+    val iso6391: String? = "",
 
     @SerializedName("name")
     @Expose
-    val name: String = "",
+    val name: String? = "",
 
     @SerializedName("english_name")
     @Expose
-    val englishName: String = ""
+    val englishName: String? = ""
 )

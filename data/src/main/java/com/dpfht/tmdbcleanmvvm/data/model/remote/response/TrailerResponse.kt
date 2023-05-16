@@ -7,12 +7,12 @@ import com.dpfht.tmdbcleanmvvm.domain.entity.TrailerEntity
 
 @Keep
 data class TrailerResponse(
-    val id: Int = 0,
-    val results: List<Trailer> = arrayListOf()
+    val id: Int? = -1,
+    val results: List<Trailer>? = listOf()
 )
 
 fun TrailerResponse.toDomain(): TrailerDomain {
-    val trailerEntities = results.map { TrailerEntity(it.id, it.key, it.name, it.site) }
+    val trailerEntities = results?.map { TrailerEntity(it.id ?: "", it.key ?: "", it.name ?: "", it.site ?: "") }
 
-    return TrailerDomain(this.id, trailerEntities.toList())
+    return TrailerDomain(this.id ?: -1, trailerEntities?.toList() ?: listOf())
 }

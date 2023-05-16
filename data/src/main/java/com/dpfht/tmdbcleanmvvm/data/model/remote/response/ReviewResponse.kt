@@ -11,21 +11,21 @@ import com.google.gson.annotations.SerializedName
 @Keep
 @Suppress("unused")
 data class ReviewResponse(
-    val id: Int = -1,
-    val page: Int = -1,
-    val results: List<Review> = arrayListOf(),
+    val id: Int? = -1,
+    val page: Int? = -1,
+    val results: List<Review>? = listOf(),
 
     @SerializedName("total_pages")
     @Expose
-    val totalPages: Int = -1,
+    val totalPages: Int? = -1,
 
     @SerializedName("total_results")
     @Expose
-    val totalResults: Int = -1
+    val totalResults: Int? = -1
 )
 
 fun ReviewResponse.toDomain(): ReviewDomain {
-    val reviewEntities = results.map {
+    val reviewEntities = results?.map {
         var imageUrl = it.authorDetails?.avatarPath ?: ""
         if (imageUrl.startsWith("/")) {
             imageUrl = imageUrl.replaceFirst("/", "")
@@ -36,10 +36,10 @@ fun ReviewResponse.toDomain(): ReviewDomain {
         }
 
         val authorDetailsEntity = AuthorDetailsEntity(imageUrl)
-        val reviewEntity = ReviewEntity(it.author, authorDetailsEntity, it.content)
+        val reviewEntity = ReviewEntity(it.author ?: "", authorDetailsEntity, it.content ?: "")
 
         reviewEntity
     }
 
-    return ReviewDomain(reviewEntities.toList(), this.page)
+    return ReviewDomain(reviewEntities?.toList() ?: listOf(), this.page ?: -1)
 }

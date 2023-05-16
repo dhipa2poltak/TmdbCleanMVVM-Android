@@ -7,12 +7,12 @@ import com.google.gson.annotations.SerializedName
 @Keep
 @Suppress("unused")
 data class AuthorDetails(
-    val name: String = "",
-    val username: String = "",
+    val name: String? = "",
+    val username: String? = "",
 
     @SerializedName("avatar_path")
     @Expose
-    val avatarPath: String = "",
+    val avatarPath: String? = "",
 
-    val rating: Float = 0.0f
+    val rating: Float? = 0.0f
 )
