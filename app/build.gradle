@@ -66,6 +66,8 @@ android {
 
 dependencies {
 
+  def appDependencies = rootProject.ext.appDependencies
+
   implementation fileTree(dir: "libs", include: ["*.jar"])
   implementation files("../libjars/YouTubeAndroidPlayerApi.jar")
   implementation project(":framework")
@@ -86,20 +88,19 @@ dependencies {
   androidTestImplementation 'androidx.test.ext:junit:1.1.5'
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-  implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-  implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
-  implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+  implementation appDependencies.retrofitConverterGson
+  implementation appDependencies.okHttpLoggingInterceptor
+  implementation appDependencies.okHttp
 
-  implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-  implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+  implementation appDependencies.navigationFragment
+  implementation appDependencies.navigationUI
 
-  implementation 'com.google.dagger:hilt-android:2.42'
-  kapt 'com.google.dagger:hilt-compiler:2.42'
+  implementation appDependencies.hilt
+  kapt appDependencies.hiltCompiler
 
-  implementation "androidx.multidex:multidex:2.0.1"
+  implementation appDependencies.multiDex
 
-  //testImplementation 'junit:junit:4.13.2'
-  testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.2'
-  testImplementation 'org.mockito.kotlin:mockito-kotlin:3.2.0'
-  testImplementation 'androidx.arch.core:core-testing:2.2.0'
+  testImplementation appDependencies.coroutinesTest
+  testImplementation appDependencies.mockitoKotlin
+  testImplementation appDependencies.coreTesting
 }

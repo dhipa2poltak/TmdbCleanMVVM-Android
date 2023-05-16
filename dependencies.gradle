@@ -12,6 +12,9 @@ ext {
   navigationFragmentVersion = '2.5.3'
   navigationUIVersion = '2.5.3'
   picassoVersion = '2.8'
+  coroutinesTestVersion = '1.6.2'
+  mockitoKotlinVersion = '3.2.0'
+  coreTestingVersion = '2.2.0'
 
   dataDependencies = [
       gson: "com.google.code.gson:gson:${gsonVersion}",
@@ -26,6 +29,20 @@ ext {
       hilt: "com.google.dagger:hilt-android:${hiltVersion}",
       hiltCompiler: "com.google.dagger:hilt-compiler:${hiltCompilerVersion}",
       multiDex: "androidx.multidex:multidex:${multiDexVersion}"
+  ]
+
+  appDependencies = [
+      retrofitConverterGson: "com.squareup.retrofit2:converter-gson:${retrofitConverterGsonVersion}",
+      okHttp: "com.squareup.okhttp3:okhttp:${okHttpVersion}",
+      okHttpLoggingInterceptor: "com.squareup.okhttp3:logging-interceptor:${okHttpLoggingInterceptorVersion}",
+      navigationFragment: "androidx.navigation:navigation-fragment-ktx:${navigationFragmentVersion}",
+      navigationUI: "androidx.navigation:navigation-ui-ktx:${navigationUIVersion}",
+      hilt: "com.google.dagger:hilt-android:${hiltVersion}",
+      hiltCompiler: "com.google.dagger:hilt-compiler:${hiltCompilerVersion}",
+      multiDex: "androidx.multidex:multidex:${multiDexVersion}",
+      coroutinesTest: "org.jetbrains.kotlinx:kotlinx-coroutines-test:${coroutinesTestVersion}",
+      mockitoKotlin: "org.mockito.kotlin:mockito-kotlin:${mockitoKotlinVersion}",
+      coreTesting: "androidx.arch.core:core-testing:${coreTestingVersion}"
   ]
 
   featureSplashDependencies = [
