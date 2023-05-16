@@ -50,6 +50,8 @@ android {
 
 dependencies {
 
+  def featureMovieDetailsDependencies = rootProject.ext.featureMovieDetailsDependencies
+
   implementation project(":framework")
   implementation project(":domain")
   implementation project(":features:feature_movie_trailer")
@@ -61,11 +63,11 @@ dependencies {
   androidTestImplementation 'androidx.test.ext:junit:1.1.5'
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-  implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-  implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+  implementation featureMovieDetailsDependencies.navigationFragment
+  implementation featureMovieDetailsDependencies.navigationUI
 
-  implementation 'com.google.dagger:hilt-android:2.42'
-  kapt 'com.google.dagger:hilt-compiler:2.42'
+  implementation featureMovieDetailsDependencies.hilt
+  kapt featureMovieDetailsDependencies.hiltCompiler
 
-  implementation 'com.squareup.picasso:picasso:2.8'
+  implementation featureMovieDetailsDependencies.picasso
 }

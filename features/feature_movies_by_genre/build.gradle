@@ -50,6 +50,8 @@ android {
 
 dependencies {
 
+  def featureMoviesByGenreDependencies = rootProject.ext.featureMoviesByGenreDependencies
+
   implementation project(":framework")
   implementation project(":domain")
 
@@ -60,11 +62,11 @@ dependencies {
   androidTestImplementation 'androidx.test.ext:junit:1.1.5'
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-  implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-  implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+  implementation featureMoviesByGenreDependencies.navigationFragment
+  implementation featureMoviesByGenreDependencies.navigationUI
 
-  implementation 'com.google.dagger:hilt-android:2.42'
-  kapt 'com.google.dagger:hilt-compiler:2.42'
+  implementation featureMoviesByGenreDependencies.hilt
+  kapt featureMoviesByGenreDependencies.hiltCompiler
 
-  implementation 'com.squareup.picasso:picasso:2.8'
+  implementation featureMoviesByGenreDependencies.picasso
 }

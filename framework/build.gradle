@@ -52,6 +52,8 @@ android {
 
 dependencies {
 
+  def frameworkDependencies = rootProject.ext.frameworkDependencies
+
   implementation project(":domain")
   implementation project(":data")
 
@@ -62,13 +64,13 @@ dependencies {
   androidTestImplementation 'androidx.test.ext:junit:1.1.5'
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-  implementation 'com.google.code.gson:gson:2.9.0'
-  implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-  implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
-  implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+  implementation frameworkDependencies.gson
+  implementation frameworkDependencies.retrofitConverterGson
+  implementation frameworkDependencies.okHttpLoggingInterceptor
+  implementation frameworkDependencies.okHttp
 
-  implementation 'com.google.dagger:hilt-android:2.42'
-  kapt 'com.google.dagger:hilt-compiler:2.42'
+  implementation frameworkDependencies.hilt
+  kapt frameworkDependencies.hiltCompiler
 
-  implementation "androidx.multidex:multidex:2.0.1"
+  implementation frameworkDependencies.multiDex
 }

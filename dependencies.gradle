@@ -1,0 +1,71 @@
+
+ext {
+
+  gsonVersion = '2.9.0'
+  annotationVersion = '1.4.0'
+  retrofitConverterGsonVersion = '2.9.0'
+  okHttpVersion = '4.9.3'
+  okHttpLoggingInterceptorVersion = '4.9.1'
+  hiltVersion = '2.42'
+  hiltCompilerVersion = '2.42'
+  multiDexVersion = '2.0.1'
+  navigationFragmentVersion = '2.5.3'
+  navigationUIVersion = '2.5.3'
+  picassoVersion = '2.8'
+
+  dataDependencies = [
+      gson: "com.google.code.gson:gson:${gsonVersion}",
+      annotation: "androidx.annotation:annotation:${annotationVersion}"
+  ]
+
+  frameworkDependencies = [
+      gson: "com.google.code.gson:gson:${gsonVersion}",
+      retrofitConverterGson: "com.squareup.retrofit2:converter-gson:${retrofitConverterGsonVersion}",
+      okHttp: "com.squareup.okhttp3:okhttp:${okHttpVersion}",
+      okHttpLoggingInterceptor: "com.squareup.okhttp3:logging-interceptor:${okHttpLoggingInterceptorVersion}",
+      hilt: "com.google.dagger:hilt-android:${hiltVersion}",
+      hiltCompiler: "com.google.dagger:hilt-compiler:${hiltCompilerVersion}",
+      multiDex: "androidx.multidex:multidex:${multiDexVersion}"
+  ]
+
+  featureSplashDependencies = [
+      hilt: "com.google.dagger:hilt-android:${hiltVersion}",
+      hiltCompiler: "com.google.dagger:hilt-compiler:${hiltCompilerVersion}",
+  ]
+
+  featureGenreDependencies = [
+      navigationFragment: "androidx.navigation:navigation-fragment-ktx:${navigationFragmentVersion}",
+      navigationUI: "androidx.navigation:navigation-ui-ktx:${navigationUIVersion}",
+      hilt: "com.google.dagger:hilt-android:${hiltVersion}",
+      hiltCompiler: "com.google.dagger:hilt-compiler:${hiltCompilerVersion}",
+  ]
+
+  featureMoviesByGenreDependencies = [
+      navigationFragment: "androidx.navigation:navigation-fragment-ktx:${navigationFragmentVersion}",
+      navigationUI: "androidx.navigation:navigation-ui-ktx:${navigationUIVersion}",
+      hilt: "com.google.dagger:hilt-android:${hiltVersion}",
+      hiltCompiler: "com.google.dagger:hilt-compiler:${hiltCompilerVersion}",
+      picasso: "com.squareup.picasso:picasso:${picassoVersion}"
+  ]
+
+  featureMovieDetailsDependencies = [
+      navigationFragment: "androidx.navigation:navigation-fragment-ktx:${navigationFragmentVersion}",
+      navigationUI: "androidx.navigation:navigation-ui-ktx:${navigationUIVersion}",
+      hilt: "com.google.dagger:hilt-android:${hiltVersion}",
+      hiltCompiler: "com.google.dagger:hilt-compiler:${hiltCompilerVersion}",
+      picasso: "com.squareup.picasso:picasso:${picassoVersion}"
+  ]
+
+  featureMovieReviewsDependencies = [
+      navigationFragment: "androidx.navigation:navigation-fragment-ktx:${navigationFragmentVersion}",
+      navigationUI: "androidx.navigation:navigation-ui-ktx:${navigationUIVersion}",
+      hilt: "com.google.dagger:hilt-android:${hiltVersion}",
+      hiltCompiler: "com.google.dagger:hilt-compiler:${hiltCompilerVersion}",
+      picasso: "com.squareup.picasso:picasso:${picassoVersion}"
+  ]
+
+  featureMovieTrailerDependencies = [
+      hilt: "com.google.dagger:hilt-android:${hiltVersion}",
+      hiltCompiler: "com.google.dagger:hilt-compiler:${hiltCompilerVersion}",
+  ]
+}

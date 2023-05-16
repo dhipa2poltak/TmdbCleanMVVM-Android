@@ -50,6 +50,8 @@ android {
 
 dependencies {
 
+  def featureGenreDependencies = rootProject.ext.featureGenreDependencies
+
   implementation project(":framework")
   implementation project(":domain")
 
@@ -60,9 +62,9 @@ dependencies {
   androidTestImplementation 'androidx.test.ext:junit:1.1.5'
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-  implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
-  implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+  implementation featureGenreDependencies.navigationFragment
+  implementation featureGenreDependencies.navigationUI
 
-  implementation 'com.google.dagger:hilt-android:2.42'
-  kapt 'com.google.dagger:hilt-compiler:2.42'
+  implementation featureGenreDependencies.hilt
+  kapt featureGenreDependencies.hiltCompiler
 }

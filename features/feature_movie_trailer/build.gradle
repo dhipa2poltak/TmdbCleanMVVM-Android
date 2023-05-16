@@ -50,6 +50,8 @@ android {
 
 dependencies {
 
+  def featureMovieTrailerDependencies = rootProject.ext.featureMovieTrailerDependencies
+
   implementation fileTree(dir: "libs", include: ["*.jar"])
   implementation files("../../libjars/YouTubeAndroidPlayerApi.jar")
   implementation project(":framework")
@@ -62,6 +64,6 @@ dependencies {
   androidTestImplementation 'androidx.test.ext:junit:1.1.5'
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-  implementation 'com.google.dagger:hilt-android:2.42'
-  kapt 'com.google.dagger:hilt-compiler:2.42'
+  implementation featureMovieTrailerDependencies.hilt
+  kapt featureMovieTrailerDependencies.hiltCompiler
 }
