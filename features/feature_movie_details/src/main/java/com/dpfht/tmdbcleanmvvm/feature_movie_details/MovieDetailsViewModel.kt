@@ -59,7 +59,7 @@ class MovieDetailsViewModel @Inject constructor(
   }
 
   private fun getMovieDetails() {
-    viewModelScope.launch(Dispatchers.Main) {
+    viewModelScope.launch {
       mIsShowDialogLoading.postValue(true)
       when (val result = getMovieDetailsUseCase(_movieId)) {
         is Success -> {
@@ -73,21 +73,25 @@ class MovieDetailsViewModel @Inject constructor(
   }
 
   private fun onSuccess(result: MovieDetailsDomain) {
-    imageUrl = result.imageUrl
+    viewModelScope.launch(Dispatchers.Main) {
+      imageUrl = result.imageUrl
 
-    _movieId = result.id
-    _title = result.title
-    overview = result.overview
+      _movieId = result.id
+      _title = result.title
+      overview = result.overview
 
-    _titleData.postValue(_title)
-    _overviewData.postValue(overview)
-    _imageUrlData.postValue(imageUrl)
+      _titleData.value = _title
+      _overviewData.value = overview
+      _imageUrlData.value = imageUrl
 
-    mIsShowDialogLoading.postValue(false)
+      mIsShowDialogLoading.value = false
+    }
   }
 
   private fun onError(message: String) {
-    mIsShowDialogLoading.postValue(false)
-    mErrorMessage.postValue(message)
+    viewModelScope.launch(Dispatchers.Main) {
+      mIsShowDialogLoading.value = false
+      mErrorMessage.value = message
+    }
   }
 }

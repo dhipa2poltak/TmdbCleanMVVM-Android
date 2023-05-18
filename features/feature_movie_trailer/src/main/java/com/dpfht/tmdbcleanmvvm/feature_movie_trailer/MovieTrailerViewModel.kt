@@ -40,7 +40,7 @@ class MovieTrailerViewModel(
   }
 
   private fun getMovieTrailer() {
-    scope.launch(Dispatchers.Main) {
+    scope.launch {
       when (val result = getMovieTrailerUseCase(_movieId)) {
         is Success -> {
           onSuccess(result.value.results)
@@ -53,22 +53,26 @@ class MovieTrailerViewModel(
   }
 
   private fun onSuccess(trailers: List<TrailerEntity>) {
-    var keyVideo = ""
-    for (trailer in trailers) {
-      if (trailer.site.lowercase(Locale.ROOT).trim() == "youtube"
-      ) {
-        keyVideo = trailer.key
-        break
+    scope.launch(Dispatchers.Main) {
+      var keyVideo = ""
+      for (trailer in trailers) {
+        if (trailer.site.lowercase(Locale.ROOT).trim() == "youtube"
+        ) {
+          keyVideo = trailer.key
+          break
+        }
       }
-    }
 
-    if (keyVideo.isNotEmpty()) {
-      _keyVideo.postValue(keyVideo)
+      if (keyVideo.isNotEmpty()) {
+        _keyVideo.value = keyVideo
+      }
     }
   }
 
   private fun onError(message: String) {
-    mErrorMessage.postValue(message)
+    scope.launch(Dispatchers.Main) {
+      mErrorMessage.value = message
+    }
   }
 
   fun onDestroy() {

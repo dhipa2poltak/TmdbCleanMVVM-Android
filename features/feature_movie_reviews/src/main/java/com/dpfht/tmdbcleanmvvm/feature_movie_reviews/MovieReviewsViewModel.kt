@@ -39,7 +39,7 @@ class MovieReviewsViewModel @Inject constructor(
   fun getMovieReviews() {
     if (isEmptyNextResponse) return
 
-    viewModelScope.launch(Dispatchers.Main) {
+    viewModelScope.launch {
       mIsShowDialogLoading.postValue(true)
       mIsLoadingData = true
 
@@ -55,24 +55,28 @@ class MovieReviewsViewModel @Inject constructor(
   }
 
   private fun onSuccess(reviews: List<ReviewEntity>, page: Int) {
-    if (reviews.isNotEmpty()) {
-      this.page = page
+    viewModelScope.launch(Dispatchers.Main) {
+      if (reviews.isNotEmpty()) {
+        this@MovieReviewsViewModel.page = page
 
-      for (review in reviews) {
-        this.reviews.add(review)
-        _notifyItemInserted.postValue(this.reviews.size - 1)
+        for (review in reviews) {
+          this@MovieReviewsViewModel.reviews.add(review)
+          _notifyItemInserted.value = this@MovieReviewsViewModel.reviews.size - 1
+        }
+      } else {
+        isEmptyNextResponse = true
       }
-    } else {
-      isEmptyNextResponse = true
-    }
 
-    mIsShowDialogLoading.postValue(false)
-    mIsLoadingData = false
+      mIsShowDialogLoading.value = false
+      mIsLoadingData = false
+    }
   }
 
   private fun onError(message: String) {
-    mIsShowDialogLoading.postValue(false)
-    mIsLoadingData = false
-    mErrorMessage.postValue(message)
+    viewModelScope.launch(Dispatchers.Main) {
+      mIsShowDialogLoading.value = false
+      mIsLoadingData = false
+      mErrorMessage.value = message
+    }
   }
 }

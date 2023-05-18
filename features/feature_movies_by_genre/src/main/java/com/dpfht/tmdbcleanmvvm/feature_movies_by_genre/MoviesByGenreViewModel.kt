@@ -42,7 +42,7 @@ class MoviesByGenreViewModel @Inject constructor(
     mIsShowDialogLoading.postValue(true)
     mIsLoadingData = true
 
-    viewModelScope.launch(Dispatchers.Main) {
+    viewModelScope.launch {
       when (val result = getMovieByGenreUseCase(_genreId, page + 1)) {
         is Success -> {
           onSuccess(result.value.results, result.value.page)
@@ -55,24 +55,28 @@ class MoviesByGenreViewModel @Inject constructor(
   }
 
   private fun onSuccess(movies: List<MovieEntity>, page: Int) {
-    if (movies.isNotEmpty()) {
-      this.page = page
+    viewModelScope.launch(Dispatchers.Main) {
+      if (movies.isNotEmpty()) {
+        this@MoviesByGenreViewModel.page = page
 
-      for (movie in movies) {
-        this.movies.add(movie)
-        _notifyItemInserted.postValue(this.movies.size - 1)
+        for (movie in movies) {
+          this@MoviesByGenreViewModel.movies.add(movie)
+          _notifyItemInserted.value = this@MoviesByGenreViewModel.movies.size - 1
+        }
+      } else {
+        isEmptyNextResponse = true
       }
-    } else {
-      isEmptyNextResponse = true
-    }
 
-    mIsShowDialogLoading.postValue(false)
-    mIsLoadingData = false
+      mIsShowDialogLoading.value = false
+      mIsLoadingData = false
+    }
   }
 
   private fun onError(message: String) {
-    mIsShowDialogLoading.postValue(false)
-    mIsLoadingData = false
-    mErrorMessage.postValue(message)
+    viewModelScope.launch(Dispatchers.Main) {
+      mIsShowDialogLoading.value = false
+      mIsLoadingData = false
+      mErrorMessage.value = message
+    }
   }
 }

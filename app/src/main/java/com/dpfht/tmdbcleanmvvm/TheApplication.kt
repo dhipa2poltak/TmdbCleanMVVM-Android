@@ -15,19 +15,6 @@ class TheApplication: Application() {
   override fun onCreate() {
     super.onCreate()
     instance = this
-
-    if (BuildConfig.DEBUG) {
-      StrictMode.setThreadPolicy(
-        Builder().detectAll()
-          .penaltyLog()
-          .build()
-      )
-      StrictMode.setVmPolicy(
-        VmPolicy.Builder().detectAll()
-          .penaltyLog()
-          .build()
-      )
-    }
   }
 
   override fun attachBaseContext(base: Context) {

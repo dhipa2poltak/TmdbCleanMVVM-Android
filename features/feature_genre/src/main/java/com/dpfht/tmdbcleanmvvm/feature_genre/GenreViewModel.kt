@@ -29,7 +29,7 @@ class GenreViewModel @Inject constructor(
   }
 
   private fun getMovieGenre() {
-    viewModelScope.launch(Dispatchers.Main) {
+    viewModelScope.launch {
       mIsShowDialogLoading.postValue(true)
       when (val result = getMovieGenreUseCase()) {
         is Success -> {
@@ -43,15 +43,20 @@ class GenreViewModel @Inject constructor(
   }
 
   private fun onSuccess(genres: List<GenreEntity>) {
-    for (genre in genres) {
-      this.genres.add(genre)
-      _notifyItemInserted.postValue(this.genres.size - 1)
+    viewModelScope.launch(Dispatchers.Main) {
+      for (genre in genres) {
+        this@GenreViewModel.genres.add(genre)
+        _notifyItemInserted.value = this@GenreViewModel.genres.size - 1
+      }
+
+      mIsShowDialogLoading.value = false
     }
-    mIsShowDialogLoading.postValue(false)
   }
 
   private fun onError(message: String) {
-    mIsShowDialogLoading.postValue(false)
-    mErrorMessage.postValue(message)
+    viewModelScope.launch(Dispatchers.Main) {
+      mIsShowDialogLoading.value = false
+      mErrorMessage.value = message
+    }
   }
 }
