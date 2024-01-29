@@ -8,9 +8,9 @@ import androidx.navigation.NavDeepLinkRequest
 import com.dpfht.tmdbcleanmvvm.R.id
 import com.dpfht.tmdbcleanmvvm.R.navigation
 import com.dpfht.tmdbcleanmvvm.feature_movie_trailer.MovieTrailerActivity
-import com.dpfht.tmdbcleanmvvm.framework.navigation.NavigationInterface
+import com.dpfht.tmdbcleanmvvm.framework.navigation.NavigationService
 
-class NavigationImpl(private val navController: NavController, private val activity: AppCompatActivity): NavigationInterface {
+class NavigationImpl(private val navController: NavController, private val activity: AppCompatActivity): NavigationService {
 
   override fun navigateToGender() {
     val navGraph = navController.navInflater.inflate(navigation.nav_graph)

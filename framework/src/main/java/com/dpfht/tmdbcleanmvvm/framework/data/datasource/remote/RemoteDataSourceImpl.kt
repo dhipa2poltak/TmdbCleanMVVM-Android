@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvvm.framework.data.datasource
+package com.dpfht.tmdbcleanmvvm.framework.data.datasource.remote
 
 import com.dpfht.tmdbcleanmvvm.data.datasource.AppDataSource
 import com.dpfht.tmdbcleanmvvm.data.model.remote.response.toDomain
@@ -8,8 +8,8 @@ import com.dpfht.tmdbcleanmvvm.domain.entity.MovieDetailsDomain
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result
 import com.dpfht.tmdbcleanmvvm.domain.entity.ReviewDomain
 import com.dpfht.tmdbcleanmvvm.domain.entity.TrailerDomain
-import com.dpfht.tmdbcleanmvvm.framework.data.core.api.rest.RestService
-import com.dpfht.tmdbcleanmvvm.framework.data.core.api.rest.safeApiCall
+import com.dpfht.tmdbcleanmvvm.framework.data.datasource.remote.rest.RestService
+import com.dpfht.tmdbcleanmvvm.framework.data.datasource.remote.rest.safeApiCall
 import kotlinx.coroutines.Dispatchers
 
 class RemoteDataSourceImpl(private val restService: RestService):

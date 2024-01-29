@@ -1,5 +1,6 @@
-package com.dpfht.tmdbcleanmvvm.framework.data.core.api.rest
+package com.dpfht.tmdbcleanmvvm.framework.data.datasource.remote.rest
 
+import com.dpfht.tmdbcleanmvvm.framework.data.datasource.remote.rest.AuthInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.security.SecureRandom

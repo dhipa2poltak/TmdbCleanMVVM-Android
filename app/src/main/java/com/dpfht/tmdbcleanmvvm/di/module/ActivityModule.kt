@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.dpfht.tmdbcleanmvvm.R
-import com.dpfht.tmdbcleanmvvm.framework.navigation.NavigationInterface
+import com.dpfht.tmdbcleanmvvm.framework.navigation.NavigationService
 import com.dpfht.tmdbcleanmvvm.navigation.NavigationImpl
 import dagger.Module
 import dagger.Provides
@@ -25,7 +25,7 @@ class ActivityModule {
   }
 
   @Provides
-  fun provideNavigationService(@ActivityContext context: Context, navController: NavController): NavigationInterface {
+  fun provideNavigationService(@ActivityContext context: Context, navController: NavController): NavigationService {
     return NavigationImpl(navController, context as AppCompatActivity)
   }
 }

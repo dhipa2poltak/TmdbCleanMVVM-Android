@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvvm.framework.data.core.api.rest
+package com.dpfht.tmdbcleanmvvm.framework.data.datasource.remote.rest
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName

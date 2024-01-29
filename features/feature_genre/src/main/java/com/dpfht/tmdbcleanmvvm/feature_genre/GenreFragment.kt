@@ -1,39 +1,23 @@
 package com.dpfht.tmdbcleanmvvm.feature_genre
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dpfht.tmdbcleanmvvm.feature_genre.adapter.GenreAdapter
 import com.dpfht.tmdbcleanmvvm.feature_genre.databinding.FragmentGenreBinding
 import com.dpfht.tmdbcleanmvvm.framework.base.BaseFragment
-import com.dpfht.tmdbcleanmvvm.framework.navigation.NavigationInterface
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class GenreFragment: BaseFragment<GenreViewModel>() {
+class GenreFragment: BaseFragment<FragmentGenreBinding, GenreViewModel>(R.layout.fragment_genre) {
 
-  private lateinit var binding: FragmentGenreBinding
   override val viewModel by viewModels<GenreViewModel>()
 
   @Inject
-  override lateinit var navigationService: NavigationInterface
-
-  @Inject
   lateinit var adapter: GenreAdapter
-
-  override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View {
-    binding = FragmentGenreBinding.inflate(inflater, container, false)
-
-    return binding.root
-  }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)

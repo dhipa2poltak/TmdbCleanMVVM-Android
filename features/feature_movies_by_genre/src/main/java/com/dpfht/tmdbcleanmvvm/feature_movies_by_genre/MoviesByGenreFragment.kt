@@ -1,9 +1,7 @@
 package com.dpfht.tmdbcleanmvvm.feature_movies_by_genre
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,30 +9,16 @@ import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.adapter.MoviesByGenreAdap
 import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.adapter.MoviesByGenreAdapter.OnClickMovieListener
 import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.databinding.FragmentMoviesByGenreBinding
 import com.dpfht.tmdbcleanmvvm.framework.base.BaseFragment
-import com.dpfht.tmdbcleanmvvm.framework.navigation.NavigationInterface
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MoviesByGenreFragment: BaseFragment<MoviesByGenreViewModel>() {
+class MoviesByGenreFragment: BaseFragment<FragmentMoviesByGenreBinding, MoviesByGenreViewModel>(R.layout.fragment_movies_by_genre) {
 
-  private lateinit var binding: FragmentMoviesByGenreBinding
   override val viewModel by viewModels<MoviesByGenreViewModel>()
 
   @Inject
-  override lateinit var navigationService: NavigationInterface
-
-  @Inject
   lateinit var adapter: MoviesByGenreAdapter
-
-  override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View {
-    binding = FragmentMoviesByGenreBinding.inflate(inflater, container, false)
-
-    return binding.root
-  }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)

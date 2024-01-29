@@ -1,6 +1,6 @@
 package com.dpfht.tmdbcleanmvvm.framework.navigation
 
-interface NavigationInterface {
+interface NavigationService {
 
   fun navigateToGender()
   fun navigateToMoviesByGender(genreId: Int, genreName: String)

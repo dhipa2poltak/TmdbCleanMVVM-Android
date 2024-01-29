@@ -1,35 +1,19 @@
 package com.dpfht.tmdbcleanmvvm.feature_movie_details
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.dpfht.tmdbcleanmvvm.feature_movie_details.R.layout
 import com.dpfht.tmdbcleanmvvm.feature_movie_details.databinding.FragmentMovieDetailsBinding
-import com.dpfht.tmdbcleanmvvm.framework.R
 import com.dpfht.tmdbcleanmvvm.framework.base.BaseFragment
-import com.dpfht.tmdbcleanmvvm.framework.navigation.NavigationInterface
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import com.dpfht.tmdbcleanmvvm.framework.R as frameworkR
 
 @AndroidEntryPoint
-class MovieDetailsFragment: BaseFragment<MovieDetailsViewModel>() {
+class MovieDetailsFragment: BaseFragment<FragmentMovieDetailsBinding, MovieDetailsViewModel>(layout.fragment_movie_details) {
 
-  private lateinit var binding: FragmentMovieDetailsBinding
   override val viewModel by viewModels<MovieDetailsViewModel>()
-
-  @Inject
-  override lateinit var navigationService: NavigationInterface
-
-  override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View {
-    binding = FragmentMovieDetailsBinding.inflate(inflater, container, false)
-
-    return binding.root
-  }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -74,7 +58,7 @@ class MovieDetailsFragment: BaseFragment<MovieDetailsViewModel>() {
     viewModel.imageUrlData.observe(viewLifecycleOwner) { imageUrl ->
       Picasso.get().load(imageUrl)
         .error(android.R.drawable.ic_menu_close_clear_cancel)
-        .placeholder(R.drawable.loading)
+        .placeholder(frameworkR.drawable.loading)
         .into(binding.ivImageMovie)
     }
   }
