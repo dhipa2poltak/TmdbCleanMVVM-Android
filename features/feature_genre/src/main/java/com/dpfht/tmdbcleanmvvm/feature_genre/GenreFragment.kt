@@ -1,6 +1,5 @@
 package com.dpfht.tmdbcleanmvvm.feature_genre
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,13 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dpfht.tmdbcleanmvvm.feature_genre.adapter.GenreAdapter
 import com.dpfht.tmdbcleanmvvm.feature_genre.databinding.FragmentGenreBinding
-import com.dpfht.tmdbcleanmvvm.feature_genre.di.DaggerGenreComponent
 import com.dpfht.tmdbcleanmvvm.framework.base.BaseFragment
-import com.dpfht.tmdbcleanmvvm.framework.di.dependency.GenreDependency
-import com.dpfht.tmdbcleanmvvm.framework.di.dependency.NavigationDependency
 import com.dpfht.tmdbcleanmvvm.framework.navigation.NavigationInterface
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -30,17 +25,6 @@ class GenreFragment: BaseFragment<GenreViewModel>() {
 
   @Inject
   lateinit var adapter: GenreAdapter
-
-  override fun onAttach(context: Context) {
-    super.onAttach(context)
-
-    DaggerGenreComponent.builder()
-      .context(requireContext())
-      .dependency(EntryPointAccessors.fromApplication(requireContext().applicationContext, GenreDependency::class.java))
-      .navDependency(EntryPointAccessors.fromActivity(requireActivity(), NavigationDependency::class.java))
-      .build()
-      .inject(this)
-  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,

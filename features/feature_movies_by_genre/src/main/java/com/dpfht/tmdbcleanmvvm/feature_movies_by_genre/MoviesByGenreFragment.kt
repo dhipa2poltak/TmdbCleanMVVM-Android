@@ -1,6 +1,5 @@
 package com.dpfht.tmdbcleanmvvm.feature_movies_by_genre
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,13 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.adapter.MoviesByGenreAdapter
 import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.adapter.MoviesByGenreAdapter.OnClickMovieListener
 import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.databinding.FragmentMoviesByGenreBinding
-import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.di.DaggerMoviesByGenreComponent
 import com.dpfht.tmdbcleanmvvm.framework.base.BaseFragment
-import com.dpfht.tmdbcleanmvvm.framework.di.dependency.MoviesByGenreDependency
-import com.dpfht.tmdbcleanmvvm.framework.di.dependency.NavigationDependency
 import com.dpfht.tmdbcleanmvvm.framework.navigation.NavigationInterface
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -31,17 +26,6 @@ class MoviesByGenreFragment: BaseFragment<MoviesByGenreViewModel>() {
 
   @Inject
   lateinit var adapter: MoviesByGenreAdapter
-
-  override fun onAttach(context: Context) {
-    super.onAttach(context)
-
-    DaggerMoviesByGenreComponent.builder()
-      .context(requireContext())
-      .dependency(EntryPointAccessors.fromApplication(requireContext().applicationContext, MoviesByGenreDependency::class.java))
-      .navDependency(EntryPointAccessors.fromActivity(requireActivity(), NavigationDependency::class.java))
-      .build()
-      .inject(this)
-  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,

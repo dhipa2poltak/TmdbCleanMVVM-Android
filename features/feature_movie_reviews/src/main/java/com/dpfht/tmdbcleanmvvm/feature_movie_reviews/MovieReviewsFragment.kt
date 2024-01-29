@@ -1,6 +1,5 @@
 package com.dpfht.tmdbcleanmvvm.feature_movie_reviews
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,13 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dpfht.tmdbcleanmvvm.feature_movie_reviews.adapter.MovieReviewsAdapter
 import com.dpfht.tmdbcleanmvvm.feature_movie_reviews.databinding.FragmentMovieReviewsBinding
-import com.dpfht.tmdbcleanmvvm.feature_movie_reviews.di.DaggerMovieReviewsComponent
 import com.dpfht.tmdbcleanmvvm.framework.base.BaseFragment
-import com.dpfht.tmdbcleanmvvm.framework.di.dependency.MovieReviewsDependency
-import com.dpfht.tmdbcleanmvvm.framework.di.dependency.NavigationDependency
 import com.dpfht.tmdbcleanmvvm.framework.navigation.NavigationInterface
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -30,17 +25,6 @@ class MovieReviewsFragment: BaseFragment<MovieReviewsViewModel>() {
 
   @Inject
   lateinit var adapter: MovieReviewsAdapter
-
-  override fun onAttach(context: Context) {
-    super.onAttach(context)
-
-    DaggerMovieReviewsComponent.builder()
-      .context(requireContext())
-      .dependency(EntryPointAccessors.fromApplication(requireContext().applicationContext, MovieReviewsDependency::class.java))
-      .navDependency(EntryPointAccessors.fromActivity(requireActivity(), NavigationDependency::class.java))
-      .build()
-      .inject(this)
-  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
