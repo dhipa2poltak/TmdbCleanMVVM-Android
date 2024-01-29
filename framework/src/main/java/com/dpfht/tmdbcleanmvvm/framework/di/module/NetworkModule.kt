@@ -2,6 +2,7 @@ package com.dpfht.tmdbcleanmvvm.framework.di.module
 
 import com.dpfht.tmdbcleanmvvm.framework.BuildConfig
 import com.dpfht.tmdbcleanmvvm.data.datasource.AppDataSource
+import com.dpfht.tmdbcleanmvvm.framework.Config
 import com.dpfht.tmdbcleanmvvm.framework.data.datasource.remote.rest.AuthInterceptor
 import com.dpfht.tmdbcleanmvvm.framework.data.datasource.remote.RemoteDataSourceImpl
 import com.dpfht.tmdbcleanmvvm.framework.data.datasource.remote.rest.RestService
@@ -23,7 +24,7 @@ class NetworkModule {
 
   @Provides
   fun provideBaseUrl(): String {
-    return BuildConfig.BASE_URL
+    return Config.BASE_URL
   }
 
   @Provides
@@ -63,9 +64,9 @@ class NetworkModule {
 
   @Provides
   @Singleton
-  fun provideRetrofit(okHttpClient: OkHttpClient, BASE_URL: String): Retrofit {
+  fun provideRetrofit(okHttpClient: OkHttpClient, baseUrl: String): Retrofit {
     return Retrofit.Builder()
-      .baseUrl(BASE_URL)
+      .baseUrl(baseUrl)
       .addConverterFactory(GsonConverterFactory.create())
       .client(okHttpClient)
       .build()

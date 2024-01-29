@@ -22,7 +22,7 @@ suspend fun <T> safeApiCall(dispatcher: CoroutineDispatcher, apiCall: suspend ()
           //val code = t.code()
           val errorResponse = convertErrorBody(t)
 
-          ErrorResult(errorResponse?.statusMessage ?: "")
+          ErrorResult(errorResponse?.statusMessage ?: "http error")
         }
         else -> {
           ErrorResult("error in conversion")

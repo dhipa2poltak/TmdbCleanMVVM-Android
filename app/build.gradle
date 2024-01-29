@@ -53,14 +53,20 @@ android {
     staging {
       applicationId "com.dpfht.tmdbcleanmvvm.staging"
       manifestPlaceholders.appName = "TMDB Clean MVVM-Staging"
+
+      buildConfigField 'String', 'BASE_URL', STAGING_BASE_URL
     }
     verify {
       applicationId "com.dpfht.tmdbcleanmvvm.verify"
       manifestPlaceholders.appName = "TMDB Clean MVVM-Verify"
+
+      buildConfigField 'String', 'BASE_URL', VERIFY_BASE_URL
     }
     prod {
       applicationId "com.dpfht.tmdbcleanmvvm"
       manifestPlaceholders.appName = "TMDB Clean MVVM"
+
+      buildConfigField 'String', 'BASE_URL', PROD_BASE_URL
     }
   }
 }

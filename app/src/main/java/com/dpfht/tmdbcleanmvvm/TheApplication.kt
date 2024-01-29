@@ -2,17 +2,15 @@ package com.dpfht.tmdbcleanmvvm
 
 import android.app.Application
 import android.content.Context
-import android.os.StrictMode
-import android.os.StrictMode.ThreadPolicy.Builder
-import android.os.StrictMode.VmPolicy
 import androidx.multidex.MultiDex
-import com.dpfht.tmdbcleanmvvm.framework.BuildConfig
+import com.dpfht.tmdbcleanmvvm.framework.Config
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class TheApplication: Application() {
 
   override fun onCreate() {
+    Config.BASE_URL = BuildConfig.BASE_URL
     super.onCreate()
     instance = this
   }

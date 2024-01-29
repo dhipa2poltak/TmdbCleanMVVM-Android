@@ -33,20 +33,6 @@ android {
   kotlinOptions {
     jvmTarget = '1.8'
   }
-
-  flavorDimensions "default"
-
-  productFlavors {
-    staging {
-
-    }
-    verify {
-
-    }
-    prod {
-
-    }
-  }
 }
 
 dependencies {
