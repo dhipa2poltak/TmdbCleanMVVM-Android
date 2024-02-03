@@ -5,33 +5,26 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.adapter.MoviesByGenreAdapter
 import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.adapter.MoviesByGenreAdapter.OnClickMovieListener
 import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.databinding.FragmentMoviesByGenreBinding
 import com.dpfht.tmdbcleanmvvm.framework.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MoviesByGenreFragment: BaseFragment<FragmentMoviesByGenreBinding, MoviesByGenreViewModel>(R.layout.fragment_movies_by_genre) {
 
   override val viewModel by viewModels<MoviesByGenreViewModel>()
 
-  @Inject
-  lateinit var adapter: MoviesByGenreAdapter
-
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-
-    adapter.movies = viewModel.movies
 
     val layoutManager = LinearLayoutManager(requireContext())
     layoutManager.orientation = LinearLayoutManager.VERTICAL
 
     binding.rvMoviesByGenre.layoutManager = layoutManager
-    binding.rvMoviesByGenre.adapter = adapter
+    binding.rvMoviesByGenre.adapter = viewModel.adapter
 
-    adapter.onClickMovieListener = object : OnClickMovieListener {
+    viewModel.adapter.onClickMovieListener = object : OnClickMovieListener {
       override fun onClickMovie(position: Int) {
         val movie = viewModel.movies[position]
         navigationService.navigateToMovieDetails(movie.id)
@@ -73,12 +66,6 @@ class MoviesByGenreFragment: BaseFragment<FragmentMoviesByGenreBinding, MoviesBy
         View.VISIBLE
       } else {
         View.GONE
-      }
-    }
-
-    viewModel.notifyItemInserted.observe(viewLifecycleOwner) { position ->
-      if (position > 0) {
-        adapter.notifyItemInserted(position)
       }
     }
   }

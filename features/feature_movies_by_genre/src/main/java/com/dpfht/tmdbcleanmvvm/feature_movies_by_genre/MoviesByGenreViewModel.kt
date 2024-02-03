@@ -1,12 +1,11 @@
 package com.dpfht.tmdbcleanmvvm.feature_movies_by_genre
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.dpfht.tmdbcleanmvvm.domain.entity.MovieEntity
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result.ErrorResult
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result.Success
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieByGenreUseCase
+import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.adapter.MoviesByGenreAdapter
 import com.dpfht.tmdbcleanmvvm.framework.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -15,6 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MoviesByGenreViewModel @Inject constructor(
+  val adapter: MoviesByGenreAdapter,
   val getMovieByGenreUseCase: GetMovieByGenreUseCase,
   val movies: ArrayList<MovieEntity>
 ): BaseViewModel() {
@@ -23,8 +23,9 @@ class MoviesByGenreViewModel @Inject constructor(
   private var page = 0
   private var isEmptyNextResponse = false
 
-  private val _notifyItemInserted = MutableLiveData<Int>()
-  val notifyItemInserted: LiveData<Int> = _notifyItemInserted
+  init {
+    adapter.movies = movies
+  }
 
   override fun start() {
     if (_genreId != -1 && movies.isEmpty()) {
@@ -61,7 +62,7 @@ class MoviesByGenreViewModel @Inject constructor(
 
         for (movie in movies) {
           this@MoviesByGenreViewModel.movies.add(movie)
-          _notifyItemInserted.value = this@MoviesByGenreViewModel.movies.size - 1
+          adapter.notifyItemInserted(this@MoviesByGenreViewModel.movies.size - 1)
         }
       } else {
         isEmptyNextResponse = true
