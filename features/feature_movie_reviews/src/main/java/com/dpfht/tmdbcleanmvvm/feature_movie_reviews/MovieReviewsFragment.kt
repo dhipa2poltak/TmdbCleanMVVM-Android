@@ -5,30 +5,23 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.dpfht.tmdbcleanmvvm.feature_movie_reviews.adapter.MovieReviewsAdapter
 import com.dpfht.tmdbcleanmvvm.feature_movie_reviews.databinding.FragmentMovieReviewsBinding
 import com.dpfht.tmdbcleanmvvm.framework.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MovieReviewsFragment: BaseFragment<FragmentMovieReviewsBinding, MovieReviewsViewModel>(R.layout.fragment_movie_reviews) {
 
   override val viewModel by viewModels<MovieReviewsViewModel>()
 
-  @Inject
-  lateinit var adapter: MovieReviewsAdapter
-
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-
-    adapter.reviews = viewModel.reviews
 
     val layoutManager = LinearLayoutManager(requireContext())
     layoutManager.orientation = LinearLayoutManager.VERTICAL
 
     binding.rvReview.layoutManager = layoutManager
-    binding.rvReview.adapter = adapter
+    binding.rvReview.adapter = viewModel.adapter
 
     binding.rvReview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
       override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -64,12 +57,6 @@ class MovieReviewsFragment: BaseFragment<FragmentMovieReviewsBinding, MovieRevie
         View.VISIBLE
       } else {
         View.GONE
-      }
-    }
-
-    viewModel.notifyItemInserted.observe(viewLifecycleOwner) { position ->
-      if (position > 0) {
-        adapter.notifyItemInserted(position)
       }
     }
   }
