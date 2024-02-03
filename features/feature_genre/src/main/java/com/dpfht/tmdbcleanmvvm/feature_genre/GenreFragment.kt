@@ -9,29 +9,23 @@ import com.dpfht.tmdbcleanmvvm.feature_genre.adapter.GenreAdapter
 import com.dpfht.tmdbcleanmvvm.feature_genre.databinding.FragmentGenreBinding
 import com.dpfht.tmdbcleanmvvm.framework.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class GenreFragment: BaseFragment<FragmentGenreBinding, GenreViewModel>(R.layout.fragment_genre) {
 
   override val viewModel by viewModels<GenreViewModel>()
 
-  @Inject
-  lateinit var adapter: GenreAdapter
-
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     setToolbar()
-
-    adapter.genres = viewModel.genres
 
     val layoutManager = LinearLayoutManager(requireContext())
     layoutManager.orientation = LinearLayoutManager.VERTICAL
 
     binding.rvGenre.layoutManager = layoutManager
-    binding.rvGenre.adapter = adapter
+    binding.rvGenre.adapter = viewModel.adapter
 
-    adapter.onClickGenreListener = object : GenreAdapter.OnClickGenreListener {
+    viewModel.adapter.onClickGenreListener = object : GenreAdapter.OnClickGenreListener {
       override fun onClickGenre(position: Int) {
         val genre = viewModel.genres[position]
         navigationService.navigateToMoviesByGender(genre.id, genre.name)
@@ -51,12 +45,6 @@ class GenreFragment: BaseFragment<FragmentGenreBinding, GenreViewModel>(R.layout
         View.VISIBLE
       } else {
         View.GONE
-      }
-    }
-
-    viewModel.notifyItemInserted.observe(viewLifecycleOwner) { position ->
-      if (position > 0) {
-        adapter.notifyItemInserted(position)
       }
     }
   }
