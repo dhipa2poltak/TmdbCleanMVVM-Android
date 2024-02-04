@@ -26,13 +26,13 @@ class AppRepositoryTest {
   }
 
   @Test
-  fun `ensure getMovieGenre method in AppDataSource is called`() = runTest {
+  fun `ensure getMovieGenre method is called in AppDataSource`() = runTest {
     appRepository.getMovieGenre()
     verify(appDataSource).getMovieGenre()
   }
 
   @Test
-  fun `ensure getMoviesByGenre method in AppDataSource is called`() = runTest {
+  fun `ensure getMoviesByGenre method is called in AppDataSource`() = runTest {
     val genreId = 10
     val page = 1
 
@@ -42,14 +42,14 @@ class AppRepositoryTest {
   }
 
   @Test
-  fun `ensure getMovieDetail method in AppDataSource is called`() = runTest {
+  fun `ensure getMovieDetail method is called in AppDataSource`() = runTest {
     val movieId = 101
     appRepository.getMovieDetail(movieId)
     verify(appDataSource).getMovieDetail(movieId)
   }
 
   @Test
-  fun `ensure getMovieReviews method in AppDataSource is called`() = runTest {
+  fun `ensure getMovieReviews method is called in AppDataSource`() = runTest {
     val movieId = 101
     val page = 1
 
@@ -59,7 +59,7 @@ class AppRepositoryTest {
   }
 
   @Test
-  fun `ensure getMovieTrailer method in AppDataSource is called`() = runTest {
+  fun `ensure getMovieTrailer method is called in AppDataSource`() = runTest {
     val movieId = 101
     appRepository.getMovieTrailer(movieId)
     verify(appDataSource).getMovieTrailer(movieId)

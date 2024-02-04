@@ -20,7 +20,7 @@ class GetMovieDetailsUseCaseTest: BaseUseCaseTest() {
   }
 
   @Test
-  fun `ensure getMovieDetail method in AppRepository is called`() = runTest {
+  fun `ensure getMovieDetail method is called in AppRepository`() = runTest {
     val movieId = 101
     getMovieDetailsUseCase(movieId)
     verify(appRepository).getMovieDetail(movieId)

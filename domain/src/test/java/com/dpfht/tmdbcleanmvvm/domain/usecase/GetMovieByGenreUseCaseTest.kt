@@ -20,7 +20,7 @@ class GetMovieByGenreUseCaseTest: BaseUseCaseTest() {
   }
 
   @Test
-  fun `ensure getMoviesByGenre method in AppRepository class is called`() = runTest {
+  fun `ensure getMoviesByGenre method is called in AppRepository class`() = runTest {
     val genreId = 101
     val page = 1
 

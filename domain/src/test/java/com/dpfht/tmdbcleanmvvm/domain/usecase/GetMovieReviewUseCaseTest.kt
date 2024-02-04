@@ -20,7 +20,7 @@ class GetMovieReviewUseCaseTest: BaseUseCaseTest() {
   }
 
   @Test
-  fun `ensure getMovieReviews method in AppRepository is called`() = runTest {
+  fun `ensure getMovieReviews method is called in AppRepository`() = runTest {
     val movieId = 101
     val page = 1
 

@@ -20,7 +20,7 @@ class GetMovieGenreUseCaseTest: BaseUseCaseTest() {
   }
 
   @Test
-  fun `ensure getMovieGenre method in AppRepository is called`() = runTest {
+  fun `ensure getMovieGenre method is called in AppRepository`() = runTest {
     getMovieGenreUseCase()
 
     verify(appRepository).getMovieGenre()
