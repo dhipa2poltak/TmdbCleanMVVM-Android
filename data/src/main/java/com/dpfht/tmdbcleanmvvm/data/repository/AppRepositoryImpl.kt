@@ -9,7 +9,9 @@ import com.dpfht.tmdbcleanmvvm.domain.entity.Result
 import com.dpfht.tmdbcleanmvvm.domain.entity.ReviewDomain
 import com.dpfht.tmdbcleanmvvm.domain.entity.TrailerDomain
 
-class AppRepositoryImpl(private val remoteDataSource: AppDataSource): AppRepository {
+class AppRepositoryImpl(
+  private val remoteDataSource: AppDataSource
+): AppRepository {
 
   override suspend fun getMovieGenre(): Result<GenreDomain> {
     return remoteDataSource.getMovieGenre()

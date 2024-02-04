@@ -16,4 +16,8 @@ dependencies {
 
   implementation dataDependencies.gson
   implementation dataDependencies.annotation
+
+  testImplementation 'junit:junit:4.13.2'
+  testImplementation appDependencies.mockitoKotlin
+  testImplementation appDependencies.coroutinesTest
 }
