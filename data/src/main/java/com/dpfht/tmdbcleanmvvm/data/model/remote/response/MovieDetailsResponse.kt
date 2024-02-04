@@ -6,6 +6,7 @@ import com.dpfht.tmdbcleanmvvm.data.model.remote.Genre
 import com.dpfht.tmdbcleanmvvm.data.model.remote.ProductionCompany
 import com.dpfht.tmdbcleanmvvm.data.model.remote.ProductionCountry
 import com.dpfht.tmdbcleanmvvm.data.model.remote.SpokenLanguage
+import com.dpfht.tmdbcleanmvvm.data.model.remote.toDomain
 import com.dpfht.tmdbcleanmvvm.domain.entity.MovieDetailsDomain
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
@@ -86,6 +87,7 @@ fun MovieDetailsResponse.toDomain(): MovieDetailsDomain {
         id ?: -1,
         title ?: "",
         overview ?: "",
-        if (posterPath?.isNotEmpty() == true) Constants.IMAGE_URL_BASE_PATH + posterPath else ""
+        if (posterPath?.isNotEmpty() == true) Constants.IMAGE_URL_BASE_PATH + posterPath else "",
+        genres?.map { it.toDomain() } ?: listOf()
     )
 }

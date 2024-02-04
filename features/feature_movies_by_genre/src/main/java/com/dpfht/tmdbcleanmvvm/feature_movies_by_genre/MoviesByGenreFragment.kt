@@ -61,8 +61,8 @@ class MoviesByGenreFragment: BaseFragment<FragmentMoviesByGenreBinding, MoviesBy
   override fun observeViewModel() {
     super.observeViewModel()
 
-    viewModel.isShowDialogLoading.observe(viewLifecycleOwner) { value ->
-      binding.pbLoading.visibility = if (value) {
+    viewModel.isShowDialogLoading.observe(viewLifecycleOwner) { isLoading ->
+      binding.pbLoading.visibility = if (isLoading) {
         View.VISIBLE
       } else {
         View.GONE

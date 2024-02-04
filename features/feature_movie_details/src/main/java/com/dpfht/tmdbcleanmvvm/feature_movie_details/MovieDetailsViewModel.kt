@@ -34,6 +34,9 @@ class MovieDetailsViewModel @Inject constructor(
   private val _imageUrlData = MutableLiveData<String>()
   val imageUrlData: LiveData<String> = _imageUrlData
 
+  private val _genres = MutableLiveData<String>()
+  val genres: LiveData<String> = _genres
+
   //--
 
   fun setMovieId(movieId: Int) {
@@ -72,17 +75,28 @@ class MovieDetailsViewModel @Inject constructor(
     }
   }
 
-  private fun onSuccess(result: MovieDetailsDomain) {
+  private fun onSuccess(movie: MovieDetailsDomain) {
     viewModelScope.launch(Dispatchers.Main) {
-      imageUrl = result.imageUrl
+      imageUrl = movie.imageUrl
 
-      _movieId = result.id
-      _title = result.title
-      overview = result.overview
+      _movieId = movie.id
+      _title = movie.title
+      overview = movie.overview
 
       _titleData.value = _title
       _overviewData.value = overview
       _imageUrlData.value = imageUrl
+
+      var strGenres = ""
+      for (genre in movie.genres) {
+        if (strGenres.isEmpty()) {
+          strGenres = genre.name
+        } else {
+          strGenres += ", ${genre.name}"
+        }
+      }
+
+      _genres.value = strGenres
 
       mIsShowDialogLoading.value = false
     }

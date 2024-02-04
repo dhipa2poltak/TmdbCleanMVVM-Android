@@ -39,8 +39,8 @@ class MovieDetailsFragment: BaseFragment<FragmentMovieDetailsBinding, MovieDetai
   override fun observeViewModel() {
     super.observeViewModel()
 
-    viewModel.isShowDialogLoading.observe(viewLifecycleOwner) { value ->
-      binding.pbLoading.visibility = if (value) {
+    viewModel.isShowDialogLoading.observe(viewLifecycleOwner) { isLoading ->
+      binding.pbLoading.visibility = if (isLoading) {
         View.VISIBLE
       } else {
         View.GONE
@@ -60,6 +60,16 @@ class MovieDetailsFragment: BaseFragment<FragmentMovieDetailsBinding, MovieDetai
         .error(android.R.drawable.ic_menu_close_clear_cancel)
         .placeholder(frameworkR.drawable.loading)
         .into(binding.ivImageMovie)
+    }
+
+    viewModel.genres.observe(viewLifecycleOwner) { genres ->
+      if (genres.isNotEmpty()) {
+        binding.tvGenresMovie.text = genres
+        binding.tvGenresMovie.visibility = View.VISIBLE
+      } else {
+        binding.tvGenresMovie.text = genres
+        binding.tvGenresMovie.visibility = View.INVISIBLE
+      }
     }
   }
 

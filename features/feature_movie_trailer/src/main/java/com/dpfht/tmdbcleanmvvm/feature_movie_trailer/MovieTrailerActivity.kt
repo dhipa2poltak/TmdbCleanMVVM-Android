@@ -1,37 +1,26 @@
 package com.dpfht.tmdbcleanmvvm.feature_movie_trailer
 
-import com.dpfht.tmdbcleanmvvm.feature_movie_trailer.databinding.ActivityMovieTrailerBinding
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.dpfht.tmdbcleanmvvm.feature_movie_trailer.databinding.ActivityMovieTrailerBinding
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
-import dagger.hilt.EntryPoint
-import dagger.hilt.InstallIn
-import dagger.hilt.android.EntryPointAccessors
-import dagger.hilt.components.SingletonComponent
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MovieTrailerActivity : AppCompatActivity() {
 
   private lateinit var binding: ActivityMovieTrailerBinding
-  private lateinit var viewModel: MovieTrailerViewModel
+  private val viewModel by viewModels<MovieTrailerViewModel>()
 
   private lateinit var youTubePlayer: YouTubePlayer
 
-  @EntryPoint
-  @InstallIn(SingletonComponent::class)
-  interface MovieTrailerEntryPoint {
-    fun getMovieTrailerViewModel(): MovieTrailerViewModel
-  }
-
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-
-    val entryPoint = EntryPointAccessors.fromApplication(applicationContext, MovieTrailerEntryPoint::class.java)
-    viewModel = entryPoint.getMovieTrailerViewModel()
-
     binding = ActivityMovieTrailerBinding.inflate(layoutInflater)
     setContentView(binding.root)
 
@@ -101,10 +90,5 @@ class MovieTrailerActivity : AppCompatActivity() {
 
   private fun showCanceledMessage() {
     showErrorMessage(getString(R.string.trailer_text_canceled_message))
-  }
-
-  override fun onDestroy() {
-    viewModel.onDestroy()
-    super.onDestroy()
   }
 }

@@ -2,45 +2,40 @@ package com.dpfht.tmdbcleanmvvm.feature_movie_trailer
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieTrailerUseCase
+import androidx.lifecycle.viewModelScope
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result.ErrorResult
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result.Success
 import com.dpfht.tmdbcleanmvvm.domain.entity.TrailerEntity
-import kotlinx.coroutines.CoroutineScope
+import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieTrailerUseCase
+import com.dpfht.tmdbcleanmvvm.framework.base.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import java.util.Locale
+import javax.inject.Inject
 
-class MovieTrailerViewModel(
-  val getMovieTrailerUseCase: GetMovieTrailerUseCase,
-  private val scope: CoroutineScope
-) {
+@HiltViewModel
+class MovieTrailerViewModel @Inject constructor(
+  val getMovieTrailerUseCase: GetMovieTrailerUseCase
+): BaseViewModel() {
 
   private var _movieId = -1
 
   private val _keyVideo = MutableLiveData<String>()
   val keyVideo: LiveData<String> = _keyVideo
 
-  private val mErrorMessage = MutableLiveData<String>()
-  val errorMessage: LiveData<String> = mErrorMessage
-
-  private val mShowCanceledMessage = MutableLiveData<Boolean>()
-  val showCanceledMessage: LiveData<Boolean> = mShowCanceledMessage
-
   fun setMovieId(movieId: Int) {
     this._movieId = movieId
   }
 
-  fun start() {
+  override fun start() {
     if (_movieId != -1) {
       getMovieTrailer()
     }
   }
 
   private fun getMovieTrailer() {
-    scope.launch {
+    viewModelScope.launch {
       when (val result = getMovieTrailerUseCase(_movieId)) {
         is Success -> {
           onSuccess(result.value.results)
@@ -53,7 +48,7 @@ class MovieTrailerViewModel(
   }
 
   private fun onSuccess(trailers: List<TrailerEntity>) {
-    scope.launch(Dispatchers.Main) {
+    viewModelScope.launch(Dispatchers.Main) {
       var keyVideo = ""
       for (trailer in trailers) {
         if (trailer.site.lowercase(Locale.ROOT).trim() == "youtube"
@@ -70,14 +65,8 @@ class MovieTrailerViewModel(
   }
 
   private fun onError(message: String) {
-    scope.launch(Dispatchers.Main) {
+    viewModelScope.launch(Dispatchers.Main) {
       mErrorMessage.value = message
-    }
-  }
-
-  fun onDestroy() {
-    if (scope.isActive) {
-      scope.cancel()
     }
   }
 }

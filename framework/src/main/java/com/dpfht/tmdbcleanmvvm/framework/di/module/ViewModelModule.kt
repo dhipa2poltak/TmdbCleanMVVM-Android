@@ -12,6 +12,8 @@ import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieGenreUseCase
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieGenreUseCaseImpl
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieReviewUseCase
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieReviewUseCaseImpl
+import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieTrailerUseCase
+import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieTrailerUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,6 +41,11 @@ class ViewModelModule {
   @Provides
   fun provideGetMovieReviewUseCase(appRepository: AppRepository): GetMovieReviewUseCase {
     return GetMovieReviewUseCaseImpl(appRepository)
+  }
+
+  @Provides
+  fun provideGetMovieTrailerUseCase(appRepository: AppRepository): GetMovieTrailerUseCase {
+    return GetMovieTrailerUseCaseImpl(appRepository)
   }
 
   @Provides
