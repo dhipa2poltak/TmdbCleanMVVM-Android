@@ -12,8 +12,9 @@ import com.dpfht.tmdbcleanmvvm.framework.data.datasource.remote.rest.RestService
 import com.dpfht.tmdbcleanmvvm.framework.data.datasource.remote.rest.safeApiCall
 import kotlinx.coroutines.Dispatchers
 
-class RemoteDataSourceImpl(private val restService: RestService):
-  AppDataSource {
+class RemoteDataSourceImpl(
+  private val restService: RestService
+): AppDataSource {
 
   override suspend fun getMovieGenre(): Result<GenreDomain> {
     return safeApiCall(Dispatchers.IO) { restService.getMovieGenre().toDomain() }
