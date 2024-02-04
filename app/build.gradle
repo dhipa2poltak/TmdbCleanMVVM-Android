@@ -11,7 +11,7 @@ android {
 
   defaultConfig {
     applicationId "com.dpfht.tmdbcleanmvvm"
-    minSdk 16
+    minSdk 19
     targetSdk 33
     versionCode 1
     versionName "1.0"
@@ -76,7 +76,6 @@ dependencies {
   def appDependencies = rootProject.ext.appDependencies
 
   implementation fileTree(dir: "libs", include: ["*.jar"])
-  implementation files("../libjars/YouTubeAndroidPlayerApi.jar")
   implementation project(":framework")
   implementation project(":domain")
   implementation project(":data")

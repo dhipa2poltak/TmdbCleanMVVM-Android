@@ -9,7 +9,7 @@ android {
   compileSdk 33
 
   defaultConfig {
-    minSdk 16
+    minSdk 19
     targetSdk 33
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -39,7 +39,6 @@ dependencies {
   def featureMovieTrailerDependencies = rootProject.ext.featureMovieTrailerDependencies
 
   implementation fileTree(dir: "libs", include: ["*.jar"])
-  implementation files("../../libjars/YouTubeAndroidPlayerApi.jar")
   implementation project(":framework")
   implementation project(":domain")
 
@@ -52,4 +51,6 @@ dependencies {
 
   implementation featureMovieTrailerDependencies.hilt
   kapt featureMovieTrailerDependencies.hiltCompiler
+
+  implementation "com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0"
 }

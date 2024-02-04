@@ -1,22 +1,24 @@
 package com.dpfht.tmdbcleanmvvm.feature_movie_trailer
 
+import com.dpfht.tmdbcleanmvvm.feature_movie_trailer.databinding.ActivityMovieTrailerBinding
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import com.dpfht.tmdbcleanmvvm.feature_movie_trailer.databinding.ActivityMovieTrailerBinding
-import com.dpfht.tmdbcleanmvvm.framework.R
-import com.google.android.youtube.player.YouTubeBaseActivity
-import com.google.android.youtube.player.YouTubeInitializationResult
-import com.google.android.youtube.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.components.SingletonComponent
 
-class MovieTrailerActivity : YouTubeBaseActivity() {
+class MovieTrailerActivity : AppCompatActivity() {
 
   private lateinit var binding: ActivityMovieTrailerBinding
   private lateinit var viewModel: MovieTrailerViewModel
+
+  private lateinit var youTubePlayer: YouTubePlayer
 
   @EntryPoint
   @InstallIn(SingletonComponent::class)
@@ -33,6 +35,9 @@ class MovieTrailerActivity : YouTubeBaseActivity() {
     binding = ActivityMovieTrailerBinding.inflate(layoutInflater)
     setContentView(binding.root)
 
+    binding.youtubePlayerView.enableAutomaticInitialization = false
+    lifecycle.addObserver(binding.youtubePlayerView)
+
     if (intent.hasExtra("movie_id")) {
       val movieId = intent.getIntExtra("movie_id", -1)
 
@@ -42,13 +47,11 @@ class MovieTrailerActivity : YouTubeBaseActivity() {
   }
 
   private val observerKeyVideo = Observer<String> { keyVideo ->
-    keyVideo?.let {
-      showTrailer(it)
-    }
+    showTrailer(keyVideo)
   }
 
   private val observerErrorMessage = Observer<String> { message ->
-    message?.let {
+    message.let {
       if (it.isNotEmpty()) {
         showErrorMessage(it)
       }
@@ -56,13 +59,14 @@ class MovieTrailerActivity : YouTubeBaseActivity() {
   }
 
   private val observerShowCanceledMessage = Observer<Boolean> { show ->
-    if (show == true) {
+    if (show) {
       showCanceledMessage()
     }
   }
 
   override fun onResume() {
     super.onResume()
+    supportActionBar?.hide()
     viewModel.keyVideo.observeForever(observerKeyVideo)
     viewModel.errorMessage.observeForever(observerErrorMessage)
     viewModel.showCanceledMessage.observeForever(observerShowCanceledMessage)
@@ -70,36 +74,25 @@ class MovieTrailerActivity : YouTubeBaseActivity() {
 
   override fun onPause() {
     super.onPause()
+    supportActionBar?.show()
     viewModel.keyVideo.removeObserver(observerKeyVideo)
     viewModel.errorMessage.removeObserver(observerErrorMessage)
     viewModel.showCanceledMessage.removeObserver(observerShowCanceledMessage)
   }
 
   private fun showTrailer(keyVideo: String) {
-    binding.playerYoutube.initialize(
-      PlayerConfig.API_KEY,
-      object : YouTubePlayer.OnInitializedListener {
+    val iFramePlayerOptions = IFramePlayerOptions.Builder()
+      .controls(1)
+      .build()
 
-        override fun onInitializationSuccess(
-          p0: YouTubePlayer.Provider?,
-          youtubePlayer: YouTubePlayer?,
-          p2: Boolean
-        ) {
-          youtubePlayer?.loadVideo(keyVideo)
-          youtubePlayer?.play()
-        }
+    binding.youtubePlayerView.initialize(object : AbstractYouTubePlayerListener() {
+      override fun onReady(youTubePlayer: YouTubePlayer) {
+        super.onReady(youTubePlayer)
 
-        override fun onInitializationFailure(
-          p0: YouTubePlayer.Provider?,
-          p1: YouTubeInitializationResult?
-        ) {
-          Toast.makeText(
-            baseContext,
-            "error loading youtube video",
-            Toast.LENGTH_SHORT
-          ).show()
-        }
-      })
+        this@MovieTrailerActivity.youTubePlayer = youTubePlayer
+        youTubePlayer.loadVideo(keyVideo, 0f)
+      }
+    }, iFramePlayerOptions)
   }
 
   private fun showErrorMessage(message: String) {
@@ -107,7 +100,7 @@ class MovieTrailerActivity : YouTubeBaseActivity() {
   }
 
   private fun showCanceledMessage() {
-    showErrorMessage(getString(R.string.canceled_message))
+    showErrorMessage(getString(R.string.trailer_text_canceled_message))
   }
 
   override fun onDestroy() {
