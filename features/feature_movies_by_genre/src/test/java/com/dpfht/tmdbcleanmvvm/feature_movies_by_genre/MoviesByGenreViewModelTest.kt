@@ -1,12 +1,12 @@
-package com.dpfht.tmdbcleanmvvm.feature_genre
+package com.dpfht.tmdbcleanmvvm.feature_movies_by_genre
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.dpfht.tmdbcleanmvvm.domain.entity.GenreDomain
-import com.dpfht.tmdbcleanmvvm.domain.entity.GenreEntity
-import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieGenreUseCase
+import com.dpfht.tmdbcleanmvvm.domain.entity.DiscoverMovieByGenreDomain
+import com.dpfht.tmdbcleanmvvm.domain.entity.MovieEntity
+import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieByGenreUseCase
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result
-import com.dpfht.tmdbcleanmvvm.feature_genre.adapter.GenreAdapter
+import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.adapter.MoviesByGenreAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
@@ -26,20 +26,20 @@ import org.mockito.kotlin.whenever
 
 @RunWith(MockitoJUnitRunner::class)
 @OptIn(ExperimentalCoroutinesApi::class)
-class GenreViewModelUnitTest {
+class MoviesByGenreViewModelTest {
 
   private val testDispatcher = UnconfinedTestDispatcher()
 
   @get:Rule
   val instantTaskExecutionRule: InstantTaskExecutorRule = InstantTaskExecutorRule()
 
-  private lateinit var viewModel: GenreViewModel
+  private lateinit var viewModel: MoviesByGenreViewModel
 
   @Mock
-  private lateinit var adapter: GenreAdapter
+  private lateinit var adapter: MoviesByGenreAdapter
 
   @Mock
-  private lateinit var getMovieGenreUseCase: GetMovieGenreUseCase
+  private lateinit var getMovieByGenreUseCase: GetMovieByGenreUseCase
 
   @Mock
   private lateinit var showLoadingObserver: Observer<Boolean>
@@ -50,39 +50,47 @@ class GenreViewModelUnitTest {
   @Before
   fun setup() {
     Dispatchers.setMain(testDispatcher)
-    viewModel = GenreViewModel(adapter, getMovieGenreUseCase, arrayListOf())
+    viewModel = MoviesByGenreViewModel(adapter, getMovieByGenreUseCase, arrayListOf())
   }
 
   @Test
-  fun `fetch movie genre successfully`() = runBlocking {
-    val genre1 = GenreEntity(1, "Cartoon")
-    val genre2 = GenreEntity(2, "Drama")
-    val genre3 = GenreEntity(3, "Horror")
+  fun `fetch movie successfully`() = runBlocking {
+    val movie1 = MovieEntity(id = 1, title = "title1", overview = "overview1")
+    val movie2 = MovieEntity(id = 2, title = "title2", overview = "overview2")
+    val movie3 = MovieEntity(id = 3, title = "title3", overview = "overview3")
 
-    val genres = listOf(genre1, genre2, genre3)
-    val getMovieGenreResult = GenreDomain(genres)
-    val result = Result.Success(getMovieGenreResult)
+    val genreId = 1
+    val page = 1
 
-    whenever(getMovieGenreUseCase.invoke()).thenReturn(result)
+    val movies = listOf(movie1, movie2, movie3)
+    val getMovieByGenreResult = DiscoverMovieByGenreDomain(page, movies)
+    val result = Result.Success(getMovieByGenreResult)
+
+    whenever(getMovieByGenreUseCase.invoke(genreId, page)).thenReturn(result)
 
     viewModel.isShowDialogLoading.observeForever(showLoadingObserver)
 
+    viewModel.setGenreId(genreId)
     viewModel.start()
 
-    verify(adapter, times(genres.size)).notifyItemInserted(anyInt())
+    verify(adapter, times(movies.size)).notifyItemInserted(anyInt())
     verify(showLoadingObserver).onChanged(eq(false))
   }
 
   @Test
-  fun `failed fetch movie genre`() = runBlocking {
-    val msg = "error fetch genre"
+  fun `failed fetch movie`() = runBlocking {
+    val msg = "error fetch movie"
     val result = Result.ErrorResult(msg)
 
-    whenever(getMovieGenreUseCase.invoke()).thenReturn(result)
+    val genreId = 1
+    val page = 1
+
+    whenever(getMovieByGenreUseCase.invoke(genreId, page)).thenReturn(result)
 
     viewModel.errorMessage.observeForever(errorMessageObserver)
     viewModel.isShowDialogLoading.observeForever(showLoadingObserver)
 
+    viewModel.setGenreId(genreId)
     viewModel.start()
 
     verify(errorMessageObserver).onChanged(eq(msg))
