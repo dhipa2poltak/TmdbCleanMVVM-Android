@@ -1,17 +1,16 @@
-package com.dpfht.tmdbcleanmvvm.viewmodel
+package com.dpfht.tmdbcleanmvvm.feature_movie_trailer
 
-/*
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.dpfht.tmdbcleanmvvm.MainCoroutineRule
-import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieTrailerUseCase
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result
 import com.dpfht.tmdbcleanmvvm.domain.entity.TrailerDomain
 import com.dpfht.tmdbcleanmvvm.domain.entity.TrailerEntity
-import com.dpfht.tmdbcleanmvvm.feature_movie_trailer.MovieTrailerViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
+import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieTrailerUseCase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.setMain
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -23,13 +22,13 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
 @RunWith(MockitoJUnitRunner::class)
-class MovieTrailerViewModelUnitTest {
+@OptIn(ExperimentalCoroutinesApi::class)
+class MovieTrailerViewModelTest {
+
+  private val testDispatcher = UnconfinedTestDispatcher()
 
   @get:Rule
-  val taskExecutorRule = InstantTaskExecutorRule()
-
-  @get:Rule
-  val coroutineRule = MainCoroutineRule()
+  val instantTaskExecutionRule: InstantTaskExecutorRule = InstantTaskExecutorRule()
 
   private lateinit var viewModel: MovieTrailerViewModel
 
@@ -42,11 +41,10 @@ class MovieTrailerViewModelUnitTest {
   @Mock
   private lateinit var errorMessageObserver: Observer<String>
 
-  private val scope = CoroutineScope(Job())
-
   @Before
   fun setup() {
-    viewModel = MovieTrailerViewModel(getMovieTrailerUseCase, scope)
+    Dispatchers.setMain(testDispatcher)
+    viewModel = MovieTrailerViewModel(getMovieTrailerUseCase)
   }
 
   @Test
@@ -89,4 +87,3 @@ class MovieTrailerViewModelUnitTest {
     verify(errorMessageObserver).onChanged(eq(msg))
   }
 }
-*/
