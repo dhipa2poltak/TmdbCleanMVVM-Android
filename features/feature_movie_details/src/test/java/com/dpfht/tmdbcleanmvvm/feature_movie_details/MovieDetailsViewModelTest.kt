@@ -1,14 +1,16 @@
-package com.dpfht.tmdbcleanmvvm.viewmodel
+package com.dpfht.tmdbcleanmvvm.feature_movie_details
 
-/*
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.dpfht.tmdbcleanmvvm.MainCoroutineRule
+import com.dpfht.tmdbcleanmvvm.domain.entity.GenreEntity
 import com.dpfht.tmdbcleanmvvm.domain.entity.MovieDetailsDomain
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieDetailsUseCase
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result
-import com.dpfht.tmdbcleanmvvm.feature_movie_details.MovieDetailsViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.setMain
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -20,13 +22,13 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
 @RunWith(MockitoJUnitRunner::class)
-class MovieDetailsViewModelUnitTest {
+@OptIn(ExperimentalCoroutinesApi::class)
+class MovieDetailsViewModelTest {
+
+  private val testDispatcher = UnconfinedTestDispatcher()
 
   @get:Rule
-  val taskExecutorRule = InstantTaskExecutorRule()
-
-  @get:Rule
-  val coroutineRule = MainCoroutineRule()
+  val instantTaskExecutionRule: InstantTaskExecutorRule = InstantTaskExecutorRule()
 
   private lateinit var viewModel: MovieDetailsViewModel
 
@@ -48,8 +50,12 @@ class MovieDetailsViewModelUnitTest {
   @Mock
   private lateinit var errorMessageObserver: Observer<String>
 
+  @Mock
+  private lateinit var genresObserver: Observer<String>
+
   @Before
   fun setup() {
+    Dispatchers.setMain(testDispatcher)
     viewModel = MovieDetailsViewModel(getMovieDetailsUseCase)
   }
 
@@ -59,12 +65,15 @@ class MovieDetailsViewModelUnitTest {
     val title = "title1"
     val overview = "overview1"
     val posterPath = "poster_path1"
+    val genreName = "Action"
+    val genres = listOf(GenreEntity(10, genreName))
 
     val getMovieDetailsResult = MovieDetailsDomain(
       id = movieId,
       title = title,
       overview = overview,
-      imageUrl = posterPath
+      imageUrl = posterPath,
+      genres = genres
     )
 
     val result = Result.Success(getMovieDetailsResult)
@@ -75,16 +84,16 @@ class MovieDetailsViewModelUnitTest {
     viewModel.overviewData.observeForever(overviewObserver)
     viewModel.imageUrlData.observeForever(imageUrlObserver)
     viewModel.isShowDialogLoading.observeForever(showLoadingObserver)
+    viewModel.genres.observeForever(genresObserver)
 
     viewModel.setMovieId(movieId)
     viewModel.start()
 
     verify(titleObserver).onChanged(eq(title))
     verify(overviewObserver).onChanged(eq(overview))
-
     verify(imageUrlObserver).onChanged(eq(posterPath))
-
     verify(showLoadingObserver).onChanged(eq(false))
+    verify(genresObserver).onChanged(genreName)
   }
 
   @Test
@@ -106,4 +115,3 @@ class MovieDetailsViewModelUnitTest {
     verify(showLoadingObserver).onChanged(eq(false))
   }
 }
-*/
