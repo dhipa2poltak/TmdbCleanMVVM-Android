@@ -2,9 +2,8 @@ package com.dpfht.tmdbcleanmvvm.data.model.remote.response
 
 import androidx.annotation.Keep
 import com.dpfht.tmdbcleanmvvm.data.model.remote.Review
-import com.dpfht.tmdbcleanmvvm.domain.entity.AuthorDetailsEntity
+import com.dpfht.tmdbcleanmvvm.data.model.remote.toDomain
 import com.dpfht.tmdbcleanmvvm.domain.entity.ReviewDomain
-import com.dpfht.tmdbcleanmvvm.domain.entity.ReviewEntity
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -25,21 +24,7 @@ data class ReviewResponse(
 )
 
 fun ReviewResponse.toDomain(): ReviewDomain {
-    val reviewEntities = results?.map {
-        var imageUrl = it.authorDetails?.avatarPath ?: ""
-        if (imageUrl.startsWith("/")) {
-            imageUrl = imageUrl.replaceFirst("/", "")
-        }
-
-        if (!imageUrl.startsWith("http")) {
-            imageUrl = ""
-        }
-
-        val authorDetailsEntity = AuthorDetailsEntity(imageUrl)
-        val reviewEntity = ReviewEntity(it.author ?: "", authorDetailsEntity, it.content ?: "")
-
-        reviewEntity
-    }
+    val reviewEntities = results?.map { it.toDomain() }
 
     return ReviewDomain(reviewEntities?.toList() ?: listOf(), this.page ?: -1)
 }

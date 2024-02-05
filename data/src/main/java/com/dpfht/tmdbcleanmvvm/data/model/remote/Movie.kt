@@ -1,6 +1,8 @@
 package com.dpfht.tmdbcleanmvvm.data.model.remote
 
 import androidx.annotation.Keep
+import com.dpfht.tmdbcleanmvvm.data.Constants
+import com.dpfht.tmdbcleanmvvm.domain.entity.MovieEntity
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -49,3 +51,12 @@ data class Movie(
     @Expose
     val voteCount: Int? = -1
 )
+
+fun Movie.toDomain(): MovieEntity {
+    return MovieEntity(
+        id ?: -1,
+        title ?: "",
+        overview ?: "",
+        if (posterPath?.isNotEmpty() == true) Constants.IMAGE_URL_BASE_PATH + posterPath else ""
+    )
+}

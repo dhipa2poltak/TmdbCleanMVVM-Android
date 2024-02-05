@@ -1,10 +1,9 @@
 package com.dpfht.tmdbcleanmvvm.data.model.remote.response
 
 import androidx.annotation.Keep
-import com.dpfht.tmdbcleanmvvm.data.Constants
 import com.dpfht.tmdbcleanmvvm.data.model.remote.Movie
+import com.dpfht.tmdbcleanmvvm.data.model.remote.toDomain
 import com.dpfht.tmdbcleanmvvm.domain.entity.DiscoverMovieByGenreDomain
-import com.dpfht.tmdbcleanmvvm.domain.entity.MovieEntity
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -25,12 +24,7 @@ data class DiscoverMovieByGenreResponse(
 
 fun DiscoverMovieByGenreResponse.toDomain(): DiscoverMovieByGenreDomain {
   val movieEntities = results?.map {
-    MovieEntity(
-      it.id ?: -1,
-      it.title ?: "",
-      it.overview ?: "",
-      if (it.posterPath?.isNotEmpty() == true) Constants.IMAGE_URL_BASE_PATH + it.posterPath else ""
-    )
+    it.toDomain()
   }
 
   return DiscoverMovieByGenreDomain(
