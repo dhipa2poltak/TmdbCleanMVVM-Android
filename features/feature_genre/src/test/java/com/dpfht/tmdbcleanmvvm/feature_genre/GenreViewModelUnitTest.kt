@@ -1,41 +1,45 @@
-package com.dpfht.tmdbcleanmvvm.viewmodel
+package com.dpfht.tmdbcleanmvvm.feature_genre
 
-/*
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.dpfht.tmdbcleanmvvm.MainCoroutineRule
 import com.dpfht.tmdbcleanmvvm.domain.entity.GenreDomain
 import com.dpfht.tmdbcleanmvvm.domain.entity.GenreEntity
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieGenreUseCase
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result
-import com.dpfht.tmdbcleanmvvm.feature_genre.GenreViewModel
+import com.dpfht.tmdbcleanmvvm.feature_genre.adapter.GenreAdapter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.setMain
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.eq
+import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
 @RunWith(MockitoJUnitRunner::class)
+@OptIn(ExperimentalCoroutinesApi::class)
 class GenreViewModelUnitTest {
 
-  @get:Rule
-  val taskExecutorRule = InstantTaskExecutorRule()
+  private val testDispatcher = UnconfinedTestDispatcher()
 
   @get:Rule
-  val coroutineRule = MainCoroutineRule()
+  val instantTaskExecutionRule: InstantTaskExecutorRule = InstantTaskExecutorRule()
 
   private lateinit var viewModel: GenreViewModel
 
   @Mock
-  private lateinit var getMovieGenreUseCase: GetMovieGenreUseCase
+  private lateinit var adapter: GenreAdapter
 
   @Mock
-  private lateinit var notifyItemInsertedObserver: Observer<Int>
+  private lateinit var getMovieGenreUseCase: GetMovieGenreUseCase
 
   @Mock
   private lateinit var showLoadingObserver: Observer<Boolean>
@@ -43,11 +47,10 @@ class GenreViewModelUnitTest {
   @Mock
   private lateinit var errorMessageObserver: Observer<String>
 
-  private val listOfGenres = arrayListOf<GenreEntity>()
-
   @Before
   fun setup() {
-    viewModel = GenreViewModel(getMovieGenreUseCase, listOfGenres)
+    Dispatchers.setMain(testDispatcher)
+    viewModel = GenreViewModel(adapter, getMovieGenreUseCase, arrayListOf())
   }
 
   @Test
@@ -62,12 +65,11 @@ class GenreViewModelUnitTest {
 
     whenever(getMovieGenreUseCase.invoke()).thenReturn(result)
 
-    viewModel.notifyItemInserted.observeForever(notifyItemInsertedObserver)
     viewModel.isShowDialogLoading.observeForever(showLoadingObserver)
 
     viewModel.start()
 
-    verify(notifyItemInsertedObserver).onChanged(eq(listOfGenres.size - 1))
+    verify(adapter, times(genres.size)).notifyItemInserted(anyInt())
     verify(showLoadingObserver).onChanged(eq(false))
   }
 
@@ -87,4 +89,3 @@ class GenreViewModelUnitTest {
     verify(showLoadingObserver).onChanged(eq(false))
   }
 }
-*/
