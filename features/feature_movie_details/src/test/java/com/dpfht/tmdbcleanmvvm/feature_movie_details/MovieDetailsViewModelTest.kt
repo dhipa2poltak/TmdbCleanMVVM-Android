@@ -8,8 +8,8 @@ import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieDetailsUseCase
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.Before
 import org.junit.Rule
@@ -60,7 +60,7 @@ class MovieDetailsViewModelTest {
   }
 
   @Test
-  fun `fetch movie details data successfully`() = runBlocking {
+  fun `fetch movie details data successfully`() = runTest {
     val movieId = 1
     val title = "title1"
     val overview = "overview1"
@@ -97,7 +97,7 @@ class MovieDetailsViewModelTest {
   }
 
   @Test
-  fun `failed fetch movie details`() = runBlocking {
+  fun `failed fetch movie details`() = runTest {
     val msg = "error fetch movie details"
     val result = Result.ErrorResult(msg)
 

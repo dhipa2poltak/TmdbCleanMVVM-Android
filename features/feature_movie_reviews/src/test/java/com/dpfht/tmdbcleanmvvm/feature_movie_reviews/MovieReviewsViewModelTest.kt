@@ -9,8 +9,8 @@ import com.dpfht.tmdbcleanmvvm.domain.entity.ReviewEntity
 import com.dpfht.tmdbcleanmvvm.feature_movie_reviews.adapter.MovieReviewsAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.Before
 import org.junit.Rule
@@ -54,7 +54,7 @@ class MovieReviewsViewModelTest {
   }
 
   @Test
-  fun `fetch movie review successfully`() = runBlocking {
+  fun `fetch movie review successfully`() = runTest {
     val review1 = ReviewEntity(author = "author1", content = "content1")
     val review2 = ReviewEntity(author = "author2", content = "content2")
     val reviews = listOf(review1, review2)
@@ -77,7 +77,7 @@ class MovieReviewsViewModelTest {
   }
 
   @Test
-  fun `failed fetch movie review`() = runBlocking {
+  fun `failed fetch movie review`() = runTest {
     val movieId = 1
     val page = 1
 

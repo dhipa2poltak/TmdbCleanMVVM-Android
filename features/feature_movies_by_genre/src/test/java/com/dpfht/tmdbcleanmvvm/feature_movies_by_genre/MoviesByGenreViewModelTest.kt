@@ -9,8 +9,8 @@ import com.dpfht.tmdbcleanmvvm.domain.entity.Result
 import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.adapter.MoviesByGenreAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.Before
 import org.junit.Rule
@@ -54,7 +54,7 @@ class MoviesByGenreViewModelTest {
   }
 
   @Test
-  fun `fetch movie successfully`() = runBlocking {
+  fun `fetch movie successfully`() = runTest {
     val movie1 = MovieEntity(id = 1, title = "title1", overview = "overview1")
     val movie2 = MovieEntity(id = 2, title = "title2", overview = "overview2")
     val movie3 = MovieEntity(id = 3, title = "title3", overview = "overview3")
@@ -78,7 +78,7 @@ class MoviesByGenreViewModelTest {
   }
 
   @Test
-  fun `failed fetch movie`() = runBlocking {
+  fun `failed fetch movie`() = runTest {
     val msg = "error fetch movie"
     val result = Result.ErrorResult(msg)
 

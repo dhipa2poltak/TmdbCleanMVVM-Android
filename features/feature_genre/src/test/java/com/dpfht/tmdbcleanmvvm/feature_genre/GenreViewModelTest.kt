@@ -9,8 +9,8 @@ import com.dpfht.tmdbcleanmvvm.domain.entity.Result
 import com.dpfht.tmdbcleanmvvm.feature_genre.adapter.GenreAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.Before
 import org.junit.Rule
@@ -54,7 +54,7 @@ class GenreViewModelTest {
   }
 
   @Test
-  fun `fetch movie genre successfully`() = runBlocking {
+  fun `fetch movie genre successfully`() = runTest {
     val genre1 = GenreEntity(1, "Cartoon")
     val genre2 = GenreEntity(2, "Drama")
     val genre3 = GenreEntity(3, "Horror")
@@ -74,7 +74,7 @@ class GenreViewModelTest {
   }
 
   @Test
-  fun `failed fetch movie genre`() = runBlocking {
+  fun `failed fetch movie genre`() = runTest {
     val msg = "error fetch genre"
     val result = Result.ErrorResult(msg)
 

@@ -8,8 +8,8 @@ import com.dpfht.tmdbcleanmvvm.domain.entity.TrailerEntity
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieTrailerUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.Before
 import org.junit.Rule
@@ -48,7 +48,7 @@ class MovieTrailerViewModelTest {
   }
 
   @Test
-  fun `fetch movie trailer successfully`() = runBlocking {
+  fun `fetch movie trailer successfully`() = runTest {
     val keyVideo1 = "11111"
     val trailer1 = TrailerEntity(id = "1", key = keyVideo1, name = "name1", site = "youtube")
     val trailer2 = TrailerEntity(id = "2", key = "22222", name = "name2", site = "youtube")
@@ -71,7 +71,7 @@ class MovieTrailerViewModelTest {
   }
 
   @Test
-  fun `failed fetch movie trailer`() = runBlocking {
+  fun `failed fetch movie trailer`() = runTest {
     val msg = "error fetch movie trailer"
     val result = Result.ErrorResult(msg)
 
