@@ -106,4 +106,5 @@ dependencies {
   testImplementation Deps.coroutinesTest
   testImplementation Deps.mockitoKotlin
   testImplementation Deps.coreTesting
+  testImplementation Deps.robolectric
 }
