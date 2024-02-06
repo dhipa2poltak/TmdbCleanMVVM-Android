@@ -2,21 +2,21 @@ plugins {
   id 'com.android.application'
   id 'org.jetbrains.kotlin.android'
   id 'kotlin-kapt'
-  id 'androidx.navigation.safeargs.kotlin'
   id 'dagger.hilt.android.plugin'
 }
 
 android {
-  compileSdk 33
+  compileSdk ConfigData.compileSdkVersion
 
   defaultConfig {
     applicationId "com.dpfht.tmdbcleanmvvm"
-    minSdk 19
-    targetSdk 33
+
+    namespace("com.dpfht.tmdbcleanmvvm")
+
+    minSdk ConfigData.minSdkVersion
+    targetSdk ConfigData.targetSdkVersion
     versionCode 1
     versionName "1.0"
-
-    multiDexEnabled true
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
@@ -36,15 +36,16 @@ android {
     }
   }
   buildFeatures {
+    buildConfig true
     viewBinding true
     dataBinding true
   }
   compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
   }
   kotlinOptions {
-    jvmTarget = '1.8'
+    jvmTarget = '17'
   }
 
   flavorDimensions "default"
@@ -73,8 +74,6 @@ android {
 
 dependencies {
 
-  def appDependencies = rootProject.ext.appDependencies
-
   implementation fileTree(dir: "libs", include: ["*.jar"])
   implementation project(":framework")
   implementation project(":domain")
@@ -87,26 +86,24 @@ dependencies {
   implementation project(":features:feature_movie_trailer")
   implementation project(":features:feature_error_message")
 
-  implementation 'androidx.core:core-ktx:1.9.0'
-  implementation 'androidx.appcompat:appcompat:1.6.1'
-  implementation 'com.google.android.material:material:1.9.0'
-  testImplementation 'junit:junit:4.13.2'
-  androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-  androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+  implementation Deps.coreKtx
+  implementation Deps.appCompat
+  implementation Deps.material
+  testImplementation Deps.jUnit
+  androidTestImplementation Deps.jUnitExt
+  androidTestImplementation Deps.espresso
 
-  implementation appDependencies.retrofitConverterGson
-  implementation appDependencies.okHttpLoggingInterceptor
-  implementation appDependencies.okHttp
+  implementation Deps.retrofitConverterGson
+  implementation Deps.okHttpLoggingInterceptor
+  implementation Deps.okHttp
 
-  implementation appDependencies.navigationFragment
-  implementation appDependencies.navigationUI
+  implementation Deps.navigationFragment
+  implementation Deps.navigationUI
 
-  implementation appDependencies.hilt
-  kapt appDependencies.hiltCompiler
+  implementation Deps.hilt
+  kapt Deps.hiltCompiler
 
-  implementation appDependencies.multiDex
-
-  testImplementation appDependencies.coroutinesTest
-  testImplementation appDependencies.mockitoKotlin
-  testImplementation appDependencies.coreTesting
+  testImplementation Deps.coroutinesTest
+  testImplementation Deps.mockitoKotlin
+  testImplementation Deps.coreTesting
 }

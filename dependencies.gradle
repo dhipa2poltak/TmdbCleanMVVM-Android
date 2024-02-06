@@ -1,88 +1,63 @@
 
 ext {
 
-  gsonVersion = '2.9.0'
-  annotationVersion = '1.4.0'
-  retrofitConverterGsonVersion = '2.9.0'
-  okHttpVersion = '4.9.3'
-  okHttpLoggingInterceptorVersion = '4.9.1'
-  hiltVersion = '2.42'
-  hiltCompilerVersion = '2.42'
-  multiDexVersion = '2.0.1'
-  navigationFragmentVersion = '2.5.3'
-  navigationUIVersion = '2.5.3'
-  picassoVersion = '2.8'
-  coroutinesTestVersion = '1.6.2'
-  mockitoKotlinVersion = '3.2.0'
-  coreTestingVersion = '2.2.0'
-
-  dataDependencies = [
-      gson: "com.google.code.gson:gson:${gsonVersion}",
-      annotation: "androidx.annotation:annotation:${annotationVersion}"
+  ConfigData = [
+      compileSdkVersion: 34,
+      minSdkVersion: 21,
+      targetSdkVersion: 34
   ]
 
-  frameworkDependencies = [
-      gson: "com.google.code.gson:gson:${gsonVersion}",
-      retrofitConverterGson: "com.squareup.retrofit2:converter-gson:${retrofitConverterGsonVersion}",
-      okHttp: "com.squareup.okhttp3:okhttp:${okHttpVersion}",
-      okHttpLoggingInterceptor: "com.squareup.okhttp3:logging-interceptor:${okHttpLoggingInterceptorVersion}",
-      hilt: "com.google.dagger:hilt-android:${hiltVersion}",
-      hiltCompiler: "com.google.dagger:hilt-compiler:${hiltCompilerVersion}",
-      multiDex: "androidx.multidex:multidex:${multiDexVersion}"
+  Versions = [
+      coreKtx: "1.9.0",
+      appCompat: "1.6.1",
+      material: "1.9.0",
+      jUnit: "4.13.2",
+      jUnitExt: "1.1.5",
+      espresso: "3.5.1",
+      gson: '2.9.0',
+      annotation: '1.7.0',
+      retrofitConverterGson: '2.9.0',
+      okHttp: '4.9.3',
+      okHttpLoggingInterceptor: '4.9.1',
+      hilt: '2.50',
+      hiltCompiler: '2.50',
+      navigationFragment: '2.5.3',
+      navigationUI: '2.5.3',
+      picasso: '2.8',
+      coroutinesTest: '1.6.2',
+      mockitoKotlin: '5.2.1',
+      mockitoInline: '5.2.0',
+      coreTesting: '2.2.0',
+      lifecycleViewModel: '2.7.0',
+      activityKtx: '1.8.2',
+      youtubePlayerCore: '12.1.0',
+      coroutinesAndroid: '1.7.1'
   ]
 
-  appDependencies = [
-      retrofitConverterGson: "com.squareup.retrofit2:converter-gson:${retrofitConverterGsonVersion}",
-      okHttp: "com.squareup.okhttp3:okhttp:${okHttpVersion}",
-      okHttpLoggingInterceptor: "com.squareup.okhttp3:logging-interceptor:${okHttpLoggingInterceptorVersion}",
-      navigationFragment: "androidx.navigation:navigation-fragment-ktx:${navigationFragmentVersion}",
-      navigationUI: "androidx.navigation:navigation-ui-ktx:${navigationUIVersion}",
-      hilt: "com.google.dagger:hilt-android:${hiltVersion}",
-      hiltCompiler: "com.google.dagger:hilt-compiler:${hiltCompilerVersion}",
-      multiDex: "androidx.multidex:multidex:${multiDexVersion}",
-      coroutinesTest: "org.jetbrains.kotlinx:kotlinx-coroutines-test:${coroutinesTestVersion}",
-      mockitoKotlin: "org.mockito.kotlin:mockito-kotlin:${mockitoKotlinVersion}",
-      coreTesting: "androidx.arch.core:core-testing:${coreTestingVersion}"
-  ]
-
-  featureSplashDependencies = [
-      hilt: "com.google.dagger:hilt-android:${hiltVersion}",
-      hiltCompiler: "com.google.dagger:hilt-compiler:${hiltCompilerVersion}",
-  ]
-
-  featureGenreDependencies = [
-      navigationFragment: "androidx.navigation:navigation-fragment-ktx:${navigationFragmentVersion}",
-      navigationUI: "androidx.navigation:navigation-ui-ktx:${navigationUIVersion}",
-      hilt: "com.google.dagger:hilt-android:${hiltVersion}",
-      hiltCompiler: "com.google.dagger:hilt-compiler:${hiltCompilerVersion}",
-  ]
-
-  featureMoviesByGenreDependencies = [
-      navigationFragment: "androidx.navigation:navigation-fragment-ktx:${navigationFragmentVersion}",
-      navigationUI: "androidx.navigation:navigation-ui-ktx:${navigationUIVersion}",
-      hilt: "com.google.dagger:hilt-android:${hiltVersion}",
-      hiltCompiler: "com.google.dagger:hilt-compiler:${hiltCompilerVersion}",
-      picasso: "com.squareup.picasso:picasso:${picassoVersion}"
-  ]
-
-  featureMovieDetailsDependencies = [
-      navigationFragment: "androidx.navigation:navigation-fragment-ktx:${navigationFragmentVersion}",
-      navigationUI: "androidx.navigation:navigation-ui-ktx:${navigationUIVersion}",
-      hilt: "com.google.dagger:hilt-android:${hiltVersion}",
-      hiltCompiler: "com.google.dagger:hilt-compiler:${hiltCompilerVersion}",
-      picasso: "com.squareup.picasso:picasso:${picassoVersion}"
-  ]
-
-  featureMovieReviewsDependencies = [
-      navigationFragment: "androidx.navigation:navigation-fragment-ktx:${navigationFragmentVersion}",
-      navigationUI: "androidx.navigation:navigation-ui-ktx:${navigationUIVersion}",
-      hilt: "com.google.dagger:hilt-android:${hiltVersion}",
-      hiltCompiler: "com.google.dagger:hilt-compiler:${hiltCompilerVersion}",
-      picasso: "com.squareup.picasso:picasso:${picassoVersion}"
-  ]
-
-  featureMovieTrailerDependencies = [
-      hilt: "com.google.dagger:hilt-android:${hiltVersion}",
-      hiltCompiler: "com.google.dagger:hilt-compiler:${hiltCompilerVersion}",
+  Deps = [
+      coreKtx: "androidx.core:core-ktx:${Versions.coreKtx}",
+      appCompat: "androidx.appcompat:appcompat:${Versions.appCompat}",
+      material: "com.google.android.material:material:${Versions.material}",
+      jUnit: "junit:junit:${Versions.jUnit}",
+      jUnitExt: "androidx.test.ext:junit:${Versions.jUnitExt}",
+      espresso: "androidx.test.espresso:espresso-core:${Versions.espresso}",
+      gson: "com.google.code.gson:gson:${Versions.gson}",
+      annotation: "androidx.annotation:annotation:${Versions.annotation}",
+      retrofitConverterGson: "com.squareup.retrofit2:converter-gson:${Versions.retrofitConverterGson}",
+      okHttp: "com.squareup.okhttp3:okhttp:${Versions.okHttp}",
+      okHttpLoggingInterceptor: "com.squareup.okhttp3:logging-interceptor:${Versions.okHttpLoggingInterceptor}",
+      hilt: "com.google.dagger:hilt-android:${Versions.hilt}",
+      hiltCompiler: "com.google.dagger:hilt-compiler:${Versions.hiltCompiler}",
+      navigationFragment: "androidx.navigation:navigation-fragment-ktx:${Versions.navigationFragment}",
+      navigationUI: "androidx.navigation:navigation-ui-ktx:${Versions.navigationUI}",
+      coroutinesTest: "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutinesTest}",
+      mockitoKotlin: "org.mockito.kotlin:mockito-kotlin:${Versions.mockitoKotlin}",
+      mockitoInline: "org.mockito:mockito-inline:${Versions.mockitoInline}",
+      coreTesting: "androidx.arch.core:core-testing:${Versions.coreTesting}",
+      picasso: "com.squareup.picasso:picasso:${Versions.picasso}",
+      lifecycleViewModel: "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycleViewModel}",
+      activityKtx: "androidx.activity:activity-ktx:${Versions.activityKtx}",
+      youtubePlayerCore: "com.pierfrancescosoffritti.androidyoutubeplayer:core:${Versions.youtubePlayerCore}",
+      coroutinesAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutinesAndroid}"
   ]
 }

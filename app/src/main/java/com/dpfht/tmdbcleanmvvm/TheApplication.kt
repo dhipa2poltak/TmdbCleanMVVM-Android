@@ -1,8 +1,6 @@
 package com.dpfht.tmdbcleanmvvm
 
 import android.app.Application
-import android.content.Context
-import androidx.multidex.MultiDex
 import com.dpfht.tmdbcleanmvvm.framework.Config
 import dagger.hilt.android.HiltAndroidApp
 
@@ -13,11 +11,6 @@ class TheApplication: Application() {
     Config.BASE_URL = BuildConfig.BASE_URL
     super.onCreate()
     instance = this
-  }
-
-  override fun attachBaseContext(base: Context) {
-    super.attachBaseContext(base)
-    MultiDex.install(this)
   }
 
   companion object {
