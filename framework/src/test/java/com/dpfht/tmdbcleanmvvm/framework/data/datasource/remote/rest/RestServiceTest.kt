@@ -39,13 +39,13 @@ class RestServiceTest {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(okHttpClient)
             .build().create(RestService::class.java)
+
+        val mockResponse = MockResponse()
+        mockWebServer.enqueue(mockResponse.setBody("{}"))
     }
 
     @Test
     fun `ensure the correct path is called when calling getMovieGenre method in RestService`() = runTest {
-        val mockResponse = MockResponse()
-        mockWebServer.enqueue(mockResponse.setBody("{}"))
-
         restService.getMovieGenre()
         val request = mockWebServer.takeRequest()
 
@@ -58,9 +58,6 @@ class RestServiceTest {
 
     @Test
     fun `ensure the correct path is called when calling getMoviesByGenre method in RestService`() = runTest {
-        val mockResponse = MockResponse()
-        mockWebServer.enqueue(mockResponse.setBody("{}"))
-
         val genreId = 10
         val page = 1
         restService.getMoviesByGenre(genreId.toString(), page)
@@ -75,9 +72,6 @@ class RestServiceTest {
 
     @Test
     fun `ensure the correct path is called when calling getMovieDetail method in RestService`() = runTest {
-        val mockResponse = MockResponse()
-        mockWebServer.enqueue(mockResponse.setBody("{}"))
-
         val movieId = 101
         restService.getMovieDetail(movieId)
         val request = mockWebServer.takeRequest()
@@ -91,9 +85,6 @@ class RestServiceTest {
 
     @Test
     fun `ensure the correct path is called when calling getMovieReviews method in RestService`() = runTest {
-        val mockResponse = MockResponse()
-        mockWebServer.enqueue(mockResponse.setBody("{}"))
-
         val movieId = 101
         val page = 1
         restService.getMovieReviews(movieId, page)
@@ -108,9 +99,6 @@ class RestServiceTest {
 
     @Test
     fun `ensure the correct path is called when calling getMovieTrailers method in RestService`() = runTest {
-        val mockResponse = MockResponse()
-        mockWebServer.enqueue(mockResponse.setBody("{}"))
-
         val movieId = 101
         restService.getMovieTrailers(movieId)
         val request = mockWebServer.takeRequest()
