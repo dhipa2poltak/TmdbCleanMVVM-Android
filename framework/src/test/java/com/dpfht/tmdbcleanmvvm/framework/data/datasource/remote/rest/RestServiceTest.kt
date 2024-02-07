@@ -45,7 +45,7 @@ class RestServiceTest {
     }
 
     @Test
-    fun `ensure the correct path is called when calling getMovieGenre method in RestService`() = runTest {
+    fun `ensure path and parameter(s) in the generated URL are correct when calling getMovieGenre method in RestService`() = runTest {
         restService.getMovieGenre()
         val request = mockWebServer.takeRequest()
 
@@ -53,11 +53,11 @@ class RestServiceTest {
         assertTrue(path.isNotEmpty())
 
         assertEquals("/3/genre/movie/list", path.substring(0, path.indexOf("?")))
-        assertTrue(path.contains(Constants.API_KEY))
+        assertTrue(path.contains("api_key=${Constants.API_KEY}"))
     }
 
     @Test
-    fun `ensure the correct path is called when calling getMoviesByGenre method in RestService`() = runTest {
+    fun `ensure path and parameter(s) in the generated URL are correct when calling getMoviesByGenre method in RestService`() = runTest {
         val genreId = 10
         val page = 1
         restService.getMoviesByGenre(genreId.toString(), page)
@@ -67,11 +67,13 @@ class RestServiceTest {
         assertTrue(path.isNotEmpty())
 
         assertEquals("/3/discover/movie", path.substring(0, path.indexOf("?")))
-        assertTrue(path.contains(Constants.API_KEY))
+        assertTrue(path.contains("api_key=${Constants.API_KEY}"))
+        assertTrue(path.contains("with_genres=$genreId"))
+        assertTrue(path.contains("page=$page"))
     }
 
     @Test
-    fun `ensure the correct path is called when calling getMovieDetail method in RestService`() = runTest {
+    fun `ensure path and parameter(s) in the generated URL are correct when calling getMovieDetail method in RestService`() = runTest {
         val movieId = 101
         restService.getMovieDetail(movieId)
         val request = mockWebServer.takeRequest()
@@ -80,11 +82,11 @@ class RestServiceTest {
         assertTrue(path.isNotEmpty())
 
         assertEquals("/3/movie/${movieId}", path.substring(0, path.indexOf("?")))
-        assertTrue(path.contains(Constants.API_KEY))
+        assertTrue(path.contains("api_key=${Constants.API_KEY}"))
     }
 
     @Test
-    fun `ensure the correct path is called when calling getMovieReviews method in RestService`() = runTest {
+    fun `ensure path and parameter(s) in the generated URL are correct when calling getMovieReviews method in RestService`() = runTest {
         val movieId = 101
         val page = 1
         restService.getMovieReviews(movieId, page)
@@ -94,11 +96,12 @@ class RestServiceTest {
         assertTrue(path.isNotEmpty())
 
         assertEquals("/3/movie/${movieId}/reviews", path.substring(0, path.indexOf("?")))
-        assertTrue(path.contains(Constants.API_KEY))
+        assertTrue(path.contains("api_key=${Constants.API_KEY}"))
+        assertTrue(path.contains("page=$page"))
     }
 
     @Test
-    fun `ensure the correct path is called when calling getMovieTrailers method in RestService`() = runTest {
+    fun `ensure path and parameter(s) in the generated URL are correct when calling getMovieTrailers method in RestService`() = runTest {
         val movieId = 101
         restService.getMovieTrailers(movieId)
         val request = mockWebServer.takeRequest()
@@ -107,7 +110,7 @@ class RestServiceTest {
         assertTrue(path.isNotEmpty())
 
         assertEquals("/3/movie/${movieId}/videos", path.substring(0, path.indexOf("?")))
-        assertTrue(path.contains(Constants.API_KEY))
+        assertTrue(path.contains("api_key=${Constants.API_KEY}"))
     }
 
     @After
