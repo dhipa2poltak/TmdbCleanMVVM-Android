@@ -32,7 +32,8 @@ ext {
       activityKtx: '1.8.2',
       youtubePlayerCore: '12.1.0',
       coroutinesAndroid: '1.7.1',
-      robolectric: '4.11.1'
+      robolectric: '4.11.1',
+      mockWebServer: '4.10.0'
   ]
 
   Deps = [
@@ -60,6 +61,7 @@ ext {
       activityKtx: "androidx.activity:activity-ktx:${Versions.activityKtx}",
       youtubePlayerCore: "com.pierfrancescosoffritti.androidyoutubeplayer:core:${Versions.youtubePlayerCore}",
       coroutinesAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutinesAndroid}",
-      robolectric: "org.robolectric:robolectric:${Versions.robolectric}"
+      robolectric: "org.robolectric:robolectric:${Versions.robolectric}",
+      mockWebServer: "com.squareup.okhttp3:mockwebserver:${Versions.mockWebServer}"
   ]
 }
