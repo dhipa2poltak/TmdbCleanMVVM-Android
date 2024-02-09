@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-  namespace("com.dpfht.tmdbcleanmvvm.feature_movie_trailer")
+  namespace = "com.dpfht.tmdbcleanmvvm.feature_movie_trailer"
   compileSdk ConfigData.compileSdkVersion
 
   defaultConfig {

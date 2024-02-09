@@ -6,12 +6,11 @@ plugins {
 }
 
 android {
+  namespace = "com.dpfht.tmdbcleanmvvm"
   compileSdk ConfigData.compileSdkVersion
 
   defaultConfig {
     applicationId "com.dpfht.tmdbcleanmvvm"
-
-    namespace("com.dpfht.tmdbcleanmvvm")
 
     minSdk ConfigData.minSdkVersion
     targetSdk ConfigData.targetSdkVersion

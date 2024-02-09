@@ -6,14 +6,12 @@ plugins {
 }
 
 android {
-  namespace("com.dpfht.tmdbcleanmvvm.framework")
+  namespace = "com.dpfht.tmdbcleanmvvm.framework"
   compileSdk ConfigData.compileSdkVersion
 
   defaultConfig {
     minSdk ConfigData.minSdkVersion
     targetSdk ConfigData.targetSdkVersion
-
-    multiDexEnabled true
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     consumerProguardFiles "consumer-rules.pro"

@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-  namespace("com.dpfht.tmdbcleanmvvm.feature_splash")
+  namespace = "com.dpfht.tmdbcleanmvvm.feature_splash"
   compileSdk ConfigData.compileSdkVersion
 
   defaultConfig {
