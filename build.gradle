@@ -31,3 +31,7 @@ subprojects {
 tasks.register('clean', Delete) {
   delete rootProject.buildDir
 }
+
+task codeCoverModules(type: GradleBuild) {
+  tasks = ['domain:jacocoTestRepor', 'data:jacocoTestReport', 'testDebugUnitTestCoverage', 'testProdDebugUnitTestCoverage']
+}
