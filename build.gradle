@@ -15,6 +15,7 @@ buildscript {
 }
 
 apply from: 'dependencies.gradle'
+apply from: 'jacoco/project.gradle'
 
 tasks.register('clean', Delete) {
   delete rootProject.buildDir

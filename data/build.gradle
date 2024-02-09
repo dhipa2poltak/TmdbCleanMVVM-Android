@@ -3,6 +3,8 @@ plugins {
   id 'org.jetbrains.kotlin.jvm'
 }
 
+apply from: "$project.rootDir/jacoco/module.gradle"
+
 java {
   sourceCompatibility = JavaVersion.VERSION_17
   targetCompatibility = JavaVersion.VERSION_17
