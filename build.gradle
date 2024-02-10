@@ -17,16 +17,16 @@ buildscript {
 apply from: 'dependencies.gradle'
 apply from: 'jacoco/project.gradle'
 
-/*
 subprojects {
   afterEvaluate { subproject ->
     def projectName = subproject.name
 
-    println "Applying JaCoCo for module-> ${projectName}"
-    subproject.apply from: "$project.rootDir/jacoco/module.gradle"
+    if (projectName != "features") {
+      println "Applying JaCoCo for module-> ${projectName}"
+      subproject.apply from: "$project.rootDir/jacoco/module.gradle"
+    }
   }
 }
-*/
 
 tasks.register('clean', Delete) {
   delete rootProject.buildDir

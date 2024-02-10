@@ -5,8 +5,6 @@ plugins {
   id 'dagger.hilt.android.plugin'
 }
 
-apply from: "$project.rootDir/jacoco/module.gradle"
-
 android {
   namespace = "com.dpfht.tmdbcleanmvvm"
   compileSdk ConfigData.compileSdkVersion
