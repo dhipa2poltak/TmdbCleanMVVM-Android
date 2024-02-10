@@ -24,8 +24,7 @@
 
 To run Code Coverage (JaCoCo):
 1. Open Terminal then move to "root_project" directory.
-2. type "./gradlew codeCoverModules" (enter), wait until finish executing.
-3. type "./gradlew allDebugCoverage" (enter), wait until finish executing.
+2. type "./gradlew codeCoverModules allDebugCodeCoverage" (enter), wait until finish executing.
 
 The report file will be located in "root_project/build/reports/jacoco/allDebugCoverage/html/index.html", open it using browser.
 

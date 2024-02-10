@@ -32,6 +32,27 @@ tasks.register('clean', Delete) {
   delete rootProject.buildDir
 }
 
-task codeCoverModules(type: GradleBuild) {
-  tasks = ['domain:jacocoTestRepor', 'data:jacocoTestReport', 'testDebugUnitTestCoverage', 'testProdDebugUnitTestCoverage']
+task codeCoverModules {
+  dependsOn ':domain:jacocoTestReport'
+  dependsOn ':data:jacocoTestReport'
+  dependsOn ':app:testProdDebugUnitTestCoverage'
+
+  subprojects.collect { proj ->
+    def projectName = proj.name
+
+    if (projectName != "domain" && projectName != "data" && projectName != "app") {
+      if (projectName != "features") {
+        if (projectName == "framework") {
+          dependsOn(":${projectName}:testDebugUnitTestCoverage")
+        } else {
+          dependsOn(":features:${projectName}:testDebugUnitTestCoverage")
+        }
+      }
+    }
+  }
+}
+
+task allDebugCodeCoverage(type: GradleBuild) {
+  tasks = ['allDebugCoverage']
+  mustRunAfter codeCoverModules
 }
