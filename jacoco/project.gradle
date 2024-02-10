@@ -29,6 +29,7 @@ project.afterEvaluate {
             '**/androidx/databinding/*',
             '**/databinding/*',
             '**/BR.*',
+            '**/DataBinding*.*',
             // android
             '**/R.class',
             '**/R$*.class',
@@ -75,7 +76,9 @@ project.afterEvaluate {
             '**/*JsonAdapter.*',
             '**/*Fragment.*',
             '**/*Fragment*.*',
-            '**/*Activity.*'
+            '**/*Activity.*',
+            '**/*Adapter.*',
+            '**/*Adapter*.*',
         ]
 
         def jClasses = subprojects.collect { proj ->

@@ -96,6 +96,7 @@ def setupAndroidReporting() {
             '**/androidx/databinding/*',
             '**/databinding/*',
             '**/BR.*',
+            '**/DataBinding*.*',
             // android
             '**/R.class',
             '**/R$*.class',
@@ -142,7 +143,9 @@ def setupAndroidReporting() {
             '**/*JsonAdapter.*',
             '**/*Fragment.*',
             '**/*Fragment*.*',
-            '**/*Activity.*'
+            '**/*Activity.*',
+            '**/*Adapter.*',
+            '**/*Adapter*.*',
         ]
 
         def javaTree = fileTree(dir: "${project.buildDir}/intermediates/javac/$sourceName/classes", excludes: fileFilter)
