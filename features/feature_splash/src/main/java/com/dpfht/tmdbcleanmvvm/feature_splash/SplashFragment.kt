@@ -1,8 +1,6 @@
 package com.dpfht.tmdbcleanmvvm.feature_splash
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
@@ -18,10 +16,18 @@ class SplashFragment: BaseFragment<FragmentSplashBinding, SplashViewModel>(R.lay
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    val handler = Handler(Looper.getMainLooper())
-    handler.postDelayed({
-      navigateToNextScreen()
-    }, 3000)
+    observeViewModel()
+    viewModel.start()
+  }
+
+  override fun observeViewModel() {
+    super.observeViewModel()
+
+    viewModel.hasFinishedDelaying.observe(viewLifecycleOwner) { hasFinished ->
+      if (hasFinished) {
+        navigateToNextScreen()
+      }
+    }
   }
 
   private fun navigateToNextScreen() {
