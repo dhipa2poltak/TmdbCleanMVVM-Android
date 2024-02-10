@@ -4,7 +4,6 @@ import com.dpfht.tmdbcleanmvvm.data.Constants
 import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
@@ -30,14 +29,10 @@ class RestServiceTest {
         gson = Gson()
         mockWebServer = MockWebServer()
 
-        val okHttpClient = OkHttpClient()
-            .newBuilder()
-            .addInterceptor(AuthInterceptor()).build()
-
         restService = Retrofit.Builder()
             .baseUrl(mockWebServer.url("/"))
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .client(okHttpClient)
+            .client(UnsafeOkHttpClient.getUnsafeOkHttpClient())
             .build().create(RestService::class.java)
 
         val mockResponse = MockResponse()

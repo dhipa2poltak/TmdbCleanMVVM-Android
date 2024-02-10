@@ -77,8 +77,11 @@ project.afterEvaluate {
             '**/*Fragment.*',
             '**/*Fragment*.*',
             '**/*Activity.*',
+            '**/*Activity*.*',
             '**/*Adapter.*',
             '**/*Adapter*.*',
+            '**/TheApplication*.*',
+            '**/framework/Config.*'
         ]
 
         def jClasses = subprojects.collect { proj ->

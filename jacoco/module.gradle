@@ -144,8 +144,11 @@ def setupAndroidReporting() {
             '**/*Fragment.*',
             '**/*Fragment*.*',
             '**/*Activity.*',
+            '**/*Activity*.*',
             '**/*Adapter.*',
             '**/*Adapter*.*',
+            '**/TheApplication*.*',
+            '**/framework/Config.*'
         ]
 
         def javaTree = fileTree(dir: "${project.buildDir}/intermediates/javac/$sourceName/classes", excludes: fileFilter)
