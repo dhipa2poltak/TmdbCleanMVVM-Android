@@ -11,6 +11,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -28,7 +29,7 @@ class MovieDetailsViewModelTest {
   private val testDispatcher = UnconfinedTestDispatcher()
 
   @get:Rule
-  val instantTaskExecutionRule: InstantTaskExecutorRule = InstantTaskExecutorRule()
+  val instantTaskExecutionRule = InstantTaskExecutorRule()
 
   private lateinit var viewModel: MovieDetailsViewModel
 
@@ -65,8 +66,9 @@ class MovieDetailsViewModelTest {
     val title = "title1"
     val overview = "overview1"
     val posterPath = "poster_path1"
-    val genreName = "Action"
-    val genres = listOf(GenreEntity(10, genreName))
+    val genreName1 = "Action"
+    val genreName2 = "Drama"
+    val genres = listOf(GenreEntity(10, genreName1), GenreEntity(11, genreName2))
 
     val getMovieDetailsResult = MovieDetailsDomain(
       id = movieId,
@@ -93,7 +95,15 @@ class MovieDetailsViewModelTest {
     verify(overviewObserver).onChanged(eq(overview))
     verify(imageUrlObserver).onChanged(eq(posterPath))
     verify(showLoadingObserver).onChanged(eq(false))
-    verify(genresObserver).onChanged(genreName)
+    verify(genresObserver).onChanged("$genreName1, $genreName2")
+
+    assertTrue(viewModel.getMovieId() == movieId)
+    assertTrue(viewModel.getMovieTitle() == title)
+
+    viewModel.start()
+    assertTrue(viewModel.titleData.value == title)
+    assertTrue(viewModel.overviewData.value == overview)
+    assertTrue(viewModel.imageUrlData.value == posterPath)
   }
 
   @Test

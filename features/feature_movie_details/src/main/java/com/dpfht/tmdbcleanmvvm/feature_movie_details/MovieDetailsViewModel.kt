@@ -9,7 +9,6 @@ import com.dpfht.tmdbcleanmvvm.domain.entity.Result.Success
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieDetailsUseCase
 import com.dpfht.tmdbcleanmvvm.framework.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -76,16 +75,16 @@ class MovieDetailsViewModel @Inject constructor(
   }
 
   private fun onSuccess(movie: MovieDetailsDomain) {
-    viewModelScope.launch(Dispatchers.Main) {
+    viewModelScope.launch {
       imageUrl = movie.imageUrl
 
       _movieId = movie.id
       _title = movie.title
       overview = movie.overview
 
-      _titleData.value = _title
-      _overviewData.value = overview
-      _imageUrlData.value = imageUrl
+      _titleData.postValue(_title)
+      _overviewData.postValue(overview)
+      _imageUrlData.postValue(imageUrl)
 
       var strGenres = ""
       for (genre in movie.genres) {
@@ -98,14 +97,14 @@ class MovieDetailsViewModel @Inject constructor(
 
       _genres.value = strGenres
 
-      mIsShowDialogLoading.value = false
+      mIsShowDialogLoading.postValue(false)
     }
   }
 
   private fun onError(message: String) {
-    viewModelScope.launch(Dispatchers.Main) {
-      mIsShowDialogLoading.value = false
-      mErrorMessage.value = message
+    viewModelScope.launch {
+      mIsShowDialogLoading.postValue(false)
+      mErrorMessage.postValue(message)
     }
   }
 }
