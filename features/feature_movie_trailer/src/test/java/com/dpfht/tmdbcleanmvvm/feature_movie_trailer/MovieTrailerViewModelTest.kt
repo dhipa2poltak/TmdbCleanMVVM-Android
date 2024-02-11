@@ -73,7 +73,7 @@ class MovieTrailerViewModelTest {
   @Test
   fun `failed fetch movie trailer`() = runTest {
     val msg = "error fetch movie trailer"
-    val result = Result.ErrorResult(msg)
+    val result = Result.Error(msg)
 
     val movieId = 1
 

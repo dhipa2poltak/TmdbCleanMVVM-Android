@@ -76,7 +76,7 @@ class GenreViewModelTest {
   @Test
   fun `failed fetch movie genre`() = runTest {
     val msg = "error fetch genre"
-    val result = Result.ErrorResult(msg)
+    val result = Result.Error(msg)
 
     whenever(getMovieGenreUseCase.invoke()).thenReturn(result)
 

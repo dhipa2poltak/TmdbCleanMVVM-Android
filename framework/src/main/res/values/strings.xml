@@ -13,4 +13,8 @@
   <string name="canceled_message">api request is canceled</string>
   <string name="title_message">Message</string>
   <string name="text_loading">loading…</string>
+
+  <string name="framework_text_error_connection">error in connection</string>
+  <string name="framework_text_error_conversion">error in conversion</string>
+  <string name="framework_text_error_http">http error</string>
 </resources>

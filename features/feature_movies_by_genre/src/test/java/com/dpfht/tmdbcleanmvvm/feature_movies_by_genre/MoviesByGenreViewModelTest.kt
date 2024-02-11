@@ -80,7 +80,7 @@ class MoviesByGenreViewModelTest {
   @Test
   fun `failed fetch movie`() = runTest {
     val msg = "error fetch movie"
-    val result = Result.ErrorResult(msg)
+    val result = Result.Error(msg)
 
     val genreId = 1
     val page = 1

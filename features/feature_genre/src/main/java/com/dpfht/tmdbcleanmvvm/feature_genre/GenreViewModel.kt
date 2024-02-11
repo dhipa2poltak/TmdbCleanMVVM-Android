@@ -2,7 +2,7 @@ package com.dpfht.tmdbcleanmvvm.feature_genre
 
 import androidx.lifecycle.viewModelScope
 import com.dpfht.tmdbcleanmvvm.domain.entity.GenreEntity
-import com.dpfht.tmdbcleanmvvm.domain.entity.Result.ErrorResult
+import com.dpfht.tmdbcleanmvvm.domain.entity.Result.Error
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result.Success
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieGenreUseCase
 import com.dpfht.tmdbcleanmvvm.feature_genre.adapter.GenreAdapter
@@ -36,7 +36,7 @@ class GenreViewModel @Inject constructor(
         is Success -> {
           onSuccess(result.value.genres)
         }
-        is ErrorResult -> {
+        is Error -> {
           onError(result.message)
         }
       }

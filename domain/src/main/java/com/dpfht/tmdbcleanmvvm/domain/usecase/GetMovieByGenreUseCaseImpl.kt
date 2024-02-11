@@ -1,5 +1,6 @@
 package com.dpfht.tmdbcleanmvvm.domain.usecase
 
+import com.dpfht.tmdbcleanmvvm.domain.entity.AppException
 import com.dpfht.tmdbcleanmvvm.domain.entity.DiscoverMovieByGenreDomain
 import com.dpfht.tmdbcleanmvvm.domain.repository.AppRepository
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result
@@ -12,6 +13,10 @@ class GetMovieByGenreUseCaseImpl(
     genreId: Int,
     page: Int
   ): Result<DiscoverMovieByGenreDomain> {
-    return appRepository.getMoviesByGenre(genreId.toString(), page)
+    return try {
+      Result.Success(appRepository.getMoviesByGenre(genreId.toString(), page))
+    } catch (e: AppException) {
+      Result.Error(e.message)
+    }
   }
 }

@@ -109,7 +109,7 @@ class MovieDetailsViewModelTest {
   @Test
   fun `failed fetch movie details`() = runTest {
     val msg = "error fetch movie details"
-    val result = Result.ErrorResult(msg)
+    val result = Result.Error(msg)
 
     val movieId = 1
 

@@ -2,7 +2,7 @@ package com.dpfht.tmdbcleanmvvm.feature_movies_by_genre
 
 import androidx.lifecycle.viewModelScope
 import com.dpfht.tmdbcleanmvvm.domain.entity.MovieEntity
-import com.dpfht.tmdbcleanmvvm.domain.entity.Result.ErrorResult
+import com.dpfht.tmdbcleanmvvm.domain.entity.Result.Error
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result.Success
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieByGenreUseCase
 import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.adapter.MoviesByGenreAdapter
@@ -48,7 +48,7 @@ class MoviesByGenreViewModel @Inject constructor(
         is Success -> {
           onSuccess(result.value.results, result.value.page)
         }
-        is ErrorResult -> {
+        is Error -> {
           onError(result.message)
         }
       }

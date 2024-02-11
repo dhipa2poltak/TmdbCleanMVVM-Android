@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.dpfht.tmdbcleanmvvm.domain.entity.MovieDetailsDomain
-import com.dpfht.tmdbcleanmvvm.domain.entity.Result.ErrorResult
+import com.dpfht.tmdbcleanmvvm.domain.entity.Result.Error
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result.Success
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieDetailsUseCase
 import com.dpfht.tmdbcleanmvvm.framework.base.BaseViewModel
@@ -67,7 +67,7 @@ class MovieDetailsViewModel @Inject constructor(
         is Success -> {
           onSuccess(result.value)
         }
-        is ErrorResult -> {
+        is Error -> {
           onError(result.message)
         }
       }

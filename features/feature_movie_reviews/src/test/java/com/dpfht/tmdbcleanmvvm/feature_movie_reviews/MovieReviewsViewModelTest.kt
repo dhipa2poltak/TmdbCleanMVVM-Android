@@ -82,7 +82,7 @@ class MovieReviewsViewModelTest {
     val page = 1
 
     val msg = "error fetch movie review"
-    val result = Result.ErrorResult(msg)
+    val result = Result.Error(msg)
 
     whenever(getMovieReviewUseCase.invoke(movieId, page)).thenReturn(result)
 

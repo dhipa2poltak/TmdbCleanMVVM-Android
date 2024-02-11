@@ -1,5 +1,6 @@
 package com.dpfht.tmdbcleanmvvm.framework.di.module
 
+import android.content.Context
 import com.dpfht.tmdbcleanmvvm.framework.BuildConfig
 import com.dpfht.tmdbcleanmvvm.data.datasource.AppDataSource
 import com.dpfht.tmdbcleanmvvm.framework.Config
@@ -10,6 +11,7 @@ import com.dpfht.tmdbcleanmvvm.framework.data.datasource.remote.rest.UnsafeOkHtt
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
@@ -80,7 +82,7 @@ class NetworkModule {
 
   @Provides
   @Singleton
-  fun provideRemoteDataSource(restService: RestService): AppDataSource {
-    return RemoteDataSourceImpl(restService)
+  fun provideRemoteDataSource(@ApplicationContext context: Context, restService: RestService): AppDataSource {
+    return RemoteDataSourceImpl(context, restService)
   }
 }
