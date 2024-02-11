@@ -2,11 +2,15 @@ package com.dpfht.tmdbcleanmvvm.framework.data.datasource.remote
 
 import android.content.Context
 import com.dpfht.tmdbcleanmvvm.data.datasource.AppDataSource
+import com.dpfht.tmdbcleanmvvm.data.model.remote.response.ApiErrorResponse
 import com.dpfht.tmdbcleanmvvm.domain.entity.AppException
 import com.dpfht.tmdbcleanmvvm.framework.data.datasource.remote.rest.RestService
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,6 +19,9 @@ import org.mockito.Mockito.anyInt
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
+import retrofit2.HttpException
+import retrofit2.Response
 
 @RunWith(MockitoJUnitRunner::class)
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -100,5 +107,40 @@ class AppDataSourceTest {
     }
 
     verify(restService).getMovieTrailers(movieId)
+  }
+
+  @Test
+  fun `failed when hitting API but ApiErrorResponse is available`() = runTest {
+    val msg = "The resource you requested could not be found."
+    val strBody = """
+        {"success":false,"status_code":34,"status_message":"$msg"}
+      """.trimIndent()
+
+    whenever(restService.getMovieGenre()).then {
+      val body = strBody.toResponseBody("application/jsob".toMediaTypeOrNull())
+      val r = Response.error<ApiErrorResponse>(400, body)
+      throw HttpException(r)
+    }
+
+    try {
+      appDataSource.getMovieGenre()
+    } catch (e: AppException) {
+      assertTrue(msg == e.message)
+    }
+  }
+
+  @Test
+  fun `failed when hitting API and ApiErrorResponse is not available`() = runTest {
+    whenever(restService.getMovieGenre()).then {
+      val body = "".toResponseBody("application/jsob".toMediaTypeOrNull())
+      val r = Response.error<ApiErrorResponse>(400, body)
+      throw HttpException(r)
+    }
+
+    try {
+      appDataSource.getMovieGenre()
+    } catch (e: AppException) {
+      assertTrue(message == e.message)
+    }
   }
 }
