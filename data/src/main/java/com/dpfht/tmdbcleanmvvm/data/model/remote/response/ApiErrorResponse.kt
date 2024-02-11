@@ -1,10 +1,10 @@
-package com.dpfht.tmdbcleanmvvm.framework.data.datasource.remote.rest
+package com.dpfht.tmdbcleanmvvm.data.model.remote.response
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
 @Keep
-data class ErrorResponse(
+data class ApiErrorResponse(
 
   val success: Boolean? = false,
   @SerializedName("status_code")

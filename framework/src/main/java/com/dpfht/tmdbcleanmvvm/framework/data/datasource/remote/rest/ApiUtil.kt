@@ -1,5 +1,6 @@
 package com.dpfht.tmdbcleanmvvm.framework.data.datasource.remote.rest
 
+import com.dpfht.tmdbcleanmvvm.data.model.remote.response.ApiErrorResponse
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result.ErrorResult
 import com.dpfht.tmdbcleanmvvm.domain.entity.Result.Success
@@ -32,12 +33,12 @@ suspend fun <T> safeApiCall(dispatcher: CoroutineDispatcher, apiCall: suspend ()
   }
 }
 
-private fun convertErrorBody(t: HttpException): ErrorResponse? {
+private fun convertErrorBody(t: HttpException): ApiErrorResponse? {
   return try {
     t.response()?.errorBody()?.source().let {
       val json = it?.readString(Charset.defaultCharset())
-      val typeToken = object : TypeToken<ErrorResponse>() {}.type
-      val errorResponse = Gson().fromJson<ErrorResponse>(json, typeToken)
+      val typeToken = object : TypeToken<ApiErrorResponse>() {}.type
+      val errorResponse = Gson().fromJson<ApiErrorResponse>(json, typeToken)
       errorResponse
     }
   } catch (e: Exception) {
