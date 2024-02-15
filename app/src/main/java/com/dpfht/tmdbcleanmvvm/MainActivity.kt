@@ -8,6 +8,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.dpfht.tmdbcleanmvvm.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import com.dpfht.tmdbcleanmvvm.framework.R as frameworkR
+import com.dpfht.tmdbcleanmvvm.navigation.R as navigationR
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -21,11 +23,11 @@ class MainActivity : AppCompatActivity() {
     setContentView(binding.root)
 
     val appBarConfiguration = AppBarConfiguration(
-      setOf(R.id.genreFragment)
+      setOf(navigationR.id.genreFragment)
     )
 
     val navHostFragment =
-      supportFragmentManager.findFragmentById(R.id.demo_nav_host_fragment) as NavHostFragment
+      supportFragmentManager.findFragmentById(frameworkR.id.demo_nav_host_fragment) as NavHostFragment
     navController = navHostFragment.navController
     NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
   }

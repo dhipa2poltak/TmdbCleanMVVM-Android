@@ -75,15 +75,7 @@ dependencies {
 
   implementation fileTree(dir: "libs", include: ["*.jar"])
   implementation project(":framework")
-  implementation project(":domain")
-  implementation project(":data")
-  implementation project(":features:feature_splash")
-  implementation project(":features:feature_genre")
-  implementation project(":features:feature_movies_by_genre")
-  implementation project(":features:feature_movie_details")
-  implementation project(":features:feature_movie_reviews")
-  implementation project(":features:feature_movie_trailer")
-  implementation project(":features:feature_error_message")
+  implementation project(":navigation")
 
   implementation Deps.coreKtx
   implementation Deps.appCompat
@@ -101,9 +93,4 @@ dependencies {
 
   implementation Deps.hilt
   kapt Deps.hiltCompiler
-
-  testImplementation Deps.coroutinesTest
-  testImplementation Deps.mockitoKotlin
-  testImplementation Deps.coreTesting
-  testImplementation Deps.robolectric
 }
