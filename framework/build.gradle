@@ -48,6 +48,7 @@ dependencies {
 
   testImplementation Deps.jUnit
   testImplementation Deps.mockitoKotlin
+  testImplementation Deps.mockitoInline
   testImplementation Deps.coroutinesTest
   testImplementation Deps.mockWebServer
   androidTestImplementation Deps.jUnitExt
