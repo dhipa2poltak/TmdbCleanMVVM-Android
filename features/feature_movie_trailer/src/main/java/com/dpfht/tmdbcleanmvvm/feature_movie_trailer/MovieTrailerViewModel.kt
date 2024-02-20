@@ -9,14 +9,13 @@ import com.dpfht.tmdbcleanmvvm.domain.entity.TrailerEntity
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieTrailerUseCase
 import com.dpfht.tmdbcleanmvvm.framework.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
 class MovieTrailerViewModel @Inject constructor(
-  val getMovieTrailerUseCase: GetMovieTrailerUseCase
+  private val getMovieTrailerUseCase: GetMovieTrailerUseCase
 ): BaseViewModel() {
 
   private var _movieId = -1
@@ -48,25 +47,21 @@ class MovieTrailerViewModel @Inject constructor(
   }
 
   private fun onSuccess(trailers: List<TrailerEntity>) {
-    viewModelScope.launch(Dispatchers.Main) {
-      var keyVideo = ""
-      for (trailer in trailers) {
-        if (trailer.site.lowercase(Locale.ROOT).trim() == "youtube"
-        ) {
-          keyVideo = trailer.key
-          break
-        }
+    var keyVideo = ""
+    for (trailer in trailers) {
+      if (trailer.site.lowercase(Locale.ROOT).trim() == "youtube"
+      ) {
+        keyVideo = trailer.key
+        break
       }
+    }
 
-      if (keyVideo.isNotEmpty()) {
-        _keyVideo.value = keyVideo
-      }
+    if (keyVideo.isNotEmpty()) {
+      _keyVideo.postValue(keyVideo)
     }
   }
 
   private fun onError(message: String) {
-    viewModelScope.launch(Dispatchers.Main) {
-      mErrorMessage.value = message
-    }
+    mErrorMessage.postValue(message)
   }
 }

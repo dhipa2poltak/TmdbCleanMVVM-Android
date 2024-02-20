@@ -8,14 +8,13 @@ import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieReviewUseCase
 import com.dpfht.tmdbcleanmvvm.feature_movie_reviews.adapter.MovieReviewsAdapter
 import com.dpfht.tmdbcleanmvvm.framework.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MovieReviewsViewModel @Inject constructor(
   val adapter: MovieReviewsAdapter,
-  val getMovieReviewUseCase: GetMovieReviewUseCase,
+  private val getMovieReviewUseCase: GetMovieReviewUseCase,
   private val reviews: ArrayList<ReviewEntity>
 ): BaseViewModel() {
 
@@ -56,28 +55,24 @@ class MovieReviewsViewModel @Inject constructor(
   }
 
   private fun onSuccess(reviews: List<ReviewEntity>, page: Int) {
-    viewModelScope.launch(Dispatchers.Main) {
-      if (reviews.isNotEmpty()) {
-        this@MovieReviewsViewModel.page = page
+    if (reviews.isNotEmpty()) {
+      this@MovieReviewsViewModel.page = page
 
-        for (review in reviews) {
-          this@MovieReviewsViewModel.reviews.add(review)
-          adapter.notifyItemInserted(this@MovieReviewsViewModel.reviews.size - 1)
-        }
-      } else {
-        isEmptyNextResponse = true
+      for (review in reviews) {
+        this@MovieReviewsViewModel.reviews.add(review)
+        adapter.notifyItemInserted(this@MovieReviewsViewModel.reviews.size - 1)
       }
-
-      mIsShowDialogLoading.value = false
-      mIsLoadingData = false
+    } else {
+      isEmptyNextResponse = true
     }
+
+    mIsShowDialogLoading.postValue(false)
+    mIsLoadingData = false
   }
 
   private fun onError(message: String) {
-    viewModelScope.launch(Dispatchers.Main) {
-      mIsShowDialogLoading.value = false
-      mIsLoadingData = false
-      mErrorMessage.value = message
-    }
+    mIsShowDialogLoading.postValue(false)
+    mIsLoadingData = false
+    mErrorMessage.postValue(message)
   }
 }

@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MovieDetailsViewModel @Inject constructor(
-  val getMovieDetailsUseCase: GetMovieDetailsUseCase
+  private val getMovieDetailsUseCase: GetMovieDetailsUseCase
 ): BaseViewModel() {
 
   private var _movieId = -1
@@ -75,36 +75,32 @@ class MovieDetailsViewModel @Inject constructor(
   }
 
   private fun onSuccess(movie: MovieDetailsDomain) {
-    viewModelScope.launch {
-      imageUrl = movie.imageUrl
+    imageUrl = movie.imageUrl
 
-      _movieId = movie.id
-      _title = movie.title
-      overview = movie.overview
+    _movieId = movie.id
+    _title = movie.title
+    overview = movie.overview
 
-      _titleData.postValue(_title)
-      _overviewData.postValue(overview)
-      _imageUrlData.postValue(imageUrl)
+    _titleData.postValue(_title)
+    _overviewData.postValue(overview)
+    _imageUrlData.postValue(imageUrl)
 
-      var strGenres = ""
-      for (genre in movie.genres) {
-        if (strGenres.isEmpty()) {
-          strGenres = genre.name
-        } else {
-          strGenres += ", ${genre.name}"
-        }
+    var strGenres = ""
+    for (genre in movie.genres) {
+      if (strGenres.isEmpty()) {
+        strGenres = genre.name
+      } else {
+        strGenres += ", ${genre.name}"
       }
-
-      _genres.value = strGenres
-
-      mIsShowDialogLoading.postValue(false)
     }
+
+    _genres.postValue(strGenres)
+
+    mIsShowDialogLoading.postValue(false)
   }
 
   private fun onError(message: String) {
-    viewModelScope.launch {
-      mIsShowDialogLoading.postValue(false)
-      mErrorMessage.postValue(message)
-    }
+    mIsShowDialogLoading.postValue(false)
+    mErrorMessage.postValue(message)
   }
 }

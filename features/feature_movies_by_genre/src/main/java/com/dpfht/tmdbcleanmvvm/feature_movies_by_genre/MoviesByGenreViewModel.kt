@@ -8,14 +8,13 @@ import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieByGenreUseCase
 import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.adapter.MoviesByGenreAdapter
 import com.dpfht.tmdbcleanmvvm.framework.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MoviesByGenreViewModel @Inject constructor(
   val adapter: MoviesByGenreAdapter,
-  val getMovieByGenreUseCase: GetMovieByGenreUseCase,
+  private val getMovieByGenreUseCase: GetMovieByGenreUseCase,
   val movies: ArrayList<MovieEntity>
 ): BaseViewModel() {
 
@@ -56,28 +55,24 @@ class MoviesByGenreViewModel @Inject constructor(
   }
 
   private fun onSuccess(movies: List<MovieEntity>, page: Int) {
-    viewModelScope.launch(Dispatchers.Main) {
-      if (movies.isNotEmpty()) {
-        this@MoviesByGenreViewModel.page = page
+    if (movies.isNotEmpty()) {
+      this@MoviesByGenreViewModel.page = page
 
-        for (movie in movies) {
-          this@MoviesByGenreViewModel.movies.add(movie)
-          adapter.notifyItemInserted(this@MoviesByGenreViewModel.movies.size - 1)
-        }
-      } else {
-        isEmptyNextResponse = true
+      for (movie in movies) {
+        this@MoviesByGenreViewModel.movies.add(movie)
+        adapter.notifyItemInserted(this@MoviesByGenreViewModel.movies.size - 1)
       }
-
-      mIsShowDialogLoading.value = false
-      mIsLoadingData = false
+    } else {
+      isEmptyNextResponse = true
     }
+
+    mIsShowDialogLoading.postValue(false)
+    mIsLoadingData = false
   }
 
   private fun onError(message: String) {
-    viewModelScope.launch(Dispatchers.Main) {
-      mIsShowDialogLoading.value = false
-      mIsLoadingData = false
-      mErrorMessage.value = message
-    }
+    mIsShowDialogLoading.postValue(false)
+    mIsLoadingData = false
+    mErrorMessage.postValue(message)
   }
 }
