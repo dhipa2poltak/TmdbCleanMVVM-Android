@@ -32,21 +32,7 @@ class GenreFragment: BaseFragment<FragmentGenreBinding, GenreViewModel>(R.layout
       }
     }
 
-    observeViewModel()
-
     viewModel.start()
-  }
-
-  override fun observeViewModel() {
-    super.observeViewModel()
-
-    viewModel.isShowDialogLoading.observe(viewLifecycleOwner) { isLoading ->
-      binding.pbLoading.visibility = if (isLoading) {
-        View.VISIBLE
-      } else {
-        View.GONE
-      }
-    }
   }
 
   private fun setToolbar() {

@@ -36,8 +36,6 @@ class MovieReviewsFragment: BaseFragment<FragmentMovieReviewsBinding, MovieRevie
       }
     })
 
-    observeViewModel()
-
     arguments?.let {
       val movieId = it.getInt("movieId")
       val movieTitle = it.getString("movieTitle")
@@ -46,18 +44,6 @@ class MovieReviewsFragment: BaseFragment<FragmentMovieReviewsBinding, MovieRevie
 
       viewModel.setMovieId(movieId)
       viewModel.start()
-    }
-  }
-
-  override fun observeViewModel() {
-    super.observeViewModel()
-
-    viewModel.isShowDialogLoading.observe(viewLifecycleOwner) { isLoading ->
-      binding.pbLoading.visibility = if (isLoading) {
-        View.VISIBLE
-      } else {
-        View.GONE
-      }
     }
   }
 }

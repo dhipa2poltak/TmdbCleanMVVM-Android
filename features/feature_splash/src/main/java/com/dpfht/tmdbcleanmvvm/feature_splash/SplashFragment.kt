@@ -16,7 +16,6 @@ class SplashFragment: BaseFragment<FragmentSplashBinding, SplashViewModel>(R.lay
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    observeViewModel()
     viewModel.start()
   }
 

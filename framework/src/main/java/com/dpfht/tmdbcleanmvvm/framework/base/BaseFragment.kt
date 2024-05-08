@@ -8,8 +8,10 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.dpfht.tmdbcleanmvvm.framework.databinding.LayoutLoadingBinding
 import com.dpfht.tmdbcleanmvvm.framework.navigation.NavigationService
 import javax.inject.Inject
+
 
 abstract class BaseFragment<VDB: ViewDataBinding, VM: BaseViewModel>(
   @LayoutRes protected val contentLayoutId: Int
@@ -21,6 +23,8 @@ abstract class BaseFragment<VDB: ViewDataBinding, VM: BaseViewModel>(
   @Inject
   protected lateinit var navigationService: NavigationService
 
+  private lateinit var loadingView: View
+
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
@@ -28,10 +32,29 @@ abstract class BaseFragment<VDB: ViewDataBinding, VM: BaseViewModel>(
   ): View {
     binding = DataBindingUtil.inflate(inflater, contentLayoutId, container, false)
 
+    val loadingBinding = LayoutLoadingBinding.inflate(inflater, container, false)
+    loadingView = loadingBinding.root
+    loadingView.visibility = View.GONE
+
+    (binding.root as ViewGroup).addView(loadingView)
+
     return binding.root
   }
 
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    observeViewModel()
+  }
+
   open fun observeViewModel() {
+    viewModel.isShowDialogLoading.observe(viewLifecycleOwner) { isLoading ->
+      loadingView.visibility = if (isLoading) {
+        View.VISIBLE
+      } else {
+        View.GONE
+      }
+    }
+
     viewModel.errorMessage.observe(viewLifecycleOwner) { message ->
       if (message.isNotEmpty()) {
         showErrorMessage(message)
@@ -53,4 +76,3 @@ abstract class BaseFragment<VDB: ViewDataBinding, VM: BaseViewModel>(
     showErrorMessage(getString(com.dpfht.tmdbcleanmvvm.framework.R.string.canceled_message))
   }
 }
-

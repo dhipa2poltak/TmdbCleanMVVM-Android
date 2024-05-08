@@ -26,8 +26,6 @@ class MovieDetailsFragment: BaseFragment<FragmentMovieDetailsBinding, MovieDetai
       onClickShowTrailer()
     }
 
-    observeViewModel()
-
     arguments?.let {
       val movieId = it.getInt("movieId")
 
@@ -38,14 +36,6 @@ class MovieDetailsFragment: BaseFragment<FragmentMovieDetailsBinding, MovieDetai
 
   override fun observeViewModel() {
     super.observeViewModel()
-
-    viewModel.isShowDialogLoading.observe(viewLifecycleOwner) { isLoading ->
-      binding.pbLoading.visibility = if (isLoading) {
-        View.VISIBLE
-      } else {
-        View.GONE
-      }
-    }
 
     viewModel.titleData.observe(viewLifecycleOwner) { title ->
       binding.tvTitleMovie.text = title
