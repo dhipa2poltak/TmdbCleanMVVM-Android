@@ -15,9 +15,7 @@ class MoviesByGenreFragment: BaseFragment<FragmentMoviesByGenreBinding, MoviesBy
 
   override val viewModel by viewModels<MoviesByGenreViewModel>()
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-
+  override fun setupView(view: View, savedInstanceState: Bundle?) {
     val layoutManager = LinearLayoutManager(requireContext())
     layoutManager.orientation = LinearLayoutManager.VERTICAL
 
@@ -43,7 +41,9 @@ class MoviesByGenreFragment: BaseFragment<FragmentMoviesByGenreBinding, MoviesBy
         super.onScrolled(recyclerView, dx, dy)
       }
     })
+  }
 
+  override fun startViewModel() {
     arguments?.let {
       val genreId = it.getInt("genreId")
       val genreName = it.getString("genreName")

@@ -13,11 +13,7 @@ class SplashFragment: BaseFragment<FragmentSplashBinding, SplashViewModel>(R.lay
 
   override val viewModel by viewModels<SplashViewModel>()
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-
-    viewModel.start()
-  }
+  override fun setupView(view: View, savedInstanceState: Bundle?) {}
 
   override fun observeViewModel() {
     super.observeViewModel()
@@ -27,6 +23,10 @@ class SplashFragment: BaseFragment<FragmentSplashBinding, SplashViewModel>(R.lay
         navigateToNextScreen()
       }
     }
+  }
+
+  override fun startViewModel() {
+    viewModel.start()
   }
 
   private fun navigateToNextScreen() {

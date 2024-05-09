@@ -2,7 +2,6 @@ package com.dpfht.tmdbcleanmvvm.feature_genre
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dpfht.tmdbcleanmvvm.feature_genre.adapter.GenreAdapter
@@ -15,10 +14,7 @@ class GenreFragment: BaseFragment<FragmentGenreBinding, GenreViewModel>(R.layout
 
   override val viewModel by viewModels<GenreViewModel>()
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    setToolbar()
-
+  override fun setupView(view: View, savedInstanceState: Bundle?) {
     val layoutManager = LinearLayoutManager(requireContext())
     layoutManager.orientation = LinearLayoutManager.VERTICAL
 
@@ -31,11 +27,9 @@ class GenreFragment: BaseFragment<FragmentGenreBinding, GenreViewModel>(R.layout
         navigationService.navigateToMoviesByGender(genre.id, genre.name)
       }
     }
-
-    viewModel.start()
   }
 
-  private fun setToolbar() {
-    (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+  override fun startViewModel() {
+    viewModel.start()
   }
 }

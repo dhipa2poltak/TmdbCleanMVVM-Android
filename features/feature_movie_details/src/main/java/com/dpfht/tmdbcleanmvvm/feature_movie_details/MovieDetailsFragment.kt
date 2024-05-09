@@ -15,22 +15,13 @@ class MovieDetailsFragment: BaseFragment<FragmentMovieDetailsBinding, MovieDetai
 
   override val viewModel by viewModels<MovieDetailsViewModel>()
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-
+  override fun setupView(view: View, savedInstanceState: Bundle?) {
     binding.tvShowReview.setOnClickListener {
       onClickShowReview()
     }
 
     binding.tvShowTrailer.setOnClickListener {
       onClickShowTrailer()
-    }
-
-    arguments?.let {
-      val movieId = it.getInt("movieId")
-
-      viewModel.setMovieId(movieId)
-      viewModel.start()
     }
   }
 
@@ -60,6 +51,15 @@ class MovieDetailsFragment: BaseFragment<FragmentMovieDetailsBinding, MovieDetai
         binding.tvGenresMovie.text = genres
         binding.tvGenresMovie.visibility = View.INVISIBLE
       }
+    }
+  }
+
+  override fun startViewModel() {
+    arguments?.let {
+      val movieId = it.getInt("movieId")
+
+      viewModel.setMovieId(movieId)
+      viewModel.start()
     }
   }
 
