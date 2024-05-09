@@ -32,11 +32,15 @@ abstract class BaseFragment<VDB: ViewDataBinding, VM: BaseViewModel>(
   ): View {
     binding = DataBindingUtil.inflate(inflater, contentLayoutId, container, false)
 
-    val loadingBinding = LayoutLoadingBinding.inflate(inflater, container, false)
-    loadingView = loadingBinding.root
-    loadingView.visibility = View.GONE
-
-    (binding.root as ViewGroup).addView(loadingView)
+    val tmpLoadingView = getCustomLoadingView()
+    if (tmpLoadingView != null) {
+      loadingView = tmpLoadingView
+    } else {
+      val loadingBinding = LayoutLoadingBinding.inflate(inflater, container, false)
+      loadingView = loadingBinding.root
+      loadingView.visibility = View.GONE
+      (binding.root as ViewGroup).addView(loadingView)
+    }
 
     return binding.root
   }
@@ -74,5 +78,9 @@ abstract class BaseFragment<VDB: ViewDataBinding, VM: BaseViewModel>(
 
   private fun showCanceledMessage() {
     showErrorMessage(getString(com.dpfht.tmdbcleanmvvm.framework.R.string.canceled_message))
+  }
+
+  open fun getCustomLoadingView(): View? {
+    return null
   }
 }
