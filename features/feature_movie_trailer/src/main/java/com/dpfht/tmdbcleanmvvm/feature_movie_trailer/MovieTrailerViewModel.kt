@@ -27,7 +27,7 @@ class MovieTrailerViewModel @Inject constructor(
     this._movieId = movieId
   }
 
-  override fun start() {
+  fun start() {
     if (_movieId != -1) {
       getMovieTrailer()
     }

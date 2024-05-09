@@ -47,14 +47,16 @@ abstract class BaseFragment<VDB: ViewDataBinding, VM: BaseViewModel>(
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+
     setupView(view, savedInstanceState)
+    defaultObserveViewModel()
     observeViewModel()
     startViewModel()
   }
 
-  abstract fun setupView(view: View, savedInstanceState: Bundle?)
+  open fun setupView(view: View, savedInstanceState: Bundle?) {}
 
-  open fun observeViewModel() {
+  private fun defaultObserveViewModel() {
     viewModel.isShowDialogLoading.observe(viewLifecycleOwner) { isLoading ->
       loadingView.visibility = if (isLoading) {
         View.VISIBLE
@@ -76,6 +78,10 @@ abstract class BaseFragment<VDB: ViewDataBinding, VM: BaseViewModel>(
     }
   }
 
+  open fun observeViewModel() {}
+
+  open fun startViewModel() {}
+
   private fun showErrorMessage(message: String) {
     navigationService.navigateToErrorMessage(message)
   }
@@ -83,8 +89,6 @@ abstract class BaseFragment<VDB: ViewDataBinding, VM: BaseViewModel>(
   private fun showCanceledMessage() {
     showErrorMessage(getString(com.dpfht.tmdbcleanmvvm.framework.R.string.canceled_message))
   }
-
-  abstract fun startViewModel()
 
   open fun getCustomLoadingView(): View? {
     return null

@@ -50,7 +50,7 @@ class MovieDetailsViewModel @Inject constructor(
     return _title
   }
 
-  override fun start() {
+  fun start() {
     if (_title.isEmpty()) {
       getMovieDetails()
     } else {

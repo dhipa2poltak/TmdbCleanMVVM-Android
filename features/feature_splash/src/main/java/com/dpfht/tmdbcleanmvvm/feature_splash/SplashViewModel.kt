@@ -15,7 +15,7 @@ class SplashViewModel @Inject constructor(): BaseViewModel() {
   private val _hasFinishedDelaying = MutableLiveData<Boolean>()
   val hasFinishedDelaying: LiveData<Boolean> = _hasFinishedDelaying
 
-  override fun start() {
+  fun start() {
     viewModelScope.launch {
       delay(3000)
       _hasFinishedDelaying.postValue(true)

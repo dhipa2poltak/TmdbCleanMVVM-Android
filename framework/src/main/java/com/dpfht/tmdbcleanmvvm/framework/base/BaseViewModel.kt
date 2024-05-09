@@ -18,6 +18,4 @@ abstract class BaseViewModel: ViewModel() {
   val showCanceledMessage: LiveData<Boolean> = mShowCanceledMessage
 
   fun isLoadingData() = mIsLoadingData
-
-  abstract fun start()
 }

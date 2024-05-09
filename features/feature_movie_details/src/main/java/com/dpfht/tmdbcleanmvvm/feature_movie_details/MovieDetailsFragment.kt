@@ -26,8 +26,6 @@ class MovieDetailsFragment: BaseFragment<FragmentMovieDetailsBinding, MovieDetai
   }
 
   override fun observeViewModel() {
-    super.observeViewModel()
-
     viewModel.titleData.observe(viewLifecycleOwner) { title ->
       binding.tvTitleMovie.text = title
     }

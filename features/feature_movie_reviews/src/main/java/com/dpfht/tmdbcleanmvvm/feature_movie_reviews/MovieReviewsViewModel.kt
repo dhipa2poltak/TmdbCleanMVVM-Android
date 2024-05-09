@@ -26,7 +26,7 @@ class MovieReviewsViewModel @Inject constructor(
     adapter.reviews = reviews
   }
 
-  override fun start() {
+  fun start() {
     if (_movieId != -1 && reviews.isEmpty()) {
       getMovieReviews()
     }

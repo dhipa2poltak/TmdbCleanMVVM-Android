@@ -26,7 +26,7 @@ class MoviesByGenreViewModel @Inject constructor(
     adapter.movies = movies
   }
 
-  override fun start() {
+  fun start() {
     if (_genreId != -1 && movies.isEmpty()) {
       getMoviesByGenre()
     }

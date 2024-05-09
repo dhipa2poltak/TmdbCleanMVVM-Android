@@ -16,8 +16,6 @@ class SplashFragment: BaseFragment<FragmentSplashBinding, SplashViewModel>(R.lay
   override fun setupView(view: View, savedInstanceState: Bundle?) {}
 
   override fun observeViewModel() {
-    super.observeViewModel()
-
     viewModel.hasFinishedDelaying.observe(viewLifecycleOwner) { hasFinished ->
       if (hasFinished) {
         navigateToNextScreen()
