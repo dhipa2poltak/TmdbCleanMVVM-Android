@@ -10,7 +10,7 @@
       android:name="com.dpfht.tmdbcleanmvvm.TheApplication"
       android:allowBackup="false"
       android:dataExtractionRules="@xml/data_extraction_rules"
-      android:fullBackupContent="@xml/backup_rules"
+      android:fullBackupContent="false"
       android:icon="@drawable/ic_app_launcher"
       android:label="${appName}${appNameSuffix}"
       android:roundIcon="@drawable/ic_app_launcher"
