@@ -52,6 +52,7 @@ dependencies {
   testImplementation Deps.coroutinesTest
   testImplementation Deps.mockWebServer
   testImplementation Deps.robolectric
+  testImplementation Deps.testCore
   androidTestImplementation Deps.jUnitExt
   androidTestImplementation Deps.espresso
 
