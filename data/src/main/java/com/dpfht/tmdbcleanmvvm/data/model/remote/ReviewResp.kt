@@ -1,20 +1,20 @@
 package com.dpfht.tmdbcleanmvvm.data.model.remote
 
 import androidx.annotation.Keep
-import com.dpfht.tmdbcleanmvvm.domain.entity.AuthorDetailsEntity
-import com.dpfht.tmdbcleanmvvm.domain.entity.ReviewEntity
+import com.dpfht.tmdbcleanmvvm.domain.model.AuthorDetails
+import com.dpfht.tmdbcleanmvvm.domain.model.Review
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.util.Date
 
 @Keep
 @Suppress("unused")
-data class Review(
+data class ReviewResp(
     val author: String? = "",
 
     @SerializedName("author_details")
     @Expose
-    val authorDetails: AuthorDetails? = null,
+    val authorDetails: AuthorDetailsResp? = null,
 
     val content: String? = "",
 
@@ -31,7 +31,7 @@ data class Review(
     val url: String? = ""
 )
 
-fun Review.toDomain(): ReviewEntity {
+fun ReviewResp.toDomain(): Review {
     var imageUrl = authorDetails?.avatarPath ?: ""
     if (imageUrl.startsWith("/")) {
         imageUrl = imageUrl.replaceFirst("/", "")
@@ -41,7 +41,7 @@ fun Review.toDomain(): ReviewEntity {
         imageUrl = ""
     }
 
-    val authorDetailsEntity = AuthorDetailsEntity(imageUrl)
+    val authorDetails = AuthorDetails(imageUrl)
 
-    return ReviewEntity(author ?: "", authorDetailsEntity, content ?: "")
+    return Review(author ?: "", authorDetails, content ?: "")
 }

@@ -1,4 +1,4 @@
-package com.dpfht.tmdbcleanmvvm.domain.entity
+package com.dpfht.tmdbcleanmvvm.domain.model
 
 class AppException(
     override val message: String = ""

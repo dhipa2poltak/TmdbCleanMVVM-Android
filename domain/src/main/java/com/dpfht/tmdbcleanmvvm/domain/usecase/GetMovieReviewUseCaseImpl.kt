@@ -1,9 +1,9 @@
 package com.dpfht.tmdbcleanmvvm.domain.usecase
 
-import com.dpfht.tmdbcleanmvvm.domain.entity.AppException
+import com.dpfht.tmdbcleanmvvm.domain.model.AppException
 import com.dpfht.tmdbcleanmvvm.domain.repository.AppRepository
-import com.dpfht.tmdbcleanmvvm.domain.entity.Result
-import com.dpfht.tmdbcleanmvvm.domain.entity.ReviewDomain
+import com.dpfht.tmdbcleanmvvm.domain.model.Result
+import com.dpfht.tmdbcleanmvvm.domain.model.ReviewModel
 
 class GetMovieReviewUseCaseImpl(
   private val appRepository: AppRepository
@@ -12,7 +12,7 @@ class GetMovieReviewUseCaseImpl(
   override suspend operator fun invoke(
     movieId: Int,
     page: Int
-  ): Result<ReviewDomain> {
+  ): Result<ReviewModel> {
     return try {
       Result.Success(appRepository.getMovieReviews(movieId, page))
     } catch (e: AppException) {

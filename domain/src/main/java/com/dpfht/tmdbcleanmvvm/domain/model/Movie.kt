@@ -1,6 +1,6 @@
-package com.dpfht.tmdbcleanmvvm.domain.entity
+package com.dpfht.tmdbcleanmvvm.domain.model
 
-data class MovieEntity(
+data class Movie(
   val id: Int = -1,
   val title: String = "",
   val overview: String = "",

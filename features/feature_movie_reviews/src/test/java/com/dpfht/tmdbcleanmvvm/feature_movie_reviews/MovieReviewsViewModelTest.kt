@@ -3,9 +3,9 @@ package com.dpfht.tmdbcleanmvvm.feature_movie_reviews
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieReviewUseCase
-import com.dpfht.tmdbcleanmvvm.domain.entity.Result
-import com.dpfht.tmdbcleanmvvm.domain.entity.ReviewDomain
-import com.dpfht.tmdbcleanmvvm.domain.entity.ReviewEntity
+import com.dpfht.tmdbcleanmvvm.domain.model.Result
+import com.dpfht.tmdbcleanmvvm.domain.model.ReviewModel
+import com.dpfht.tmdbcleanmvvm.domain.model.Review
 import com.dpfht.tmdbcleanmvvm.feature_movie_reviews.adapter.MovieReviewsAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -55,14 +55,14 @@ class MovieReviewsViewModelTest {
 
   @Test
   fun `fetch movie review successfully`() = runTest {
-    val review1 = ReviewEntity(author = "author1", content = "content1")
-    val review2 = ReviewEntity(author = "author2", content = "content2")
+    val review1 = Review(author = "author1", content = "content1")
+    val review2 = Review(author = "author2", content = "content2")
     val reviews = listOf(review1, review2)
 
     val movieId = 1
     val page = 1
 
-    val getMovieReviewResult = ReviewDomain(reviews)
+    val getMovieReviewResult = ReviewModel(reviews)
     val result = Result.Success(getMovieReviewResult)
 
     whenever(getMovieReviewUseCase.invoke(movieId, page)).thenReturn(result)

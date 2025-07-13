@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dpfht.tmdbcleanmvvm.framework.R
 import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.databinding.RowMovieBinding
-import com.dpfht.tmdbcleanmvvm.domain.entity.MovieEntity
+import com.dpfht.tmdbcleanmvvm.domain.model.Movie
 import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.adapter.MoviesByGenreAdapter.MovieByGenreHolder
 import com.squareup.picasso.Picasso
 import javax.inject.Inject
@@ -14,7 +14,7 @@ class MoviesByGenreAdapter @Inject constructor(
 
 ): RecyclerView.Adapter<MovieByGenreHolder>() {
 
-  lateinit var movies: ArrayList<MovieEntity>
+  lateinit var movies: ArrayList<Movie>
   var onClickMovieListener: OnClickMovieListener? = null
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieByGenreHolder {
@@ -36,7 +36,7 @@ class MoviesByGenreAdapter @Inject constructor(
 
   class MovieByGenreHolder(private val binding: RowMovieBinding): RecyclerView.ViewHolder(binding.root) {
 
-    fun bindData(movie: MovieEntity) {
+    fun bindData(movie: Movie) {
       binding.tvTitleMovie.text = movie.title
       binding.tvOverviewMovie.text = movie.overview
 

@@ -1,13 +1,13 @@
 package com.dpfht.tmdbcleanmvvm.data.model.remote
 
 import androidx.annotation.Keep
-import com.dpfht.tmdbcleanmvvm.domain.entity.TrailerEntity
+import com.dpfht.tmdbcleanmvvm.domain.model.Trailer
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 @Keep
 @Suppress("unused")
-data class Trailer(
+data class TrailerResp(
     val id: String? = "",
 
     @SerializedName("iso_639_1")
@@ -25,6 +25,6 @@ data class Trailer(
     val type: String? = ""
 )
 
-fun Trailer.toDomain(): TrailerEntity {
-    return TrailerEntity(id ?: "", key ?: "", name ?: "", site ?: "")
+fun TrailerResp.toDomain(): Trailer {
+    return Trailer(id ?: "", key ?: "", name ?: "", site ?: "")
 }

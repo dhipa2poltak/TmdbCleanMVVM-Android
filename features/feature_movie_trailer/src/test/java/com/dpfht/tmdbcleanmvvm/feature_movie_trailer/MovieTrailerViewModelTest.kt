@@ -2,9 +2,9 @@ package com.dpfht.tmdbcleanmvvm.feature_movie_trailer
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.dpfht.tmdbcleanmvvm.domain.entity.Result
-import com.dpfht.tmdbcleanmvvm.domain.entity.TrailerDomain
-import com.dpfht.tmdbcleanmvvm.domain.entity.TrailerEntity
+import com.dpfht.tmdbcleanmvvm.domain.model.Result
+import com.dpfht.tmdbcleanmvvm.domain.model.TrailerModel
+import com.dpfht.tmdbcleanmvvm.domain.model.Trailer
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieTrailerUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -50,12 +50,12 @@ class MovieTrailerViewModelTest {
   @Test
   fun `fetch movie trailer successfully`() = runTest {
     val keyVideo1 = "11111"
-    val trailer1 = TrailerEntity(id = "1", key = keyVideo1, name = "name1", site = "youtube")
-    val trailer2 = TrailerEntity(id = "2", key = "22222", name = "name2", site = "youtube")
-    val trailer3 = TrailerEntity(id = "3", key = "33333", name = "name3", site = "youtube")
+    val trailer1 = Trailer(id = "1", key = keyVideo1, name = "name1", site = "youtube")
+    val trailer2 = Trailer(id = "2", key = "22222", name = "name2", site = "youtube")
+    val trailer3 = Trailer(id = "3", key = "33333", name = "name3", site = "youtube")
 
     val trailers = listOf(trailer1, trailer2, trailer3)
-    val getMovieTrailerResult = TrailerDomain(results = trailers)
+    val getMovieTrailerResult = TrailerModel(results = trailers)
     val result = Result.Success(getMovieTrailerResult)
 
     val movieId = 1

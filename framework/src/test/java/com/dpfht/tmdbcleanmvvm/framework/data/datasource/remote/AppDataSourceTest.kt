@@ -3,7 +3,7 @@ package com.dpfht.tmdbcleanmvvm.framework.data.datasource.remote
 import android.content.Context
 import com.dpfht.tmdbcleanmvvm.data.datasource.AppDataSource
 import com.dpfht.tmdbcleanmvvm.data.model.remote.response.ApiErrorResponse
-import com.dpfht.tmdbcleanmvvm.domain.entity.AppException
+import com.dpfht.tmdbcleanmvvm.domain.model.AppException
 import com.dpfht.tmdbcleanmvvm.framework.data.datasource.remote.rest.RestService
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest

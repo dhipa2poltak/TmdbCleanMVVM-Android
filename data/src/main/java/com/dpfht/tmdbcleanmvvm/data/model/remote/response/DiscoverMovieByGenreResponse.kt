@@ -1,9 +1,9 @@
 package com.dpfht.tmdbcleanmvvm.data.model.remote.response
 
 import androidx.annotation.Keep
-import com.dpfht.tmdbcleanmvvm.data.model.remote.Movie
+import com.dpfht.tmdbcleanmvvm.data.model.remote.MovieResp
 import com.dpfht.tmdbcleanmvvm.data.model.remote.toDomain
-import com.dpfht.tmdbcleanmvvm.domain.entity.DiscoverMovieByGenreDomain
+import com.dpfht.tmdbcleanmvvm.domain.model.DiscoverMovieByGenreModel
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName
 @Suppress("unused")
 data class DiscoverMovieByGenreResponse(
   val page: Int? = -1,
-  val results: List<Movie>? = listOf(),
+  val results: List<MovieResp>? = listOf(),
 
   @SerializedName("total_pages")
   @Expose
@@ -22,12 +22,12 @@ data class DiscoverMovieByGenreResponse(
   val totalResults: Int? = -1
 )
 
-fun DiscoverMovieByGenreResponse.toDomain(): DiscoverMovieByGenreDomain {
+fun DiscoverMovieByGenreResponse.toDomain(): DiscoverMovieByGenreModel {
   val movieEntities = results?.map {
     it.toDomain()
   }
 
-  return DiscoverMovieByGenreDomain(
+  return DiscoverMovieByGenreModel(
     page ?: -1,
     movieEntities?.toList() ?: listOf(),
     totalPages ?: -1,

@@ -2,10 +2,10 @@ package com.dpfht.tmdbcleanmvvm.feature_movie_details
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.dpfht.tmdbcleanmvvm.domain.entity.GenreEntity
-import com.dpfht.tmdbcleanmvvm.domain.entity.MovieDetailsDomain
+import com.dpfht.tmdbcleanmvvm.domain.model.Genre
+import com.dpfht.tmdbcleanmvvm.domain.model.MovieDetailsModel
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieDetailsUseCase
-import com.dpfht.tmdbcleanmvvm.domain.entity.Result
+import com.dpfht.tmdbcleanmvvm.domain.model.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -68,9 +68,9 @@ class MovieDetailsViewModelTest {
     val posterPath = "poster_path1"
     val genreName1 = "Action"
     val genreName2 = "Drama"
-    val genres = listOf(GenreEntity(10, genreName1), GenreEntity(11, genreName2))
+    val genres = listOf(Genre(10, genreName1), Genre(11, genreName2))
 
-    val getMovieDetailsResult = MovieDetailsDomain(
+    val getMovieDetailsResult = MovieDetailsModel(
       id = movieId,
       title = title,
       overview = overview,

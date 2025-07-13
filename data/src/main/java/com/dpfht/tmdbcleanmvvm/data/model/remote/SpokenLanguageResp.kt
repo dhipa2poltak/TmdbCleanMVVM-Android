@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 
 @Keep
 @Suppress("unused")
-data class SpokenLanguage(
+data class SpokenLanguageResp(
     @SerializedName("iso_639_1")
     @Expose
     val iso6391: String? = "",

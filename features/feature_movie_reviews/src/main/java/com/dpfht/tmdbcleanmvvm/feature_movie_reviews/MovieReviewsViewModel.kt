@@ -1,9 +1,11 @@
 package com.dpfht.tmdbcleanmvvm.feature_movie_reviews
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.dpfht.tmdbcleanmvvm.domain.entity.Result.Error
-import com.dpfht.tmdbcleanmvvm.domain.entity.Result.Success
-import com.dpfht.tmdbcleanmvvm.domain.entity.ReviewEntity
+import com.dpfht.tmdbcleanmvvm.domain.model.Result.Error
+import com.dpfht.tmdbcleanmvvm.domain.model.Result.Success
+import com.dpfht.tmdbcleanmvvm.domain.model.Review
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieReviewUseCase
 import com.dpfht.tmdbcleanmvvm.feature_movie_reviews.adapter.MovieReviewsAdapter
 import com.dpfht.tmdbcleanmvvm.framework.base.BaseViewModel
@@ -15,12 +17,15 @@ import javax.inject.Inject
 class MovieReviewsViewModel @Inject constructor(
   val adapter: MovieReviewsAdapter,
   private val getMovieReviewUseCase: GetMovieReviewUseCase,
-  private val reviews: ArrayList<ReviewEntity>
+  private val reviews: ArrayList<Review>
 ): BaseViewModel() {
 
   private var _movieId = -1
   private var page = 0
   private var isEmptyNextResponse = false
+
+  protected val mIsEmptyResponse = MutableLiveData<Boolean>()
+  val isEmptyResponse: LiveData<Boolean> = mIsEmptyResponse
 
   init {
     adapter.reviews = reviews
@@ -54,7 +59,7 @@ class MovieReviewsViewModel @Inject constructor(
     }
   }
 
-  private fun onSuccess(reviews: List<ReviewEntity>, page: Int) {
+  private fun onSuccess(reviews: List<Review>, page: Int) {
     if (reviews.isNotEmpty()) {
       this@MovieReviewsViewModel.page = page
 
@@ -63,6 +68,9 @@ class MovieReviewsViewModel @Inject constructor(
         adapter.notifyItemInserted(this@MovieReviewsViewModel.reviews.size - 1)
       }
     } else {
+      if (this@MovieReviewsViewModel.reviews.isEmpty()) {
+        mIsEmptyResponse.postValue(true)
+      }
       isEmptyNextResponse = true
     }
 

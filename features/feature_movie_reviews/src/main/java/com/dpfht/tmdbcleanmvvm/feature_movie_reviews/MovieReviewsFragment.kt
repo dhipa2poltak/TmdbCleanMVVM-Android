@@ -35,6 +35,20 @@ class MovieReviewsFragment: BaseFragment<FragmentMovieReviewsBinding, MovieRevie
     })
   }
 
+  override fun observeViewModel() {
+    super.observeViewModel()
+
+    viewModel.isEmptyResponse.observe(viewLifecycleOwner) {
+      with(binding) {
+        tvNoReview.visibility = if (it) {
+          View.VISIBLE
+        } else {
+          View.GONE
+        }
+      }
+    }
+  }
+
   override fun startViewModel() {
     arguments?.let {
       val movieId = it.getInt("movieId")

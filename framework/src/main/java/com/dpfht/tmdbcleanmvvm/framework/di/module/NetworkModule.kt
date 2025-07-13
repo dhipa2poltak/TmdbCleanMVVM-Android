@@ -50,9 +50,9 @@ class NetworkModule {
 
   @Provides
   @Singleton
-  fun provideClient(certificatePinner: CertificatePinner): OkHttpClient {
+  fun provideClient(@ApplicationContext context: Context, certificatePinner: CertificatePinner): OkHttpClient {
     if (BuildConfig.DEBUG) {
-      return UnsafeOkHttpClient.getUnsafeOkHttpClient()
+      return UnsafeOkHttpClient.getUnsafeOkHttpClient(context)
     }
 
     val httpClientBuilder = OkHttpClient()
@@ -69,8 +69,8 @@ class NetworkModule {
   fun provideRetrofit(okHttpClient: OkHttpClient, baseUrl: String): Retrofit {
     return Retrofit.Builder()
       .baseUrl(baseUrl)
-      .addConverterFactory(GsonConverterFactory.create())
       .client(okHttpClient)
+      .addConverterFactory(GsonConverterFactory.create())
       .build()
   }
 

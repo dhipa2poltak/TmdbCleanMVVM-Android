@@ -1,8 +1,8 @@
 package com.dpfht.tmdbcleanmvvm.framework.di.module
 
-import com.dpfht.tmdbcleanmvvm.domain.entity.GenreEntity
-import com.dpfht.tmdbcleanmvvm.domain.entity.MovieEntity
-import com.dpfht.tmdbcleanmvvm.domain.entity.ReviewEntity
+import com.dpfht.tmdbcleanmvvm.domain.model.Genre
+import com.dpfht.tmdbcleanmvvm.domain.model.Movie
+import com.dpfht.tmdbcleanmvvm.domain.model.Review
 import com.dpfht.tmdbcleanmvvm.domain.repository.AppRepository
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieByGenreUseCase
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieByGenreUseCaseImpl
@@ -49,17 +49,17 @@ class ViewModelModule {
   }
 
   @Provides
-  fun provideGenres(): ArrayList<GenreEntity> {
+  fun provideGenres(): ArrayList<Genre> {
     return arrayListOf()
   }
 
   @Provides
-  fun provideMovies(): ArrayList<MovieEntity> {
+  fun provideMovies(): ArrayList<Movie> {
     return arrayListOf()
   }
 
   @Provides
-  fun provideReviews(): ArrayList<ReviewEntity> {
+  fun provideReviews(): ArrayList<Review> {
     return arrayListOf()
   }
 }

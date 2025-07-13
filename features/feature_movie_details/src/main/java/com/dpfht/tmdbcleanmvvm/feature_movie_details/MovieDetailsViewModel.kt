@@ -3,9 +3,9 @@ package com.dpfht.tmdbcleanmvvm.feature_movie_details
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.dpfht.tmdbcleanmvvm.domain.entity.MovieDetailsDomain
-import com.dpfht.tmdbcleanmvvm.domain.entity.Result.Error
-import com.dpfht.tmdbcleanmvvm.domain.entity.Result.Success
+import com.dpfht.tmdbcleanmvvm.domain.model.MovieDetailsModel
+import com.dpfht.tmdbcleanmvvm.domain.model.Result.Error
+import com.dpfht.tmdbcleanmvvm.domain.model.Result.Success
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieDetailsUseCase
 import com.dpfht.tmdbcleanmvvm.framework.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -74,7 +74,7 @@ class MovieDetailsViewModel @Inject constructor(
     }
   }
 
-  private fun onSuccess(movie: MovieDetailsDomain) {
+  private fun onSuccess(movie: MovieDetailsModel) {
     imageUrl = movie.imageUrl
 
     _movieId = movie.id

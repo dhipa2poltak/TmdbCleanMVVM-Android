@@ -2,10 +2,10 @@ package com.dpfht.tmdbcleanmvvm.feature_genre
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.dpfht.tmdbcleanmvvm.domain.entity.GenreDomain
-import com.dpfht.tmdbcleanmvvm.domain.entity.GenreEntity
+import com.dpfht.tmdbcleanmvvm.domain.model.GenreModel
+import com.dpfht.tmdbcleanmvvm.domain.model.Genre
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieGenreUseCase
-import com.dpfht.tmdbcleanmvvm.domain.entity.Result
+import com.dpfht.tmdbcleanmvvm.domain.model.Result
 import com.dpfht.tmdbcleanmvvm.feature_genre.adapter.GenreAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -55,12 +55,12 @@ class GenreViewModelTest {
 
   @Test
   fun `fetch movie genre successfully`() = runTest {
-    val genre1 = GenreEntity(1, "Cartoon")
-    val genre2 = GenreEntity(2, "Drama")
-    val genre3 = GenreEntity(3, "Horror")
+    val genre1 = Genre(1, "Cartoon")
+    val genre2 = Genre(2, "Drama")
+    val genre3 = Genre(3, "Horror")
 
     val genres = listOf(genre1, genre2, genre3)
-    val getMovieGenreResult = GenreDomain(genres)
+    val getMovieGenreResult = GenreModel(genres)
     val result = Result.Success(getMovieGenreResult)
 
     whenever(getMovieGenreUseCase.invoke()).thenReturn(result)

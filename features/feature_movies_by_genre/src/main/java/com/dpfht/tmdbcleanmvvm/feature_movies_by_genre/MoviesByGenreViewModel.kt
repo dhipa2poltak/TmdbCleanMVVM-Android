@@ -1,9 +1,9 @@
 package com.dpfht.tmdbcleanmvvm.feature_movies_by_genre
 
 import androidx.lifecycle.viewModelScope
-import com.dpfht.tmdbcleanmvvm.domain.entity.MovieEntity
-import com.dpfht.tmdbcleanmvvm.domain.entity.Result.Error
-import com.dpfht.tmdbcleanmvvm.domain.entity.Result.Success
+import com.dpfht.tmdbcleanmvvm.domain.model.Movie
+import com.dpfht.tmdbcleanmvvm.domain.model.Result.Error
+import com.dpfht.tmdbcleanmvvm.domain.model.Result.Success
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieByGenreUseCase
 import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.adapter.MoviesByGenreAdapter
 import com.dpfht.tmdbcleanmvvm.framework.base.BaseViewModel
@@ -15,7 +15,7 @@ import javax.inject.Inject
 class MoviesByGenreViewModel @Inject constructor(
   val adapter: MoviesByGenreAdapter,
   private val getMovieByGenreUseCase: GetMovieByGenreUseCase,
-  val movies: ArrayList<MovieEntity>
+  val movies: ArrayList<Movie>
 ): BaseViewModel() {
 
   private var _genreId = -1
@@ -54,7 +54,7 @@ class MoviesByGenreViewModel @Inject constructor(
     }
   }
 
-  private fun onSuccess(movies: List<MovieEntity>, page: Int) {
+  private fun onSuccess(movies: List<Movie>, page: Int) {
     if (movies.isNotEmpty()) {
       this@MoviesByGenreViewModel.page = page
 

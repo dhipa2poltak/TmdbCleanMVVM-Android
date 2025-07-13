@@ -62,4 +62,7 @@ dependencies {
 
   implementation Deps.hilt
   kapt Deps.hiltCompiler
+
+  debugImplementation Deps.chuckerLibrary
+  releaseImplementation Deps.chuckerLibraryNoOp
 }

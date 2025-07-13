@@ -1,9 +1,9 @@
 package com.dpfht.tmdbcleanmvvm.domain.usecase
 
-import com.dpfht.tmdbcleanmvvm.domain.entity.AppException
-import com.dpfht.tmdbcleanmvvm.domain.entity.Result
-import com.dpfht.tmdbcleanmvvm.domain.entity.ReviewDomain
-import com.dpfht.tmdbcleanmvvm.domain.entity.ReviewEntity
+import com.dpfht.tmdbcleanmvvm.domain.model.AppException
+import com.dpfht.tmdbcleanmvvm.domain.model.Result
+import com.dpfht.tmdbcleanmvvm.domain.model.ReviewModel
+import com.dpfht.tmdbcleanmvvm.domain.model.Review
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertTrue
@@ -37,14 +37,14 @@ class GetMovieReviewUseCaseTest: BaseUseCaseTest() {
 
   @Test
   fun `fetch movie review successfully`() = runTest {
-    val review1 = ReviewEntity(author = "author1", content = "content1")
-    val review2 = ReviewEntity(author = "author2", content = "content2")
+    val review1 = Review(author = "author1", content = "content1")
+    val review2 = Review(author = "author2", content = "content2")
     val reviews = listOf(review1, review2)
 
     val movieId = 1
     val page = 1
 
-    val reviewData = ReviewDomain(reviews)
+    val reviewData = ReviewModel(reviews)
 
     whenever(appRepository.getMovieReviews(movieId, page)).thenReturn(reviewData)
 

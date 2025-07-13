@@ -1,9 +1,9 @@
 package com.dpfht.tmdbcleanmvvm.domain.usecase
 
-import com.dpfht.tmdbcleanmvvm.domain.entity.AppException
-import com.dpfht.tmdbcleanmvvm.domain.entity.DiscoverMovieByGenreDomain
+import com.dpfht.tmdbcleanmvvm.domain.model.AppException
+import com.dpfht.tmdbcleanmvvm.domain.model.DiscoverMovieByGenreModel
 import com.dpfht.tmdbcleanmvvm.domain.repository.AppRepository
-import com.dpfht.tmdbcleanmvvm.domain.entity.Result
+import com.dpfht.tmdbcleanmvvm.domain.model.Result
 
 class GetMovieByGenreUseCaseImpl(
   private val appRepository: AppRepository
@@ -12,7 +12,7 @@ class GetMovieByGenreUseCaseImpl(
   override suspend operator fun invoke(
     genreId: Int,
     page: Int
-  ): Result<DiscoverMovieByGenreDomain> {
+  ): Result<DiscoverMovieByGenreModel> {
     return try {
       Result.Success(appRepository.getMoviesByGenre(genreId.toString(), page))
     } catch (e: AppException) {

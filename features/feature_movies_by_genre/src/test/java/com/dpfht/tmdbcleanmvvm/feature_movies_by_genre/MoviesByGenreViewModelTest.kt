@@ -2,10 +2,10 @@ package com.dpfht.tmdbcleanmvvm.feature_movies_by_genre
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.dpfht.tmdbcleanmvvm.domain.entity.DiscoverMovieByGenreDomain
-import com.dpfht.tmdbcleanmvvm.domain.entity.MovieEntity
+import com.dpfht.tmdbcleanmvvm.domain.model.DiscoverMovieByGenreModel
+import com.dpfht.tmdbcleanmvvm.domain.model.Movie
 import com.dpfht.tmdbcleanmvvm.domain.usecase.GetMovieByGenreUseCase
-import com.dpfht.tmdbcleanmvvm.domain.entity.Result
+import com.dpfht.tmdbcleanmvvm.domain.model.Result
 import com.dpfht.tmdbcleanmvvm.feature_movies_by_genre.adapter.MoviesByGenreAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -55,15 +55,15 @@ class MoviesByGenreViewModelTest {
 
   @Test
   fun `fetch movie successfully`() = runTest {
-    val movie1 = MovieEntity(id = 1, title = "title1", overview = "overview1")
-    val movie2 = MovieEntity(id = 2, title = "title2", overview = "overview2")
-    val movie3 = MovieEntity(id = 3, title = "title3", overview = "overview3")
+    val movie1 = Movie(id = 1, title = "title1", overview = "overview1")
+    val movie2 = Movie(id = 2, title = "title2", overview = "overview2")
+    val movie3 = Movie(id = 3, title = "title3", overview = "overview3")
 
     val genreId = 1
     val page = 1
 
     val movies = listOf(movie1, movie2, movie3)
-    val getMovieByGenreResult = DiscoverMovieByGenreDomain(page, movies)
+    val getMovieByGenreResult = DiscoverMovieByGenreModel(page, movies)
     val result = Result.Success(getMovieByGenreResult)
 
     whenever(getMovieByGenreUseCase.invoke(genreId, page)).thenReturn(result)

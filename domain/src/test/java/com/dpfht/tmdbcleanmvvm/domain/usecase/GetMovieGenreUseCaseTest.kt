@@ -1,9 +1,9 @@
 package com.dpfht.tmdbcleanmvvm.domain.usecase
 
-import com.dpfht.tmdbcleanmvvm.domain.entity.AppException
-import com.dpfht.tmdbcleanmvvm.domain.entity.GenreDomain
-import com.dpfht.tmdbcleanmvvm.domain.entity.GenreEntity
-import com.dpfht.tmdbcleanmvvm.domain.entity.Result
+import com.dpfht.tmdbcleanmvvm.domain.model.AppException
+import com.dpfht.tmdbcleanmvvm.domain.model.GenreModel
+import com.dpfht.tmdbcleanmvvm.domain.model.Genre
+import com.dpfht.tmdbcleanmvvm.domain.model.Result
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertTrue
@@ -34,12 +34,12 @@ class GetMovieGenreUseCaseTest: BaseUseCaseTest() {
 
   @Test
   fun `fetch movie genre successfully`() = runTest {
-    val genre1 = GenreEntity(1, "Cartoon")
-    val genre2 = GenreEntity(2, "Drama")
-    val genre3 = GenreEntity(3, "Horror")
+    val genre1 = Genre(1, "Cartoon")
+    val genre2 = Genre(2, "Drama")
+    val genre3 = Genre(3, "Horror")
 
     val genres = listOf(genre1, genre2, genre3)
-    val getMovieGenreData = GenreDomain(genres)
+    val getMovieGenreData = GenreModel(genres)
 
     whenever(appRepository.getMovieGenre()).thenReturn(getMovieGenreData)
 
