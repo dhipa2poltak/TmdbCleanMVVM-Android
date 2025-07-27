@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 
 @Keep
 @Suppress("unused")
-data class ProductionCountryResp(
+data class ProductionCountryDTO(
     @SerializedName("iso_3166_1")
     @Expose
     val iso31661: String? = "",

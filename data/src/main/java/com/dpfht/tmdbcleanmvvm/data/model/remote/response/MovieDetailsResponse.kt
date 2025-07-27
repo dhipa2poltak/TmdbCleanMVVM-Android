@@ -2,10 +2,10 @@ package com.dpfht.tmdbcleanmvvm.data.model.remote.response
 
 import androidx.annotation.Keep
 import com.dpfht.tmdbcleanmvvm.data.Constants
-import com.dpfht.tmdbcleanmvvm.data.model.remote.GenreResp
-import com.dpfht.tmdbcleanmvvm.data.model.remote.ProductionCompanyResp
-import com.dpfht.tmdbcleanmvvm.data.model.remote.ProductionCountryResp
-import com.dpfht.tmdbcleanmvvm.data.model.remote.SpokenLanguageResp
+import com.dpfht.tmdbcleanmvvm.data.model.remote.GenreDTO
+import com.dpfht.tmdbcleanmvvm.data.model.remote.ProductionCompanyDTO
+import com.dpfht.tmdbcleanmvvm.data.model.remote.ProductionCountryDTO
+import com.dpfht.tmdbcleanmvvm.data.model.remote.SpokenLanguageDTO
 import com.dpfht.tmdbcleanmvvm.data.model.remote.toDomain
 import com.dpfht.tmdbcleanmvvm.domain.model.MovieDetailsModel
 import com.google.gson.annotations.Expose
@@ -26,7 +26,7 @@ data class MovieDetailsResponse(
     val belongsToCollection: Any? = null,
 
     val budget: Int? = -1,
-    val genres: List<GenreResp>? = listOf(),
+    val genres: List<GenreDTO>? = listOf(),
     val homepage: String? = "",
     val id: Int? = -1,
 
@@ -51,11 +51,11 @@ data class MovieDetailsResponse(
 
     @SerializedName("production_companies")
     @Expose
-    val productionCompanies: List<ProductionCompanyResp>? = listOf(),
+    val productionCompanies: List<ProductionCompanyDTO>? = listOf(),
 
     @SerializedName("production_countries")
     @Expose
-    val productionCountries: List<ProductionCountryResp>? = listOf(),
+    val productionCountries: List<ProductionCountryDTO>? = listOf(),
 
     @SerializedName("release_date")
     @Expose
@@ -66,7 +66,7 @@ data class MovieDetailsResponse(
 
     @SerializedName("spoken_languages")
     @Expose
-    val spokenLanguages: List<SpokenLanguageResp>? = listOf(),
+    val spokenLanguages: List<SpokenLanguageDTO>? = listOf(),
 
     val status: String? = "",
     val tagline: String? = "",

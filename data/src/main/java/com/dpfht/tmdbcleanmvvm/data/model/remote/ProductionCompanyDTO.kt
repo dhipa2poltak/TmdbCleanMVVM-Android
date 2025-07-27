@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 
 @Keep
 @Suppress("unused")
-data class ProductionCompanyResp(
+data class ProductionCompanyDTO(
     @SerializedName("name")
     @Expose
     val name: String? = "",

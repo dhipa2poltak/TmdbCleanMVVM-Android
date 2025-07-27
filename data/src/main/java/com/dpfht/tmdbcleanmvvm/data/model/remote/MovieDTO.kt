@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName
 
 @Keep
 @Suppress("unused")
-data class MovieResp(
+data class MovieDTO(
     val adult: Boolean? = false,
 
     @SerializedName("backdrop_path")
@@ -52,7 +52,7 @@ data class MovieResp(
     val voteCount: Int? = -1
 )
 
-fun MovieResp.toDomain(): Movie {
+fun MovieDTO.toDomain(): Movie {
     return Movie(
         id ?: -1,
         title ?: "",

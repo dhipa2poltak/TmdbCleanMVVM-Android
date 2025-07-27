@@ -9,12 +9,12 @@ import java.util.Date
 
 @Keep
 @Suppress("unused")
-data class ReviewResp(
+data class ReviewDTO(
     val author: String? = "",
 
     @SerializedName("author_details")
     @Expose
-    val authorDetails: AuthorDetailsResp? = null,
+    val authorDetails: AuthorDetailsDTO? = null,
 
     val content: String? = "",
 
@@ -31,7 +31,7 @@ data class ReviewResp(
     val url: String? = ""
 )
 
-fun ReviewResp.toDomain(): Review {
+fun ReviewDTO.toDomain(): Review {
     var imageUrl = authorDetails?.avatarPath ?: ""
     if (imageUrl.startsWith("/")) {
         imageUrl = imageUrl.replaceFirst("/", "")

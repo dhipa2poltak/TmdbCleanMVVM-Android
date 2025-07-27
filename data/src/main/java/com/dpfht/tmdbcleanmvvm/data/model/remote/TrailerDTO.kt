@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 
 @Keep
 @Suppress("unused")
-data class TrailerResp(
+data class TrailerDTO(
     val id: String? = "",
 
     @SerializedName("iso_639_1")
@@ -25,6 +25,6 @@ data class TrailerResp(
     val type: String? = ""
 )
 
-fun TrailerResp.toDomain(): Trailer {
+fun TrailerDTO.toDomain(): Trailer {
     return Trailer(id ?: "", key ?: "", name ?: "", site ?: "")
 }

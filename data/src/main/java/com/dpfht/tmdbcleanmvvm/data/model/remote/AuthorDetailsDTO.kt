@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 
 @Keep
 @Suppress("unused")
-data class AuthorDetailsResp(
+data class AuthorDetailsDTO(
     val name: String? = "",
     val username: String? = "",
 
